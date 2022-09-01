@@ -61,12 +61,16 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+The system's goal is to make it easier for people interested in surfing to rent surfing gear or get surfing lessons while travelling or to simply try something new while at home. It will also have a vast library of surf locations so that users can always find the perfect surf spot based on your needs and skills while on the go. This will both help local businesses to get new customers and for surfers to save money renting instead of paying to bring their own gear.
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* Home: Landing page showing a map based on your location and some shops in your area. Also allows the user to login.
+* Search for store: Here it's possible to search and filter stores based on the users preference and skills.
+* Store page: These pages contain the details of the chosen store. Includes contact information, prices and so on.
+* Search for surfing spots: Here it's possible to search and filter surfing spots based on the users preference and skills.
+* Surfing spot page: These pages contain the details of the chosen surfing spot. Includes things such as recommended skill level to surf at the spot and if it's a beach break, reef break or rock point.
+* Profile page: Here the user can enter their details and preferences. These can later be used to filter surfing spots and stores. 
 
 ### Entity-Relationship (ER) Diagram
 
