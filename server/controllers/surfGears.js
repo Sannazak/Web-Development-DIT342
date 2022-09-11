@@ -18,6 +18,16 @@ router.get('/api/surfGears', function(req, res, next){
     });
 });
 
+router.delete('/api/surfGears', function(req, res, next){
+    SurfGear.deleteMany(function(err, surfGears){
+        if(err) {return next(err);}
+        if(surfGear === null){
+            return res.status(404).json({'message': 'Surf Gear not found'});
+        }
+        res.json(surfGear);
+    });
+});
+
 router.get('/api/surfGears/:id', function(req, res, next){
     var id = req.params.id;
     SurfGear.findById(id, function(err, surfGear){

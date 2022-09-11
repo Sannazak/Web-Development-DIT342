@@ -18,6 +18,16 @@ router.get('/api/surfSpots', function(req, res, next){
     });
 });
 
+router.delete('/api/surfSpots', function(req, res, next){
+    SurfSpot.deleteMany(function(err, surfSpots){
+        if(err) {return next(err);}
+        if(surfSpot === null){
+            return res.status(404).json({'message': 'Surf Spot not found'});
+        }
+        res.json(surfSpot);
+    });
+});
+
 router.get('/api/surfSpots/:name', function(req, res, next){
     var name = req.params.name;
     SurfSpot.findById(name, function(err, surfSpot){
