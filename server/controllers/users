@@ -16,26 +16,26 @@ router.get('/api/users/:id', function(req, res, next) {
     User.findById(id, function(err, user) {
         if (err) {return next(err);}
         if (user === null) {
-            return res.status(404).json({'message': 'User not gound!'});   
+            return res.status(404).json({'message': 'User not found!'});   
         }
         res.json(user);
     });
 });
 
 //delete user with id
-router.delete('api/users/:id', function(req, res, next) {
+router.delete('/api/users/:id', function(req, res, next) {
     var it = req.params.id;
     User.deleteById({_id: id}, function(err, user) {
         if (err) {return next(err);}
         if(user === null) {
-            return res.status(404).json({'message': 'User not gound!'});   
+            return res.status(404).json({'message': 'User not found!'});   
         }
         res.json(user);
     });
 });
 
 //post user
-router.post('api/users', function(req, res, next) {
+router.post('/api/users', function(req, res, next) {
     var user = new User(req.body);
     user.save(function(err, user) {
         if (err) { return next(err);}

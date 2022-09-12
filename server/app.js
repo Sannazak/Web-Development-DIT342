@@ -8,7 +8,7 @@ var history = require('connect-history-api-fallback');
 var usersController = require('./controllers/users');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || ' mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
