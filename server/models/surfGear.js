@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var surfGearsSchema = new Schema({
-    id: String,
+    _id: { type: String, required: true, unique:true},
     name: String,
     price: Number,
     size: Number,
