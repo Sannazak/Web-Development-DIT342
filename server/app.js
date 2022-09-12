@@ -6,9 +6,11 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 var usersController = require('./controllers/users');
+var surfGearsController = require('./controllers/surfGears');
+var surfSpotsController = require('./controllers/surfSpots');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || ' mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -37,10 +39,20 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
-app.get("/api/camels", function(req, res) {
-    res.json({'color' : 'green', 'position':6}) 
+app.get('/api/abc', function(req, res, next) {
+    console.log("Run first abc BEFORE next()");
+    next();
+    console.log("Run first abc AFTER next()");
+    res.json({'message': 'abc endpoint'});
 });
 
+app.get('/api/abc', function(req, res, next) {
+    console.log("Run second abc");
+    next();
+});
+
+app.use(surfGearsController);
+app.use(surfSpotsController);
 app.use(usersController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
