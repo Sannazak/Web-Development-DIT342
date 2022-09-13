@@ -4,14 +4,17 @@ var Schema = mongoose.Schema;
 var storeSchema = new Schema(
     {
         name: {type: String, required: true, unique: true},
-        //adress: {
-            //city: {type: String, required: true},
-            //street: {type: String, required:true},
-          //  number: Number,
-          //  postalCode: Number,
-       // },
+        adress: {
+            country: { type: String, required: true },
+            street: { type: String },
+            streetNr: { type: Number },
+            postalCode: { type: Number },
+            city: { type: String, required: true }
+        }
+
+       
     }
 
 );  
 
-module.exports = mongoose.model('stores', storeSchema);
+module.exports = mongoose.model("stores", storeSchema);
