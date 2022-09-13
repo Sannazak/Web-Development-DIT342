@@ -13,6 +13,9 @@ var surfSpotsController = require('./controllers/surfSpots');
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears';
 var port = process.env.PORT || 3000;
 
+//mongodb://localhost:27017/SurfGears
+//mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears
+
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
     if (err) {

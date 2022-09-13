@@ -28,9 +28,9 @@ router.delete('/api/surfSpots', function(req, res, next){
     });
 });
 
-router.get('/api/surfSpots/:name', function(req, res, next){
-    var name = req.params.name;
-    SurfSpot.findById(name, function(err, surfSpot){
+router.get('/api/surfSpots/:id', function(req, res, next){
+    var id = req.params.id;
+    SurfSpot.findById(id, function(err, surfSpot){
         if(err) {return next(err);}
         if(surfSpot === null){
             return res.status(404).json({'message': 'Surf Spot not found'});
@@ -39,9 +39,9 @@ router.get('/api/surfSpots/:name', function(req, res, next){
     });
 });
 
-router.delete('/api/surfSpots/:name', function(req, res, next){
-    var name = req.params.name;
-    SurfSpot.findOneAndDelete({_name: name}, function(err, surfSpot){
+router.delete('/api/surfSpots/:id', function(req, res, next){
+    var id = req.params.id;
+    SurfSpot.findOneAndDelete({_id: id}, function(err, surfSpot){
         if(err) {return next(err);}
         if(surfSpot === null){
             return res.status(404).json({'message': 'Surf Spot not found'});
@@ -49,5 +49,6 @@ router.delete('/api/surfSpots/:name', function(req, res, next){
         res.json(surfSpot);
     });
 });
+
 
 module.exports = router;
