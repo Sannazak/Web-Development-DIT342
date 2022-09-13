@@ -55,6 +55,11 @@ app.use(surfGearsController);
 app.use(surfSpotsController);
 app.use(usersController);
 
+// Catch all non-error handler for api/users (i.e., 404 Not Found)
+app.use('/api/users/*', function (req, res) {
+    res.status(404).json({ 'message': 'Users API Not Found' });
+});
+
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
     res.status(404).json({ 'message': 'Not Found' });
