@@ -1,13 +1,12 @@
 var express = require('express');
-const store = require('..models/store');
 var router = express.Router();
-var Store =  require('../models/stores');
 
+var Store =  require('../models/stores');
 
 router.post('/api/stores', function (req, res, next){
     var store = new Store(req.body);
     
-    store.save(function (err, store){ 
+    store.save(function (err, store){
         if (err) {return next (err);}
    
         res.status(201).json(store);
@@ -22,6 +21,6 @@ router.get("/api/stores", function (req, res, next) {
     });
 });
 
-
 module.exports = router;
+
 
