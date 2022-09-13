@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var storesSchema = new Schema(
+var storeSchema = new Schema(
     {
-        name: String//{type: String, required: true, unique: true},
+        name: {type: String, required: true, unique: true},
         //adress: {
             //city: {type: String, required: true},
             //street: {type: String, required:true},
@@ -14,4 +14,4 @@ var storesSchema = new Schema(
 
 );  
 
-module.exports = mongoose.model('stores', storesSchema);
+module.exports = mongoose.model('stores', storeSchema);
