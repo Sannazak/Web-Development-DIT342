@@ -5,6 +5,7 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var storesController = require('./controllers/stores');
 var usersController = require('./controllers/users');
 var surfGearsController = require('./controllers/surfGears');
 var surfSpotsController = require('./controllers/surfSpots');
@@ -42,21 +43,15 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
-app.get('/api/abc', function(req, res, next) {
-    console.log("Run first abc BEFORE next()");
-    next();
-    console.log("Run first abc AFTER next()");
-    res.json({'message': 'abc endpoint'});
-});
-
-app.get('/api/abc', function(req, res, next) {
-    console.log("Run second abc");
-    next();
-});
-
+app.use(storesController);
 app.use(surfGearsController);
 app.use(surfSpotsController);
 app.use(usersController);
+
+// Catch all non-error handler for api/users (i.e., 404 Not Found)
+app.use('/api/users/*', function (req, res) {
+    res.status(404).json({ 'message': 'Users API Not Found' });
+});
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
