@@ -28,9 +28,9 @@ router.delete('/api/surfSpots', function(req, res, next){
     });
 });
 
-router.get('/api/surfSpots/:name', function(req, res, next){
-    var name = req.params.name;
-    SurfSpot.findById(name, function(err, surfSpot){
+router.get('/api/surfSpots/:id', function(req, res, next){
+    var id = req.params.id;
+    SurfSpot.findById(id, function(err, surfSpot){
         if(err) {return next(err);}
         if(surfSpot === null){
             return res.status(404).json({'message': 'Surf Spot not found'});
@@ -39,9 +39,9 @@ router.get('/api/surfSpots/:name', function(req, res, next){
     });
 });
 
-router.delete('/api/surfSpots/:name', function(req, res, next){
-    var name = req.params.name;
-    SurfSpot.findOneAndDelete({_name: name}, function(err, surfSpot){
+router.delete('/api/surfSpots/:id', function(req, res, next){
+    var id = req.params.id;
+    SurfSpot.findOneAndDelete({_id: id}, function(err, surfSpot){
         if(err) {return next(err);}
         if(surfSpot === null){
             return res.status(404).json({'message': 'Surf Spot not found'});
@@ -49,5 +49,54 @@ router.delete('/api/surfSpots/:name', function(req, res, next){
         res.json(surfSpot);
     });
 });
+
+router.put('/api/surfSpots/:id', function(req, res, next) {
+    var id = req.params.id;
+    SurfSpot.findById(id, function(err, surfSpot) {
+        if (err) { return next(err); }
+        if (surfSpot == null) {
+            return res.status(404).json({"message": "Surf Spot not found"});
+        }
+        surfSpot.name = req.body.name;
+        surfSpot.description = req.body.description;
+        surfSpot.surfSpotTags = req.body.surfSpotTags;
+        surfSpot.location = req.body.location;
+        surfSpot.latitude = req.body.latitude;
+        surfSpot.longitude = req.body.longitude;
+        surfSpot.adress = req.body.adress;
+        surfSpot.country = req.body.country;
+        surfSpot.street = req.body.street;
+        surfSpot.streetNr = req.body.streetNr;
+        surfSpot.postalCode = req.body.postalCode;
+        surfSpot.city = req.body.city;
+        surfSpot.save();
+        res.json(surfSpot);
+    });
+});
+
+router.patch('/api/surfSpots/:id', function(req, res, next) {
+    var id = req.params.id;
+    SurfSpot.findById(id, function(err, surfSpot) {
+        if (err) { return next(err); }
+        if (surfSpot == null) {
+            return res.status(404).json({"message": "Surf Spot not found"});
+        }
+        surfSpot.name = (req.body.name || surfSpot.name);
+        surfSpot.description = (req.body.description || surfSpot.description);
+        surfSpot.surfSpotTags = (req.body.surfSpotTags || surfSpot.surfSpotTags);
+        surfSpot.location = (req.body.location || surfSpot.location);
+        surfSpot.latitude = (req.body.latitude || surfSpot.latitude);
+        surfSpot.longitude = (req.body.longitude || surfSpot.longitude);
+        surfSpot.adress = (req.body.adress || surfSpot.adress);
+        surfSpot.country = (req.body.country || surfSpot.country);
+        surfSpot.street = (req.body.street || surfSpot.street);
+        surfSpot.streetNr = (req.body.streetNr || surfSpot.streetNr);
+        surfSpot.postalCode = (req.body.postalCode || surfSpot.postalCode);
+        surfSpot.city = (req.body.city || surfSpot.city);
+        surfSpot.save();
+        res.json(surfSpot);
+    });
+});
+
 
 module.exports = router;
