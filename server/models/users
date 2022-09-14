@@ -3,42 +3,16 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema(
     {
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        },
-
-        fullName: { 
-            type: String },
-
-        password: {
-            type: String,
-            required: true },
-
-        skillLevel: {
-            type: String },
-
-        favouriteShops: {
-            type: [String] 
-         },
-
-         favouriteSpots: {
-            type: [String]
-         },
-
-         boardPreference: {
-           type: [String]
-         },
-
-         clothingSize: {
-            type: String },
-
-         userHeight: {
-            type: Number},
-
-         userWeight: {
-            type: Number }
+        email: { type: String, required: true, unique: true },
+        fullName: { type: String },
+        password: { type: String, required: true },
+        skillLevel: { type: String },
+        favouriteShops: { type: [String] },
+        favouriteSpots: { type: [String] },
+        boardPreference: { type: [String] },
+        clothingSize: { type: String },
+        userHeight: { type: Number },
+        userWeight: { type: Number }
     }
 );
 
