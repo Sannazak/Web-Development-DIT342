@@ -41,18 +41,6 @@ app.get('/api', function(req, res) {
 });
 
 app.use(storesController);
-app.get('/api/abc', function(req, res, next) {
-    console.log("Run first abc BEFORE next()");
-    next();
-    console.log("Run first abc AFTER next()");
-    res.json({'message': 'abc endpoint'});
-});
-
-app.get('/api/abc', function(req, res, next) {
-    console.log("Run second abc");
-    next();
-});
-
 app.use(surfGearsController);
 app.use(surfSpotsController);
 app.use(usersController);
