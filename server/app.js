@@ -5,6 +5,7 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var storesController = require('./controllers/stores');
 var usersController = require('./controllers/users');
 var surfGearsController = require('./controllers/surfGears');
 var surfSpotsController = require('./controllers/surfSpots');
@@ -39,6 +40,7 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
+app.use(storesController);
 app.get('/api/abc', function(req, res, next) {
     console.log("Run first abc BEFORE next()");
     next();
