@@ -35,7 +35,7 @@ router.get('/api/surfBoards/:id', function(req, res, next){
         if(surfBoards === null){
             return res.status(404).json({'message': 'Surf Board not found'});
         }
-        res.json(surfBoard);
+        res.json(surfBoards);
     });
 });
 
