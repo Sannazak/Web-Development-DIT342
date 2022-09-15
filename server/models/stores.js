@@ -11,7 +11,7 @@ var storeSchema = new Schema(
             postalCode: { type: Number },
             city: { type: String, required: true }
         },
-        
+
         surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}]
        
     }

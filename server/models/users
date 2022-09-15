@@ -12,7 +12,7 @@ var userSchema = new Schema(
         userHeight: { type: Number },
         userWeight: { type: Number },
 
-        favouriteShops: [{type: Schema.Types.ObjectId, ref: "stores"}],  //unique?
+        favouriteStores: [{type: Schema.Types.ObjectId, ref: "stores"}],  //unique?
         favouriteSpots: [{type: Schema.Types.ObjectId, ref: "surfSpot"}]  //unique?
     }
 );
