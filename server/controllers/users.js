@@ -188,7 +188,26 @@ router.get('/api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
             if (surfSpot === null) {
                 return res.status(404).json({'message' : 'Spot not found'});
             } 
-            res.jsonp({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+            res.json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+        });
+    });
+});
+
+router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
+    var userId = req.params.user_id;
+    var storeId = req.params.store_id;
+
+    User.findById(userId, function(err, user) {
+        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+        if (user === null) {
+            return res.status(404).json({'message' : 'User not found'});
+        }
+        FavouriteStore.findById(storeId, function(err, store) {
+            if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+            if (store === null) {
+                return res.status(404).json({'message' : 'Store not found'});
+            } 
+            res.json({'Name of store ' : store.name, 'Data on store ' : store});
         });
     });
 });
