@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Store =  require('../models/stores');
+const surfGear = require('../models/surfGear');
 
 
 //create a store
@@ -71,6 +72,7 @@ router.put('/api/stores/:id', function(req, res, next) {
         store.streetNr = req.body.streetNr;
         store.postalCode = req.body.postalCode;
         store.city = req.body.city;
+        store.surfGear = req.body.surfGear;
         store.save();
         res.json(store);
     });
@@ -90,11 +92,22 @@ router.patch('/api/stores/:id', function(req, res, next) {
         store.streetNr = (req.body.streetNr || store.streetNr);
         store.postalCode = (req.body.postalCode || store.postalCode);
         store.city = (req.body.city || store.city);
+        store.surfGear = (req.body.surfGear || store.surfGear);
         store.save();
         res.json(store);
     });
 });
 
+router.get('/api/stores/:id/surfGears', function(req, res, next){
+    var id = req.params.id;
+    Store.findById(id, function(err, store){
+        if(err) {return next(err);}
+        if(store === null){
+            return res.status(404).json({'message': 'Store not found'});
+        }
+        res.json(store.surfGear);
+    });
+});
 
 module.exports = router;
 
