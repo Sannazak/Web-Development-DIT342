@@ -1,17 +1,2347 @@
 {
 	"info": {
-		"_postman_id": "f7ee95b5-9cb9-442f-a6a9-42de46138872",
+		"_postman_id": "a576956e-eef1-4e1e-9fd0-5074f987e1a4",
 		"name": "server",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23101496"
 	},
 	"item": [
+		{
+			"name": "stores",
+			"item": [
+				{
+					"name": "POST /api/stores",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
+									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "bodyPassword",
+								"value": "\"123891\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "bodyEmail",
+								"value": "sannaPatriciaemail",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vita Sand\",\n    \"adress\": {\n        \"country\": \"Sweden\",\n        \"street\": \"Sörviksvägen\",\n        \"streetNr\": 45,\n        \"postalCode\": 43955,\n        \"city\": \"Åsa\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/stores",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/stores/:id/surfGears",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
+									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "bodyPassword",
+								"value": "\"123891\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "bodyEmail",
+								"value": "sannaPatriciaemail",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vita Sand\",\n    \"adress\": {\n        \"country\": \"Sweden\",\n        \"street\": \"Sörviksvägen\",\n        \"streetNr\": 45,\n        \"postalCode\": 43955,\n        \"city\": \"Åsa\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/stores/:id/surfGears",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								":id",
+								"surfGears"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/stores",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/stores",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/stores/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/stores/{{store_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"{{store_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/stores/:id/surfGears",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/stores/632223f816331e2f687e399a/surfGears",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"632223f816331e2f687e399a",
+								"surfGears"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/stores/:id/surfGears/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/stores/632223f816331e2f687e399a/surfGears/63219d405c0b7a0f18fa71d6",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"632223f816331e2f687e399a",
+								"surfGears",
+								"63219d405c0b7a0f18fa71d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT / api/stores:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roca Store\",\r\n    \"adress\": {\r\n        \"country\": \"Costa Rica\",\r\n        \"street\": \"San Jose\",\r\n        \"streetNr\": 56,\r\n        \"postalCode\": 4556,\r\n        \"city\": \"San Jose\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/stores/6320eade2887ba1ab4600de0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"6320eade2887ba1ab4600de0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH / api/stores:id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Åsa\",\r\n    \"surfGear\": [\"63219d405c0b7a0f18fa71d6\", \"63219d7c5c0b7a0f18fa71d8\", \"63219d9e5c0b7a0f18fa71da\", \"632238f5486dfe150cd85313\"]  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/stores/632223f816331e2f687e399a",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"632223f816331e2f687e399a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/stores",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/stores",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/stores:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/stores/6320439e86d9b51044b19b4a",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"6320439e86d9b51044b19b4a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "surfBoards",
+			"item": [
+				{
+					"name": "POST /api/surfBoards",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
+									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "bodyPassword",
+								"value": "\"123891\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "bodyEmail",
+								"value": "sannaPatriciaemail",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"volume\": \"27 L\",\n    \"size\": \"6.3ft\",\n    \"price\": \"67\",\n    \"style\": \"longboard\"\n\n\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/surfBoards",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/surfBoards",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/surfBoards",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/surfBoards/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/surfBoards/63230cc0c1203737788e3e44",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards",
+								"63230cc0c1203737788e3e44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT / api/surfBoards:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfBoards/63230cc0c1203737788e3e44",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards",
+								"63230cc0c1203737788e3e44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH / api/surfBoards:id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"style\": \"beginner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/surfBoards/63230cc0c1203737788e3e44",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards",
+								"63230cc0c1203737788e3e44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/surfBoards",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfBoards",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/surfBoards:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfBoards/632227ccc318411ad4dbf6a2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfBoards",
+								"632227ccc318411ad4dbf6a2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "POST /api/postUsers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
+									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "bodyPassword",
+								"value": "\"123891\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "bodyEmail",
+								"value": "sannaPatriciaemail",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"morningtim66e\",\n    \"password\": \"bodyPassword\",\n    \"clothingSize\": \"medium\",\n    \"favouriteShops\": [\"HI\", \"HIAGAIN\",\"THISISHOW\", \"YOUDOIT\"]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/postUsers:id/favouriteSpots",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
+									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "bodyPassword",
+								"value": "\"123891\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "bodyEmail",
+								"value": "sannaPatriciaemail",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\": \"PLaya del Campus\",\n    \"description\": \"Long left\",\n    \"surfSpotTags\": [\"Surf\"],\n    \"location\": { \n        \"longitude\": 54543, \n        \"latitude\": 589898 \n    },\n    \"adress\": {\n        \"country\": \"Indonesia\",\n        \"street\": \"xxx\",\n        \"streetNr\": 45,\n        \"postalCode\": 4556,\n        \"city\": \"Medewi\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/favouriteSpots",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"favouriteSpots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/getUsers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "morningtime",
+									"disabled": true
+								},
+								{
+									"key": "clothingSize",
+									"value": "medium",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/findOneAndDelete:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/632190a870f30c0c4c6f6059",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"632190a870f30c0c4c6f6059"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/getUser:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "morningtime",
+									"disabled": true
+								},
+								{
+									"key": "clothingSize",
+									"value": "medium",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/patchUser:id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"lololol\",\r\n    \"fullName\": \"Erik The Great\",\r\n    \"favouriteStores\": [\"6322de1c98f17549ac181596\", \"632223f816331e2f687e399a\"],\r\n    \"favouriteSpots\": [\"6320e27256034431e0c828b3\", \"6320e2af56034431e0c828b5\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/putUser:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"lololol\",\r\n    \"fullName\": \"Not erik the 2nd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"631f7d748a15fe255c24998d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove spot from user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/favouriteSpots/6320e2af56034431e0c828b5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"favouriteSpots",
+								"6320e2af56034431e0c828b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one surfspot from user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/favouriteSpots/6320e27256034431e0c828b3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"favouriteSpots",
+								"6320e27256034431e0c828b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one store from user id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/favouriteStores/6322de1c98f17549ac181596",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"favouriteStores",
+								"6322de1c98f17549ac181596"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "surfSpot",
+			"item": [
+				{
+					"name": "POST /api/surfSpots",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var surfSpotId = jsonData._id",
+									"pm.environment.set(\"surfSpot_id\", surfSpotId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/surfSpots/{{camel_id}}",
+									"var getSurfSpotsId = pm.variables.get(\"surfSpot_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct name and description\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Pavones\");",
+									"    pm.expect(jsonData.description).to.eql(\"Long left\");",
+									"    ",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pavones\",\n    \"description\": \"Long left\",\n    \"surfSpotTags\": [\"Surf\"],\n    \"location\": { \n        \"longitude\": 54543, \n        \"latitude\": 589898 \n    },\n    \"adress\": {\n        \"country\": \"Indonesia\",\n        \"street\": \"xxx\",\n        \"streetNr\": 45,\n        \"postalCode\": 4556,\n        \"city\": \"Medewi\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/surfSpots",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfSpots"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Medewi",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/surfSpots",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/surfSpots",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfSpots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/surfSpots",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfSpots",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfSpots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/surfSpots:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfSpots/631fa0be0549be275841254d",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfSpots",
+								"631fa0be0549be275841254d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT / api/surfSpots:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables\r",
+									"\r",
+									"// 1) Create an environment in Postman:\r",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments\r",
+									"\r",
+									"// 2) Save reponse data in environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"var surfSpotId = jsonData._id\r",
+									"pm.environment.set(\"surfSpot_id\", surfSpotId);\r",
+									"\r",
+									"// 3) Use variable in later requests via {{variable}}\r",
+									"// GET {{host}}/api/surfSpots/{{camel_id}}\r",
+									"var getSurfSpotsId = pm.variables.get(\"surfSpot_id\");\r",
+									"\r",
+									"// Test assertion examples\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has correct name and description\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Roca bruja\");\r",
+									"    pm.expect(jsonData.description).to.eql(\"Big rock on the spot\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has _id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData._id).to.be.a('String');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roca bruja\",\r\n    \"description\": \"Big rock on the spot\",\r\n    \"surfSpotTags\": [\"Surf\"],\r\n    \"location\": { \r\n        \"longitude\": 434324, \r\n        \"latitude\": 5435345 \r\n    },\r\n    \"adress\": {\r\n        \"country\": \"Costa Rica\",\r\n        \"street\": \"San Jose\",\r\n        \"streetNr\": 45,\r\n        \"postalCode\": 4556,\r\n        \"city\": \"San Jose\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/surfSpots/6320e45227845b66e84d87b0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfSpots",
+								"6320e45227845b66e84d87b0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH / api/surfSpots:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables\r",
+									"\r",
+									"// 1) Create an environment in Postman:\r",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments\r",
+									"\r",
+									"// 2) Save reponse data in environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"var surfSpotId = jsonData._id\r",
+									"pm.environment.set(\"surfSpot_id\", surfSpotId);\r",
+									"\r",
+									"// 3) Use variable in later requests via {{variable}}\r",
+									"// GET {{host}}/api/surfSpots/{{camel_id}}\r",
+									"var getSurfSpotsId = pm.variables.get(\"surfSpot_id\");\r",
+									"\r",
+									"// Test assertion examples\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has correct name and description\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Träslövesläget or Läget\");\r",
+									"    pm.expect(jsonData.description).to.eql(\"Works better on west wind\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has _id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData._id).to.be.a('String');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Träslövesläget or Läget\",\r\n    \"description\": \"Works better on west wind\",\r\n    \"surfSpotTags\": [\"Surf\", \"Kitesurf\", \"Windsurf\"],\r\n    \"location\": { \r\n        \"longitude\": 999, \r\n        \"latitude\": 111 \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/surfSpots/6320e27256034431e0c828b3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfSpots",
+								"6320e27256034431e0c828b3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "surfGear",
+			"item": [
+				{
+					"name": "POST /api/surfGears",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var surfGearId = jsonData._id",
+									"pm.environment.set(\"surfGear_id\", surfGearId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/surfGear/{{surfGear_id}}",
+									"var getSurfGearsId = pm.variables.get(\"surfGear_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct name and description\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Leash\");",
+									"    pm.expect(jsonData.description).to.eql(\"Professional 6'0 board\");",
+									"    ",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Leash\",\n    \"price\": 500,\n    \"size\": 6,\n    \"gender\": \"\",\n    \"description\": \"Professional 6'0 board\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/surfGears",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfGears"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/surfGears",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/surfGears",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfGears"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/surfGears",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfGears",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfGears"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/surfGears:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/surfGears/63219d405c0b7a0f18fa71d6",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfGears",
+								"63219d405c0b7a0f18fa71d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT / api/surfGear:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables\r",
+									"\r",
+									"// 1) Create an environment in Postman:\r",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments\r",
+									"\r",
+									"// 2) Save reponse data in environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"var surfGearId = jsonData._id\r",
+									"pm.environment.set(\"surfGear_id\", surfGearId);\r",
+									"\r",
+									"// 3) Use variable in later requests via {{variable}}\r",
+									"// GET {{host}}/api/surfGear/{{surfGear_id}}\r",
+									"var getSurfGearsId = pm.variables.get(\"surfGear_id\");\r",
+									"\r",
+									"// Test assertion examples\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has correct name and description\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Wetsuit\");\r",
+									"    pm.expect(jsonData.description).to.eql(\"5.3mm, Flashbomb Autumm\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has _id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData._id).to.be.a('String');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Wetsuit\",\r\n    \"price\": 500,\r\n    \"size\": 10,\r\n    \"gender\": \"Female or male\",\r\n    \"description\": \"5.3mm, Flashbomb Autumm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/surfGears/63219d7c5c0b7a0f18fa71d8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfGears",
+								"63219d7c5c0b7a0f18fa71d8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH / api/surfGear:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables\r",
+									"\r",
+									"// 1) Create an environment in Postman:\r",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments\r",
+									"\r",
+									"// 2) Save reponse data in environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"var surfGearId = jsonData._id\r",
+									"pm.environment.set(\"surfGear_id\", surfGearId);\r",
+									"\r",
+									"// 3) Use variable in later requests via {{variable}}\r",
+									"// GET {{host}}/api/surfGear/{{surfGear_id}}\r",
+									"var getSurfGearsId = pm.variables.get(\"surfGear_id\");\r",
+									"\r",
+									"// Test assertion examples\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has correct price and description\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.price).to.eql(50);\r",
+									"    pm.expect(jsonData.description).to.eql(\"5.3mm, Flashbomb Autumm\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body has _id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData._id).to.be.a('String');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 50,\r\n    \"description\": \"5.3mm, Flashbomb Autumm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/surfGears/63219d9e5c0b7a0f18fa71da",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfGears",
+								"63219d9e5c0b7a0f18fa71da"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "surfLesson",
+			"item": [
+				{
+					"name": "GET /api/getLessons",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(\"orange\");",
+									"    pm.expect(jsonData.position).to.eql(9);",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/surfLessons",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfLessons"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "morningtime",
+									"disabled": true
+								},
+								{
+									"key": "clothingSize",
+									"value": "medium",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/postLesson",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save and read environment variables",
+									"",
+									"// 1) Create an environment in Postman:",
+									"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+									"",
+									"// 2) Save reponse data in environment variable",
+									"var jsonData = pm.response.json();",
+									"var camelId = jsonData._id",
+									"pm.environment.set(\"camel_id\", camelId);",
+									"",
+									"// 3) Use variable in later requests via {{variable}}",
+									"// GET {{host}}/api/camels/{{camel_id}}",
+									"var getCamelId = pm.variables.get(\"camel_id\");",
+									"",
+									"// Test assertion examples",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body has correct color and position\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
+									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"});",
+									"",
+									"pm.test(\"Body has _id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.be.a('String');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "bodyPassword",
+								"value": "\"123891\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "bodyEmail",
+								"value": "sannaPatriciaemail",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Surfing The Web\",\n    \"price\": 50,\n    \"instructor\": \"Alexander\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/surfLessons",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"surfLessons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "GET /api",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
 						"exec": [
 							""
 						],
@@ -19,6 +2349,9 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -26,8 +2359,17 @@
 						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"color\": \"vermelho\",\r\n    \"position\": 5\r\n}"
+				},
 				"url": {
 					"raw": "{{host}}/api",
 					"host": [
@@ -45,7 +2387,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -55,7 +2396,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -65,11 +2405,9 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
 			"value": "http://localhost:3000",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
