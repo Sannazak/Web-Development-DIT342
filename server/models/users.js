@@ -6,7 +6,7 @@ var userSchema = new Schema(
         email: { type: String, required: true, unique: true },
         fullName: { type: String },
         password: { type: String, required: true },
-        skillLevel: { type: String },
+        skillLevel: { type: String, allowedValues: ["Beginner", "Intermediate", "Advanced", "Pro"] },
         boardPreference: { type: [String] },
         clothingSize: { type: String },
         userHeight: { type: Number },

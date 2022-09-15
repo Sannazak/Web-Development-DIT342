@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/users');
+var FavouriteSpot = require('../models/surfSpot');
 
 //get all users
 router.get('/api/users', function (req, res, next) {
@@ -115,10 +116,23 @@ router.post('/api/users', function(req, res, next) {
 
 //post favouriteSpot to user
 router.post('/api/users/:id/favouriteSpots', function(req, res, next) {
-    var user = new User(req.body);
-    user.save(function(err, user) {
-        if (err) { return next(err);}
-        res.status(201).json(user);
-    })
+User.findById(req.params.id, function(err, user) {
+    if(err) {return res.status(500);}
+if (user === null) {
+    return res.status(404).json({'message' : 'User not found'});
+}
+var favouriteSpot = new FavouriteSpot(req.body);
+favouriteSpot.save(function(err) {
+    if(err) {
+        return res.status(500);
+    }
+    console.log('User ' + favouriteSpot.name + 'created.');
 });
+user.favouriteSpots.push(favouriteSpot);
+user.save();
+console.log('Favourite spot ' + favouriteSpot.name + ' added to ' + user.email);
+return res.status(201).json(user);
+})
+});
+
 module.exports = router;
