@@ -10,8 +10,9 @@ var storeSchema = new Schema(
             streetNr: { type: Number },
             postalCode: { type: Number },
             city: { type: String, required: true }
-        }
-
+        },
+        
+        surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}]
        
     }
 

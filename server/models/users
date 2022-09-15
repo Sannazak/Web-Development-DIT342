@@ -7,12 +7,13 @@ var userSchema = new Schema(
         fullName: { type: String },
         password: { type: String, required: true },
         skillLevel: { type: String },
-        favouriteShops: { type: [String] },
-        favouriteSpots: { type: [String] },
         boardPreference: { type: [String] },
         clothingSize: { type: String },
         userHeight: { type: Number },
-        userWeight: { type: Number }
+        userWeight: { type: Number },
+
+        favouriteShops: [{type: Schema.Types.ObjectId, ref: "stores"}],  //unique?
+        favouriteSpots: [{type: Schema.Types.ObjectId, ref: "surfSpot"}]  //unique?
     }
 );
 
