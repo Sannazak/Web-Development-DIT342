@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/users');
 var FavouriteSpot = require('../models/surfSpot');
+var FavouriteStore = require('../models/stores');
+const surfSpot = require('../models/surfSpot');
+
 
 //get all users
 router.get('/api/users', function (req, res, next) {
@@ -126,13 +129,118 @@ favouriteSpot.save(function(err) {
     if(err) {
         return res.status(500);
     }
-    console.log('User ' + favouriteSpot.name + 'created.');
 });
 user.favouriteSpots.push(favouriteSpot);
 user.save();
-console.log('Favourite spot ' + favouriteSpot.name + ' added to ' + user.email);
 return res.status(201).json(user);
 })
 });
 
-module.exports = router;
+router.get('api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
+    var userId = req.params.user_id;
+    var spotId = req.params.spot_id;
+
+    User.findById(userId, function(err, user) {
+        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+        if (user === null) {
+            return res.status(404).json({'message' : 'User not found'});
+        }
+        FavouriteSpot.findById(spotId, function(err, surfSpot) {
+            if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
+            if (user === null) {
+                return res.status(404).json({'message' : 'Spot not found'});
+            } 
+            res.json({'spotName' : surfSpot.name, 'surfSpot' : surfSpot});
+        });
+    });
+});
+
+//post favouriteStore to user
+router.post('/api/users/:id/favouriteStores', function(req, res, next) {
+    User.findById(req.params.id, function(err, user) {
+        if(err) {return res.status(500);}
+    if (user === null) {
+        return res.status(404).json({'message' : 'User not found'});
+    }
+    var favouriteStore = new FavouriteStore(req.body);
+    favouriteStore.save(function(err) {
+        if(err) {
+            return res.status(500);
+        }
+    });
+    user.favouriteStore.push(favouriteStore);
+    user.save();
+    return res.status(201).json(user);
+    })
+});
+
+router.get('/api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
+    var userId = req.params.user_id;
+    var spotId = req.params.spot_id;
+
+    User.findById(userId, function(err, user) {
+        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+        if (user === null) {
+            return res.status(404).json({'message' : 'User not found'});
+        }
+        FavouriteSpot.findById(spotId, function(err, surfSpot) {
+            if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
+            if (surfSpot === null) {
+                return res.status(404).json({'message' : 'Spot not found'});
+            } 
+            res.jsonp({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+        });
+    });
+});
+
+//delete favouriteStore from user
+router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res, next) {
+    var userId = req.params.user_id;
+    var storeId = req.params.store_id;
+    
+    User.findById(userId, function(err, user) {
+        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+        if (user === null) {
+            return res.status(404).json({'message' : 'User not found'});
+        }
+        try{
+            let index = user.favouriteStores.indexOf(storeId);
+            user.favouriteStores.splice(index, 1);
+            user.save();
+            res.json(user);
+        }
+        catch(error){
+            return res.status(404).json({'message' : 'Favourite store ID is incorrect.'});
+        }
+    
+    });
+});
+
+
+//delete favouriteSpot from user
+router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, next) {
+    var userId = req.params.user_id;
+    var spotId = req.params.spot_id;
+    
+    User.findById(userId, function(err, user) {
+        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+        if (user === null) {
+            return res.status(404).json({'message' : 'User not found'});
+        }
+        try{
+            let index = user.favouriteSpots.indexOf(spotId);
+            user.favouriteSpots.splice(index, 1);
+            user.save();
+            res.json(user);
+        }
+        catch(error){
+            return res.status(404).json({'message' : 'Favourite spot ID is incorrect.'});
+        }
+    
+    });
+});
+
+        
+        
+    
+    module.exports = router;
