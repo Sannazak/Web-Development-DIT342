@@ -9,6 +9,8 @@ var storesController = require('./controllers/stores');
 var usersController = require('./controllers/users');
 var surfGearsController = require('./controllers/surfGears');
 var surfSpotsController = require('./controllers/surfSpots');
+var surfLessonsController = require('./controllers/surfLessons');
+var surfLessonsController = require('./controllers/surfLessons');
 var surfBoardsController = require('./controllers/surfBoards');
 
 // Variables
@@ -45,6 +47,7 @@ app.use(storesController);
 app.use(surfGearsController);
 app.use(surfSpotsController);
 app.use(usersController);
+app.use(surfLessonsController);
 app.use(surfBoardsController);
 
 // Catch all non-error handler for api/users (i.e., 404 Not Found)

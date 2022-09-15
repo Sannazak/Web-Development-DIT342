@@ -12,7 +12,8 @@ var storeSchema = new Schema(
             postalCode: { type: Number },
             city: { type: String, required: true }
         },
-        surfGear: [{ type: Schema.Types.ObjectId, ref: "surfGears", unique: true }]
+        surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}],
+        surfGear: [{ type: Schema.Types.ObjectId, ref: "surfGears" }]
     }
 
 );  
