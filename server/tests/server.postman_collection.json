@@ -1131,10 +1131,10 @@
 									"    pm.response.to.have.status(201);",
 									"});",
 									"",
-									"pm.test(\"Body has correct color and position\", function () {",
+									"pm.test(\"Body has correct data\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.email).to.eql(\"bodyEmail\");",
-									"    pm.expect(jsonData.password).to.eql(\"bodyPassword\");",
+									"    pm.expect(jsonData.email).to.eql(\"adminuseremail\");",
+									"    pm.expect(jsonData.password).to.eql(\"lololol\");",
 									"});",
 									"",
 									"pm.test(\"Body has _id\", function () {",
@@ -1178,14 +1178,14 @@
 							"raw": "{\n\"name\": \"PLaya del Campus\",\n    \"description\": \"Long left\",\n    \"surfSpotTags\": [\"Surf\"],\n    \"location\": { \n        \"longitude\": 54543, \n        \"latitude\": 589898 \n    },\n    \"adress\": {\n        \"country\": \"Indonesia\",\n        \"street\": \"xxx\",\n        \"streetNr\": 45,\n        \"postalCode\": 4556,\n        \"city\": \"Medewi\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}/favouriteSpots",
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteSpots",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}",
+								"631f7d748a15fe255c24998d",
 								"favouriteSpots"
 							]
 						}
@@ -1361,14 +1361,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}",
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}"
+								"631f7d748a15fe255c24998d"
 							],
 							"query": [
 								{
@@ -1401,14 +1401,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}",
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}"
+								"631f7d748a15fe255c24998d"
 							]
 						}
 					},
@@ -1448,14 +1448,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}/favouriteSpots/6320e2af56034431e0c828b5",
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteSpots/6320e2af56034431e0c828b5",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}",
+								"631f7d748a15fe255c24998d",
 								"favouriteSpots",
 								"6320e2af56034431e0c828b5"
 							]
@@ -1469,14 +1469,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}/favouriteSpots/6320e27256034431e0c828b3",
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteSpots/6320e27256034431e0c828b3",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}",
+								"631f7d748a15fe255c24998d",
 								"favouriteSpots",
 								"6320e27256034431e0c828b3"
 							]
@@ -1490,14 +1490,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}/favouriteStores/6322de1c98f17549ac181596",
+							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteStores/6322de1c98f17549ac181596",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}",
+								"631f7d748a15fe255c24998d",
 								"favouriteStores",
 								"6322de1c98f17549ac181596"
 							]
