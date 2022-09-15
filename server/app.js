@@ -9,13 +9,11 @@ var storesController = require('./controllers/stores');
 var usersController = require('./controllers/users');
 var surfGearsController = require('./controllers/surfGears');
 var surfSpotsController = require('./controllers/surfSpots');
+var surfBoardsController = require('./controllers/surfBoards');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears';
 var port = process.env.PORT || 3000;
-
-//mongodb://localhost:27017/SurfGears
-//mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -47,6 +45,7 @@ app.use(storesController);
 app.use(surfGearsController);
 app.use(surfSpotsController);
 app.use(usersController);
+app.use(surfBoardsController);
 
 // Catch all non-error handler for api/users (i.e., 404 Not Found)
 app.use('/api/users/*', function (req, res) {
