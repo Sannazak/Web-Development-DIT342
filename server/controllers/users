@@ -46,24 +46,6 @@ router.get('/api/users/:id/favouriteSpots', function(req, res, next) {
     });
 });
 
-//get favouriteSpots information from user id
-router.get('/api/users/:id/favouriteSpots/:secondId', function(req, res, next) {
-    var id = req.params.id;
-    User.findById(id, function(err, user) {
-        if (err) {return next(err);}
-        if (user === null) {
-            return res.status(404).json({'message': 'User not found!'});   
-        }
-        var secondID = req.params.secondId;
-        SurfSpot.findById(secondID, function(err, surfSpot){
-            if(err) {return next(err);}
-            if(surfSpot === null){
-                return res.status(404).json({'message': 'Surf Spot not found'});
-            }
-            res.json(surfSpot);
-    });
-});
-
 //patch user with id
 router.patch('/api/users/:id', function(req, res, next) {
     var id = req.params.id;
