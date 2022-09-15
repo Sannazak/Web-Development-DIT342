@@ -57,7 +57,7 @@ router.put('/api/surfBoards/:id', function(req, res, next) {
         if (surfBoards == null) {
             return res.status(404).json({"message": "Surf Board not found"});
         }
-        surfBoards.id = req.body.id;
+        
         surfBoards.price = req.body.price;
         surfBoards.size = req.body.size;
         surfBoards.volume = req.body.volume;
@@ -74,7 +74,6 @@ router.patch('/api/surfBoards/:id', function(req, res, next) {
         if (surfBoards == null) {
             return res.status(404).json({"message": "Surf Board not found"});
         }
-        surfBoards.id = (req.body.id || surfBoards.id);
         surfBoards.price = (req.body.price || surfBoards.price);
         surfBoards.size = (req.body.size || surfBoards.size);
         surfBoards.volume = (req.body.volume || surfBoards.volume);
