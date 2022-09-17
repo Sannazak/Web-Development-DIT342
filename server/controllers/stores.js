@@ -158,21 +158,26 @@ router.get('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res){
     });
 });
 
+//not working properly
 //Delete a specific gear from a specific store
 router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, next) {
     var gearId = req.params.gear_id;
     var storeId = req.params.store_id;
     
     Store.findById(storeId, function(err, store) {
-        if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+        if (err) { return res.status(404).json({'message' : 'Store not found'});}
         if (store === null) {
             return res.status(404).json({'message' : 'Store does not exists'});
         }
         try{
-            let index = store.surfGear.indexOf(gearId);
-            store.surfGear.splice(index, 1);
-            store.save();
-            res.json(store);
+            if (store.surfGear.indexOf(gearId) !== -1){
+                let index = store.surfGear.indexOf(gearId);
+                store.surfGear.splice(index, 1);
+                store.save();
+                res.json(store);
+            }else{
+                return res.status(400).json({'message': 'This gear is not saved on this store'});
+            }
         }
         catch(error){
             return res.status(404).json({'message' : 'Gear ID is incorrect.'});
@@ -180,7 +185,32 @@ router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, nex
     });
 });
 
-
+//Not working properly
+//Delete a specific lesson from a specific store
+router.delete('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res, next) {
+    var lessonId = req.params.lesson_id;
+    var storeId = req.params.store_id;
+    
+    Store.findById(storeId, function(err, store) {
+        if (err) { return res.status(404).json({'message' : 'Store not found'});}
+        if (store === null) {
+            return res.status(404).json({'message' : 'Store does not exists'});
+        }
+        try{
+            if (store.surfLessons.indexOf(lessonId) !== -1){
+                let index = store.surfLessons.indexOf(lessonId);
+                store.surfLessons.splice(index, 1);
+                store.save();
+                res.json(store);
+            }else{
+                return res.status(400).json({'message': 'This lesson is not saved on this store'});
+            }
+        }
+        catch(error){
+            return res.status(404).json({'message' : 'Lesson ID is incorrect.'});
+        }
+    });
+});
 
 module.exports = router;
 

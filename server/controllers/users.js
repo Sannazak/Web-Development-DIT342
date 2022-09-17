@@ -213,10 +213,14 @@ router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res
             return res.status(404).json({'message' : 'User not found'});
         }
         try{
-            let index = user.favouriteStores.indexOf(storeId);
-            user.favouriteStores.splice(index, 1);
-            user.save();
-            res.json(user);
+            if(user.favouriteStores.indexOf(storeId) !== -1){
+                let index = user.favouriteStores.indexOf(storeId);
+                user.favouriteStores.splice(index, 1);
+                user.save();
+                res.json(user);
+            }else{
+                return res.status(400).json({'message': 'The store is not saved as favorite by the user'});
+            }
         }
         catch(error){
             return res.status(404).json({'message' : 'Favourite store ID is incorrect.'});
@@ -235,10 +239,15 @@ router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, 
             return res.status(404).json({'message' : 'User not found'});
         }
         try{
-            let index = user.favouriteSpots.indexOf(spotId);
-            user.favouriteSpots.splice(index, 1);
-            user.save();
-            res.json(user);
+            if(user.favouriteSpots.indexOf(spotId) !== -1){
+                let index = user.favouriteSpots.indexOf(spotId);
+                user.favouriteSpots.splice(index, 1);
+                user.save();
+                res.json(user);
+            }else{
+                return res.status(400).json({'message': 'The surf spot is not saved as favorite by the user'});
+            }
+
         }
         catch(error){
             return res.status(404).json({'message' : 'Favourite spot ID is incorrect.'});
