@@ -221,7 +221,6 @@ router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res
         catch(error){
             return res.status(404).json({'message' : 'Favourite store ID is incorrect.'});
         }
-    
     });
 });
 
@@ -243,8 +242,7 @@ router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, 
         }
         catch(error){
             return res.status(404).json({'message' : 'Favourite spot ID is incorrect.'});
-        }
-    
+        }  
     });
 });   
     

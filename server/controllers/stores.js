@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
 var Store =  require('../models/stores');
-const surfGear = require('../models/surfGear');
-
+var SurfLessons = require('../models/surfLessons');
+var SurGears = require('../models/surfGear');
 
 //create a store
 router.post('/api/stores', function (req, res, next){
@@ -106,6 +105,30 @@ router.get('/api/stores/:id/surfGears', function(req, res, next){
             return res.status(404).json({'message': 'Store not found'});
         }
         res.json(store.surfGear);
+    });
+});
+
+//Get the info of a specific gear from a specific store
+router.get('/api/stores/:store_id/surfGears/:gear_id', function(req, res){
+    var gearId = req.params.gear_id;
+    var storeId = req.params.store_id;
+
+    Store.findById(storeId, function(err, store) {
+        if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+        if (store === null) {
+            return res.status(404).json({'message' : 'Store does not exists'});
+        }
+        if (store.surfGear.indexOf(gearId) !== -1){
+            SurGears.findById(gearId, function(err, surfGear) {
+                if (err) { return res.status(404).json({'message' : 'Gear not fund'});}
+                if (surfGear === null) {
+                    return res.status(404).json({'message' : 'Gear not found'});
+                } 
+                res.json({'Name of gear ' : surfGear.name, 'Data on store ' : surfGear});
+            });
+        }else{
+            return res.status(400).json({'message': 'This gear is not saved on this store'});
+        }
     });
 });
 
