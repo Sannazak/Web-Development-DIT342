@@ -72,6 +72,7 @@ router.put('/api/stores/:id', function(req, res, next) {
         store.postalCode = req.body.postalCode;
         store.city = req.body.city;
         store.surfGear = req.body.surfGear;
+        store.surfLessons = req.body.surfLessons;
         store.save();
         res.json(store);
     });
@@ -92,6 +93,7 @@ router.patch('/api/stores/:id', function(req, res, next) {
         store.postalCode = (req.body.postalCode || store.postalCode);
         store.city = (req.body.city || store.city);
         store.surfGear = (req.body.surfGear || store.surfGear);
+        store.surfLessons = (req.body.surfLessons || store.surfLessons);
         store.save();
         res.json(store);
     });
@@ -131,6 +133,54 @@ router.get('/api/stores/:store_id/surfGears/:gear_id', function(req, res){
         }
     });
 });
+
+//Get the info of a specific lesson from a specific store
+router.get('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res){
+    var lessonId = req.params.lesson_id;
+    var storeId = req.params.store_id;
+
+    Store.findById(storeId, function(err, store) {
+        if (err) { return res.status(404).json({'message' : 'Store not found'});}
+        if (store === null) {
+            return res.status(404).json({'message' : 'Store does not exists'});
+        }
+        if (store.surfLessons.indexOf(lessonId) !== -1){
+            SurfLessons.findById(lessonId, function(err, surfLessons) {
+                if (err) { return res.status(404).json({'message' : 'Lesson not found'});}
+                if (surfLessons === null) {
+                    return res.status(404).json({'message' : 'Lesson does not exists'});
+                } 
+                res.json({'Name of the lesson ' : surfLessons.name, 'Data on the lesson ' : surfLessons});
+            });
+        }else{
+            return res.status(400).json({'message': 'This lesson is not saved on this store'});
+        }
+    });
+});
+
+//Delete a specific gear from a specific store
+router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, next) {
+    var gearId = req.params.gear_id;
+    var storeId = req.params.store_id;
+    
+    Store.findById(storeId, function(err, store) {
+        if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+        if (store === null) {
+            return res.status(404).json({'message' : 'Store does not exists'});
+        }
+        try{
+            let index = store.surfGear.indexOf(gearId);
+            store.surfGear.splice(index, 1);
+            store.save();
+            res.json(store);
+        }
+        catch(error){
+            return res.status(404).json({'message' : 'Gear ID is incorrect.'});
+        }
+    });
+});
+
+
 
 module.exports = router;
 
