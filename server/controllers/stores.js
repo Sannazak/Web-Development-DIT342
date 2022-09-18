@@ -62,7 +62,7 @@ router.put('/api/stores/:id', function(req, res, next) {
     var id = req.params.id;
     Store.findById(id, function(err, store) {
         if (err) { return next(err); }
-        if (store == null) {
+        if (store === null) {
             return res.status(404).json({"message": "Storet not found"});
         }
         store.name = req.body.name;
