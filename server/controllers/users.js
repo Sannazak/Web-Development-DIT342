@@ -137,7 +137,7 @@ return res.status(201).json(user);
 })
 });
 
-router.get('api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
+router.get('/api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
     var userId = req.params.user_id;
     var spotId = req.params.spot_id;
 
@@ -146,15 +146,21 @@ router.get('api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
         if (user === null) {
             return res.status(404).json({'message' : 'User not found'});
         }
+        if(user.favouriteSpots.indexOf(spotId) >= 0){
         FavouriteSpot.findById(spotId, function(err, surfSpot) {
             if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
-            if (user === null) {
+            if (surfSpot === null) {
                 return res.status(404).json({'message' : 'Spot not found'});
             } 
-            res.json({'spotName' : surfSpot.name, 'surfSpot' : surfSpot});
+            res.json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
         });
+    } else {
+        return res.status(404).json({'message' : 'This spot is not among the users'});
+
+    }
     });
 });
+
 
 //post favouriteStore to user
 router.post('/api/users/:id/favouriteStores', function(req, res, next) {
@@ -173,25 +179,6 @@ router.post('/api/users/:id/favouriteStores', function(req, res, next) {
     user.save();
     return res.status(201).json(user);
     })
-});
-
-router.get('/api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
-    var userId = req.params.user_id;
-    var spotId = req.params.spot_id;
-
-    User.findById(userId, function(err, user) {
-        if (err) { return res.status(404).json({'message' : 'User not fund'});}
-        if (user === null) {
-            return res.status(404).json({'message' : 'User not found'});
-        }
-        FavouriteSpot.findById(spotId, function(err, surfSpot) {
-            if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
-            if (surfSpot === null) {
-                return res.status(404).json({'message' : 'Spot not found'});
-            } 
-            res.json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
-        });
-    });
 });
 
 router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
@@ -260,7 +247,4 @@ router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, 
     });
 });
 
-        
-        
-    
-    module.exports = router;
+module.exports = router;
