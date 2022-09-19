@@ -3,6 +3,7 @@ const surfSpot = require('../models/surfSpot');
 var router = express.Router();
 var SurfSpot = require('../models/surfSpot');
 
+//add/post a spot
 router.post('/api/surfSpots', function(req, res, next){
     var surfSpot = new SurfSpot(req.body);
     surfSpot.save(function(err, surfSpot){
@@ -11,6 +12,7 @@ router.post('/api/surfSpots', function(req, res, next){
     });
 });
 
+//get all spots
 router.get('/api/surfSpots', function(req, res, next){
     SurfSpot.find(function(err, surfSpots){
         if(err) {return next(err);}
@@ -18,16 +20,18 @@ router.get('/api/surfSpots', function(req, res, next){
     });
 });
 
+//delete all spots
 router.delete('/api/surfSpots', function(req, res, next){
     SurfSpot.deleteMany(function(err, surfSpots){
         if(err) {return next(err);}
         if(surfSpot === null){
-            return res.status(404).json({'message': 'Surf Spot not found'});
+            return res.status(404).json({'message': 'There are not spots'});
         }
         res.json(surfSpot);
     });
 });
 
+//get spot by id
 router.get('/api/surfSpots/:id', function(req, res, next){
     var id = req.params.id;
     SurfSpot.findById(id, function(err, surfSpot){
@@ -39,6 +43,7 @@ router.get('/api/surfSpots/:id', function(req, res, next){
     });
 });
 
+//delete spot by id
 router.delete('/api/surfSpots/:id', function(req, res, next){
     var id = req.params.id;
     SurfSpot.findOneAndDelete({_id: id}, function(err, surfSpot){
@@ -50,6 +55,7 @@ router.delete('/api/surfSpots/:id', function(req, res, next){
     });
 });
 
+//put spot by id
 router.put('/api/surfSpots/:id', function(req, res, next) {
     var id = req.params.id;
     SurfSpot.findById(id, function(err, surfSpot) {
@@ -74,6 +80,7 @@ router.put('/api/surfSpots/:id', function(req, res, next) {
     });
 });
 
+//patch spot by id
 router.patch('/api/surfSpots/:id', function(req, res, next) {
     var id = req.params.id;
     SurfSpot.findById(id, function(err, surfSpot) {
