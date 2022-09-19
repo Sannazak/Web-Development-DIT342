@@ -83,7 +83,7 @@ router.put('/api/surfSpots/:id', function(req, res, next) {
 //patch spot by id
 router.patch('/api/surfSpots/:id', function(req, res, next) {
     var id = req.params.id;
-    SurfSpot.findByIdAndUpdate(id, function(err, surfSpot) {
+    SurfSpot.findByIdAndUpdate(id, req.body,{new: true}, function(err, surfSpot) {
         if (err) {
             return next(err); 
         } else if (surfSpot === null) {
@@ -94,5 +94,28 @@ router.patch('/api/surfSpots/:id', function(req, res, next) {
     })
 });
 
+//get spot with certain tag
+router.get('/api/surfSpots?surfSpotTags=:tag', function(req, res, next) {
+    console.log("Searching through spots");
+    SurfSpot.find({surfSpotTags: {$all : [req.params.tag] } }).exec(function (err, surfSpot) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        console.log("Search complete");
+        return res.status(200).json(surfSpot);
+    });
+});
+
+//get spot with certain country location
+router.get('/api/surfSpots?Country=:country', function(req, res, next) {
+    console.log("Searching through spots");
+    SurfSpot.find({surfSpotTags: {$all : [req.params.country] } }).exec(function (err, surfSpot) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        console.log("Search complete");
+        return res.status(200).json(surfSpot);
+    });
+});
 
 module.exports = router;
