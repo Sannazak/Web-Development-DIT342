@@ -3,6 +3,8 @@ var router = express.Router();
 var Store =  require('../models/stores');
 var SurfLessons = require('../models/surfLessons');
 var SurGears = require('../models/surfGear');
+const { validate } = require('../models/surfGear');
+const { query } = require('express');
 
 //create a store
 router.post('/api/stores', function (req, res, next){
@@ -19,7 +21,7 @@ router.post('/api/stores', function (req, res, next){
 router.get("/api/stores", function (req, res, next) {
     Store.find(function(err, store) {
         if (err) {return next(err);}
-        res.json({'store': store});
+        res.status(200).json({'store': store});
     });
 });
 
@@ -94,6 +96,7 @@ router.patch('/api/stores/:id', function(req, res, next) {
         store.city = (req.body.city || store.city);
         store.surfGear = (req.body.surfGear || store.surfGear);
         store.surfLessons = (req.body.surfLessons || store.surfLessons);
+        store.category = (req.body.category || store.category);
         store.save();
         res.json(store);
     });
