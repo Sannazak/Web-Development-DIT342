@@ -28,9 +28,9 @@ router.get("/api/stores", function (req, res, next) {
                 }
             }
         }
-        query.exec(function(err, data){
+        query.exec(function(err, store){
             if(err) { return next(err); }
-            res.status(200).json(data)
+            res.status(200).json(store)
         });
     }catch(error){
         res.status(404).json()
