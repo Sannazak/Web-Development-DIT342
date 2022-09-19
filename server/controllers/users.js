@@ -137,31 +137,6 @@ return res.status(201).json(user);
 })
 });
 
-router.get('/api/users/:user_id/favouriteSpots/:spot_id', function(req,res){
-    var userId = req.params.user_id;
-    var spotId = req.params.spot_id;
-
-    User.findById(userId, function(err, user) {
-        if (err) { return res.status(404).json({'message' : 'User not fund'});}
-        if (user === null) {
-            return res.status(404).json({'message' : 'User not found'});
-        }
-        if(user.favouriteSpots.indexOf(spotId) >= 0){
-        FavouriteSpot.findById(spotId, function(err, surfSpot) {
-            if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
-            if (surfSpot === null) {
-                return res.status(404).json({'message' : 'Spot not found'});
-            } 
-            res.json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
-        });
-    } else {
-        return res.status(404).json({'message' : 'This spot is not among the users favourites'});
-
-    }
-    });
-});
-
-
 //post favouriteStore to user
 router.post('/api/users/:id/favouriteStores', function(req, res, next) {
     User.findById(req.params.id, function(err, user) {
@@ -181,6 +156,30 @@ router.post('/api/users/:id/favouriteStores', function(req, res, next) {
     })
 });
 
+//Get the info of a specific favorite spot from a specific user
+router.get('/api/users/:id/favouriteSpots/:spot_Id', function(req, res) {
+    var id = req.params.id;
+    var spotId = req.params.spot_Id;
+    User.findById(id, function(err, user) {
+        if (err) {  return res.status(404).json({'message': 'User not found!', 'error': err}); }
+        if (user === null) {
+            return res.status(404).json({'message': 'User not found'});
+        }
+        if (user.favouriteSpots.indexOf(spotId) !== -1){
+            FavouriteSpot.findById(spotId, function(err, surfSpot) {
+                if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
+                if (surfSpot === null) {
+                    return res.status(404).json({'message' : 'Spot not found'});
+                } 
+                res.json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+            });
+        }else{
+            return res.status(400).json({'message': 'User doesnt have this spot saved as favorite'});
+        }
+    });
+});
+
+//Get the info of a specific favorite store from a specific user
 router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
     var userId = req.params.user_id;
     var storeId = req.params.store_id;
@@ -190,18 +189,17 @@ router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
         if (user === null) {
             return res.status(404).json({'message' : 'User not found'});
         }
-        if(user.favouriteStores.indexOf(spotId) >= 0){
-        FavouriteStore.findById(storeId, function(err, store) {
-            if (err) { return res.status(404).json({'message' : 'Store not fund'});}
-            if (store === null) {
-                return res.status(404).json({'message' : 'Store not found'});
-            } 
-            res.json({'Name of store ' : store.name, 'Data on store ' : store});
-        });
-    } else {
-        return res.status(404).json({'message' : 'This store is not among the users favourites'});
-
-    }
+        if (user.favouriteStores.indexOf(storeId) !== -1){
+            FavouriteStore.findById(storeId, function(err, store) {
+                if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+                if (store === null) {
+                    return res.status(404).json({'message' : 'Store not found'});
+                } 
+                res.json({'Name of store ' : store.name, 'Data on store ' : store});
+            });
+        }else{
+            return res.status(400).json({'message': 'User doesnt have this store saved as favorite'});
+        }
     });
 });
 
@@ -216,18 +214,20 @@ router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res
             return res.status(404).json({'message' : 'User not found'});
         }
         try{
-            let index = user.favouriteStores.indexOf(storeId);
-            user.favouriteStores.splice(index, 1);
-            user.save();
-            return res.status(200).json(user);
+            if(user.favouriteStores.indexOf(storeId) !== -1){
+                let index = user.favouriteStores.indexOf(storeId);
+                user.favouriteStores.splice(index, 1);
+                user.save();
+                res.json(user);
+            }else{
+                return res.status(400).json({'message': 'The store is not saved as favorite by the user'});
+            }
         }
         catch(error){
             return res.status(404).json({'message' : 'Favourite store ID is incorrect.'});
         }
-    
     });
 });
-
 
 //delete favouriteSpot from user
 router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, next) {
@@ -240,16 +240,20 @@ router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, 
             return res.status(404).json({'message' : 'User not found'});
         }
         try{
-            let index = user.favouriteSpots.indexOf(spotId);
-            user.favouriteSpots.splice(index, 1);
-            user.save();
-            res.json(user);
+            if(user.favouriteSpots.indexOf(spotId) !== -1){
+                let index = user.favouriteSpots.indexOf(spotId);
+                user.favouriteSpots.splice(index, 1);
+                user.save();
+                res.json(user);
+            }else{
+                return res.status(400).json({'message': 'The surf spot is not saved as favorite by the user'});
+            }
+
         }
         catch(error){
             return res.status(404).json({'message' : 'Favourite spot ID is incorrect.'});
-        }
-    
+        }  
     });
-});
-
+});   
+    
 module.exports = router;
