@@ -50,50 +50,51 @@ router.get('/api/users/:id/favouriteSpots', function(req, res, next) {
     });
 });
 
-//patch user with id
+
+//patch user v2
 router.patch('/api/users/:id', function(req, res, next) {
     var id = req.params.id;
-    User.findById(id, function (err, user) {
-        if (err) {return next(err); }
-        if (user === null) {
+    User.findByIdAndUpdate(id, req.body, function(err, user) {
+        if (err) {
+            return next(err); 
+        } else if (user === null) {
             return res.status(404).json({'message': 'User not found!'});   
+        } else {
+            return res.status(200).json(user);
         }
-        user.email = (req.body.email || user.email);
-        user.fullName = (req.body.fullName || user.fullName);
-        user.password = (req.body.password || user.password);
-        user.skillLevel = (req.body.skillLevel || user.skillLevel);
-        user.favouriteStores = (req.body.favouriteStores || user.favouriteStores);
-        user.favouriteSpots = (req.body.favouriteSpots || user.favouriteSpots);
-        user.boardPreference = (req.body.boardPreference || user.boardPreference);
-        user.clothingSize = (req.body.clothingSize || user.clothingSize);
-        user.userHeight = (req.body.userHeight || user.userHeight);
-        user.userWeight = (req.body.userWeight || user.userWeight);
-    user.save();
-    res.json(user);
-    });
+
+    })
 });
 
 //put user with id
 router.put('/api/users/:id', function(req, res, next) {
-    var id = req.params.id;
-    User.findById(id, function (err, user) {
+
+    if(req.body.email && req.body.password){
+        
+        var id = req.params.id;
+        User.findById(id, function (err, user) {
         if (err) {return next(err); }
-        if (user === null) {
-            return res.status(404).json({'message': 'User not found!'});   
-        }
-        user.email = req.body.email;
-        user.fullName = req.body.fullName;
-        user.password = req.body.password;
-        user.skillLevel = req.body.skillLevel;
-        user.favouriteShops = req.body.favouriteShops;
-        user.favouriteSpots = req.body.favouriteSpots;
-        user.boardPreference = req.body.boardPreference;
-        user.clothingSize = req.body.clothingSize;
-        user.userHeight = req.body.userHeight;
-        user.userWeight = req.body.userHeight;
+            if (user === null) {
+                return res.status(404).json({'message': 'User not found!'});   
+            }
+            user.email = req.body.email;
+            user.fullName = req.body.fullName;
+            user.password = req.body.password;
+            user.skillLevel = req.body.skillLevel;
+            user.favouriteShops = req.body.favouriteShops;
+            user.favouriteSpots = req.body.favouriteSpots;
+            user.boardPreference = req.body.boardPreference;
+            user.clothingSize = req.body.clothingSize;
+            user.userHeight = req.body.userHeight;
+            user.userWeight = req.body.userHeight;
+    
     user.save();
-    res.json(user);
-    });
+    return res.status(200).json(user);
+});
+    } else {
+    return res.status(400).json({'message': 'Email and password required'});   
+    }
+ 
 });
 
 //delete user with id
@@ -104,7 +105,7 @@ router.delete('/api/users/:id', function(req, res, next) {
         if(user === null) {
             return res.status(404).json({'message': 'User not found!'});   
         }
-        res.json(user);
+        return res.status(200).json(user);
     });
 });
 
