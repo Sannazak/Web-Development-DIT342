@@ -15,6 +15,8 @@ var storeSchema = new Schema(
             city: { type: String, required: true }
         },
         surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}]
+        surfGears: [{type: Schema.Types.ObjectId, ref: "surfGears"}]
+
         }
 
 );  
