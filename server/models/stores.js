@@ -1,25 +1,20 @@
 var mongoose = require('mongoose');
-const surfGears = require('./surfGear');
-const surfLessons = require('./surfLessons');
-
 var Schema = mongoose.Schema;
 
 var storeSchema = new Schema(
     {
         name: {type: String, required: true, unique: true},
         adress: {
-            country: { type: String, required: true },
+            country: { type: String },
             street: { type: String },
             streetNr: { type: Number },
             postalCode: { type: Number },
-            city: { type: String, required: true }
+            city: { type: String}
         },
-        category: { type: String, allowedValues: ["Private", "Chain"]},
+        surfBoards: [{type: Schema.Types.ObjectId, ref: "surfBoards"}],
         surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}],
         surfGears: [{type: Schema.Types.ObjectId, ref: "surfGears"}]
-
-        }
-
+    }
 );  
 
 module.exports = mongoose.model("stores", storeSchema);

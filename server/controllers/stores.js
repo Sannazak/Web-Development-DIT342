@@ -3,15 +3,15 @@ var router = express.Router();
 var Store =  require('../models/stores');
 var SurfLessons = require('../models/surfLessons');
 var SurGears = require('../models/surfGear');
-const { validate } = require('../models/surfGear');
-const { query } = require('express');
+//const { validate } = require('../models/surfGear');
+//const { query } = require('express');
 
 //create a store
 router.post('/api/stores', function (req, res, next){
     var store = new Store(req.body);
-    
+    //TO DO: Check if unique name already exist
     store.save(function (err, store){
-        if (err) {return next (err);}
+        if (err) {return res.status(400);}
    
         res.status(201).json(store);
     })
@@ -21,10 +21,10 @@ router.post('/api/stores', function (req, res, next){
 router.get("/api/stores", function (req, res, next) {
     try{
         var query = Store.find();
-        for (var fieldName in req.query){
-            if(req.query.hasOwnProperty(fieldName)){
-                if(req.query[fieldName]){
-                    query.where(fieldName).equals(req.query[fieldName]);
+        for (var queryName in req.query){
+            if(req.query.hasOwnProperty(queryName)){
+                if(req.query[queryName]){
+                    query.where(queryName).equals(req.query[queryName]);
                 }
             }
         }
@@ -37,6 +37,7 @@ router.get("/api/stores", function (req, res, next) {
     };
 });
 
+//Get store by id
 router.get('/api/stores/:id', function(req, res, next){
     var id = req.params.id;
     Store.findById(id, function(err, store){
@@ -44,20 +45,22 @@ router.get('/api/stores/:id', function(req, res, next){
         if(store === null){
             return res.status(404).json({'message': 'Store not found'});
         }
-        res.json(store);
+        res.status(200).json(store);
     });
 });
 
+//Delete all the stores
 router.delete('/api/stores', function(req, res, next){
     Store.deleteMany(function(err, store){
         if(err) {return next(err);}
         if(store === null){
             return res.status(404).json({'message': 'Store not found'});
         }
-        res.json(store);
+        res.status(202).json(store);
     });
 });
 
+//Delete stores by the id
 router.delete('/api/stores/:id', function(req, res, next){
     var id = req.params.id;
     Store.findOneAndDelete({_id: id}, function(err, store){
@@ -65,11 +68,13 @@ router.delete('/api/stores/:id', function(req, res, next){
         if(store === null){
             return res.status(404).json({'message': 'Store not found'});
         }
-        res.json(store);
+        res.status(202).json(store);
     });
 });
 
+//Put new information to the store
 router.put('/api/stores/:id', function(req, res, next) {
+    //TO DO fix the code to make it shorter
     var id = req.params.id;
     Store.findById(id, function(err, store) {
         if (err) { return next(err); }
@@ -86,11 +91,12 @@ router.put('/api/stores/:id', function(req, res, next) {
         store.surfGear = req.body.surfGear;
         store.surfLessons = req.body.surfLessons;
         store.save();
-        res.json(store);
+        res.status(201).json(store);
     });
 });
 
 router.patch('/api/stores/:id', function(req, res, next) {
+    //TO DO fix the code to make it shorter
     var id = req.params.id;
     Store.findById(id, function(err, store) {
         if (err) { return next(err); }
@@ -108,10 +114,11 @@ router.patch('/api/stores/:id', function(req, res, next) {
         store.surfLessons = (req.body.surfLessons || store.surfLessons);
         store.category = (req.body.category || store.category);
         store.save();
-        res.json(store);
+        res.status(201).json(store);
     });
 });
 
+//Get all gears byt the surf id
 router.get('/api/stores/:id/surfGears', function(req, res, next){
     var id = req.params.id;
     Store.findById(id, function(err, store){
@@ -119,7 +126,7 @@ router.get('/api/stores/:id/surfGears', function(req, res, next){
         if(store === null){
             return res.status(404).json({'message': 'Store not found'});
         }
-        res.json(store.surfGear);
+        res.status(200).json(store.surfGear);
     });
 });
 
@@ -139,7 +146,8 @@ router.get('/api/stores/:store_id/surfGears/:gear_id', function(req, res){
                 if (surfGear === null) {
                     return res.status(404).json({'message' : 'Gear not found'});
                 } 
-                res.json({'Name of gear ' : surfGear.name, 'Data on store ' : surfGear});
+                //May need change of the response
+                res.status(200).json({'Name of gear ' : surfGear.name, 'Data on store ' : surfGear});
             });
         }else{
             return res.status(400).json({'message': 'This gear is not saved on this store'});
@@ -163,7 +171,7 @@ router.get('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res){
                 if (surfLessons === null) {
                     return res.status(404).json({'message' : 'Lesson does not exists'});
                 } 
-                res.json({'Name of the lesson ' : surfLessons.name, 'Data on the lesson ' : surfLessons});
+                res.status(200).json({'Name of the lesson ' : surfLessons.name, 'Data on the lesson ' : surfLessons});
             });
         }else{
             return res.status(400).json({'message': 'This lesson is not saved on this store'});
@@ -186,7 +194,7 @@ router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, nex
                 let index = store.surfGear.indexOf(gearId);
                 store.surfGear.splice(index, 1);
                 store.save();
-                res.json(store);
+                res.status(202).json(store);
             }else{
                 return res.status(400).json({'message': 'This gear is not saved on this store'});
             }
@@ -212,7 +220,7 @@ router.delete('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res,
                 let index = store.surfLessons.indexOf(lessonId);
                 store.surfLessons.splice(index, 1);
                 store.save();
-                res.json(store);
+                res.status(202).json(store);
             }else{
                 return res.status(400).json({'message': 'This lesson is not saved on this store'});
             }
