@@ -6,7 +6,7 @@ var FavouriteStore = require('../models/stores');
 
 
 //get all users
-router.get('/api/users', function (res, next) {
+router.get('/api/users', function (req, res, next) {
     User.find(function(err, user) {
         if (err) {return next(err);}
         res.status(200).json(user);
