@@ -3,6 +3,8 @@ var router = express.Router();
 var Store =  require('../models/stores');
 var SurfLessons = require('../models/surfLessons');
 var SurGears = require('../models/surfGear');
+const { validate } = require('../models/surfGear');
+const { query } = require('express');
 
 //create a store
 router.post('/api/stores', function (req, res, next){
@@ -15,12 +17,24 @@ router.post('/api/stores', function (req, res, next){
     })
 });
 
-//read all stores
+//read all stores or using query to filter 
 router.get("/api/stores", function (req, res, next) {
-    Store.find(function(err, store) {
-        if (err) {return next(err);}
-        res.json({'store': store});
-    });
+    try{
+        var query = Store.find();
+        for (var fieldName in req.query){
+            if(req.query.hasOwnProperty(fieldName)){
+                if(req.query[fieldName]){
+                    query.where(fieldName).equals(req.query[fieldName]);
+                }
+            }
+        }
+        query.exec(function(err, store){
+            if(err) { return next(err); }
+            res.status(200).json(store)
+        });
+    }catch(error){
+        res.status(404).json()
+    };
 });
 
 router.get('/api/stores/:id', function(req, res, next){
@@ -43,8 +57,6 @@ router.delete('/api/stores', function(req, res, next){
         res.json(store);
     });
 });
-
-
 
 router.delete('/api/stores/:id', function(req, res, next){
     var id = req.params.id;
@@ -94,6 +106,7 @@ router.patch('/api/stores/:id', function(req, res, next) {
         store.city = (req.body.city || store.city);
         store.surfGear = (req.body.surfGear || store.surfGear);
         store.surfLessons = (req.body.surfLessons || store.surfLessons);
+        store.category = (req.body.category || store.category);
         store.save();
         res.json(store);
     });
@@ -158,7 +171,6 @@ router.get('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res){
     });
 });
 
-//not working properly
 //Delete a specific gear from a specific store
 router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, next) {
     var gearId = req.params.gear_id;
@@ -185,7 +197,6 @@ router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, nex
     });
 });
 
-//Not working properly
 //Delete a specific lesson from a specific store
 router.delete('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res, next) {
     var lessonId = req.params.lesson_id;

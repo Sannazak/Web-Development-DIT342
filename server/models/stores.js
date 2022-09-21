@@ -14,6 +14,7 @@ var storeSchema = new Schema(
             postalCode: { type: Number },
             city: { type: String, required: true }
         },
+        category: { type: String, allowedValues: ["Private", "Chain"]},
         surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}],
         surfGears: [{type: Schema.Types.ObjectId, ref: "surfGears"}]
 
