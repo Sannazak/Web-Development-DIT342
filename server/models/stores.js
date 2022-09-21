@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
-const surfGear = require('./surfGear');
+const surfGears = require('./surfGear');
+const surfLessons = require('./surfLessons');
+
 var Schema = mongoose.Schema;
 
 var storeSchema = new Schema(
@@ -13,8 +15,9 @@ var storeSchema = new Schema(
             city: { type: String, required: true }
         },
         surfLessons: [{type: Schema.Types.ObjectId, ref: "surfLessons"}],
-        surfGear: [{ type: Schema.Types.ObjectId, ref: "surfGears" }]
-    }
+        surfGears: [{type: Schema.Types.ObjectId, ref: "surfGears"}]
+
+        }
 
 );  
 

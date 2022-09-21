@@ -54,7 +54,7 @@ router.get('/api/users/:id/favouriteSpots', function(req, res, next) {
 //patch user v2
 router.patch('/api/users/:id', function(req, res, next) {
     var id = req.params.id;
-    User.findByIdAndUpdate(id, req.body, function(err, user) {
+    User.findByIdAndUpdate(id, req.body,{new: true}, function(err, user) {
         if (err) {
             return next(err); 
         } else if (user === null) {
@@ -62,7 +62,6 @@ router.patch('/api/users/:id', function(req, res, next) {
         } else {
             return res.status(200).json(user);
         }
-
     })
 });
 

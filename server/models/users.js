@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
+const surfSpot = require('./surfSpot');
+const stores = require('./stores');
+
 var Schema = mongoose.Schema;
+
 
 var userSchema = new Schema(
     {
@@ -16,5 +20,5 @@ var userSchema = new Schema(
         favouriteSpots : [{type: Schema.Types.ObjectId, ref: "surfSpot"}]  //unique?
     }
 );
-
+ 
 module.exports = mongoose.model("users", userSchema);
