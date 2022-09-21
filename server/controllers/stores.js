@@ -2,16 +2,14 @@ var express = require('express');
 var router = express.Router();
 var Store =  require('../models/stores');
 var SurfLessons = require('../models/surfLessons');
-var SurGears = require('../models/surfGear');
-//const { validate } = require('../models/surfGear');
-//const { query } = require('express');
+var SurfGears = require('../models/surfGear');
 
 //create a store
 router.post('/api/stores', function (req, res, next){
     var store = new Store(req.body);
     //TO DO: Check if unique name already exist
     store.save(function (err, store){
-        if (err) {return res.status(400);}
+        if (err) {return next(err);}
    
         res.status(201).json(store);
     })
@@ -141,7 +139,7 @@ router.get('/api/stores/:store_id/surfGears/:gear_id', function(req, res){
             return res.status(404).json({'message' : 'Store does not exists'});
         }
         if (store.surfGear.indexOf(gearId) !== -1){
-            SurGears.findById(gearId, function(err, surfGear) {
+            SurfGears.findById(gearId, function(err, surfGear) {
                 if (err) { return res.status(404).json({'message' : 'Gear not fund'});}
                 if (surfGear === null) {
                     return res.status(404).json({'message' : 'Gear not found'});
