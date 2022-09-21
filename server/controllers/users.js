@@ -3,14 +3,13 @@ var router = express.Router();
 var User = require('../models/users');
 var FavouriteSpot = require('../models/surfSpot');
 var FavouriteStore = require('../models/stores');
-const surfSpot = require('../models/surfSpot');
 
 
 //get all users
-router.get('/api/users', function (req, res, next) {
+router.get('/api/users', function (res, next) {
     User.find(function(err, user) {
         if (err) {return next(err);}
-        res.json({'user': user});
+        res.status(200).json(user);
     });
 });
 
@@ -22,7 +21,7 @@ router.get('/api/users/:id', function(req, res, next) {
         if (user === null) {
             return res.status(404).json({'message': 'User not found!'});   
         }
-        res.json(user);
+        res.status(200).json(user);
     });
 });
 
@@ -34,7 +33,7 @@ router.get('/api/users/:id/favouriteStores', function(req, res, next) {
         if (user === null) {
             return res.status(404).json({'message': 'User not found!'});   
         }
-        res.json(user.favouriteStores);
+        res.status(200).json(user.favouriteStores);
     });
 });
 
@@ -46,12 +45,12 @@ router.get('/api/users/:id/favouriteSpots', function(req, res, next) {
         if (user === null) {
             return res.status(404).json({'message': 'User not found!'});   
         }
-        res.json(user.favouriteSpots);
+        res.status(200).json(user.favouriteSpots);
     });
 });
 
 
-//patch user v2
+//patch user by id
 router.patch('/api/users/:id', function(req, res, next) {
     var id = req.params.id;
     User.findByIdAndUpdate(id, req.body,{new: true}, function(err, user) {
@@ -75,7 +74,7 @@ router.put('/api/users/:id', function(req, res, next) {
         if (err) {return next(err); }
             if (user === null) {
                 return res.status(404).json({'message': 'User not found!'});   
-            }
+            } //fix smaller code
             user.email = req.body.email;
             user.fullName = req.body.fullName;
             user.password = req.body.password;
@@ -87,13 +86,12 @@ router.put('/api/users/:id', function(req, res, next) {
             user.userHeight = req.body.userHeight;
             user.userWeight = req.body.userHeight;
     
-    user.save();
-    return res.status(200).json(user);
-});
+            user.save();
+            return res.status(200).json(user);
+        });
     } else {
-    return res.status(400).json({'message': 'Email and password required'});   
+        return res.status(400).json({'message': 'Email and password required'});   
     }
- 
 });
 
 //delete user with id
@@ -109,6 +107,7 @@ router.delete('/api/users/:id', function(req, res, next) {
 });
 
 //post user
+//check if required is met
 router.post('/api/users', function(req, res, next) {
     var user = new User(req.body);
     user.save(function(err, user) {
@@ -117,36 +116,38 @@ router.post('/api/users', function(req, res, next) {
     })
 });
 
-//post favouriteSpot to user
-router.post('/api/users/:id/favouriteSpots', function(req, res, next) {
-User.findById(req.params.id, function(err, user) {
-    if(err) {return res.status(500);}
-if (user === null) {
-    return res.status(404).json({'message' : 'User not found'});
-}
-var favouriteSpot = new FavouriteSpot(req.body);
-favouriteSpot.save(function(err) {
-    if(err) {
-        return res.status(500);
+//post favouriteSpot to user with id
+//check if duplicate
+router.post('/api/users/:id/favouriteSpots', function(req, res) {
+    User.findById(req.params.id, function(err, user) {
+        if(err) {return res.status(400);}
+    if (user === null) {
+        return res.status(404).json({'message' : 'User not found'});
     }
-});
-user.favouriteSpots.push(favouriteSpot);
-user.save();
-return res.status(201).json(user);
-})
+    var favouriteSpot = new FavouriteSpot(req.body);
+    favouriteSpot.save(function(err) {
+        if(err) {
+            return res.status(400);
+        }
+    });
+    user.favouriteSpots.push(favouriteSpot);
+    user.save();
+    return res.status(201).json(user);
+    })
 });
 
 //post favouriteStore to user
-router.post('/api/users/:id/favouriteStores', function(req, res, next) {
+//check if duplicate
+router.post('/api/users/:id/favouriteStores', function(req, res) {
     User.findById(req.params.id, function(err, user) {
-        if(err) {return res.status(500);}
+        if(err) {return res.status(400);}
     if (user === null) {
         return res.status(404).json({'message' : 'User not found'});
     }
     var favouriteStore = new FavouriteStore(req.body);
     favouriteStore.save(function(err) {
         if(err) {
-            return res.status(500);
+            return res.status(400);
         }
     });
     user.favouriteStore.push(favouriteStore);
@@ -170,7 +171,7 @@ router.get('/api/users/:id/favouriteSpots/:spot_Id', function(req, res) {
                 if (surfSpot === null) {
                     return res.status(404).json({'message' : 'Spot not found'});
                 } 
-                res.json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+                res.status(200).json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
             });
         }else{
             return res.status(400).json({'message': 'User doesnt have this spot saved as favorite'});
@@ -194,7 +195,7 @@ router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
                 if (store === null) {
                     return res.status(404).json({'message' : 'Store not found'});
                 } 
-                res.json({'Name of store ' : store.name, 'Data on store ' : store});
+                res.status(200).json({'Name of store ' : store.name, 'Data on store ' : store});
             });
         }else{
             return res.status(400).json({'message': 'User doesnt have this store saved as favorite'});
@@ -203,7 +204,7 @@ router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
 });
 
 //delete favouriteStore from user
-router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res, next) {
+router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res) {
     var userId = req.params.user_id;
     var storeId = req.params.store_id;
     
@@ -217,7 +218,7 @@ router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res
                 let index = user.favouriteStores.indexOf(storeId);
                 user.favouriteStores.splice(index, 1);
                 user.save();
-                res.json(user);
+                res.status(202).json(user);
             }else{
                 return res.status(400).json({'message': 'The store is not saved as favorite by the user'});
             }
@@ -229,7 +230,7 @@ router.delete('/api/users/:user_id/favouriteStores/:store_id', function(req, res
 });
 
 //delete favouriteSpot from user
-router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, next) {
+router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res) {
     var userId = req.params.user_id;
     var spotId = req.params.spot_id;
     
@@ -243,7 +244,7 @@ router.delete('/api/users/:user_id/favouriteSpots/:spot_id', function(req, res, 
                 let index = user.favouriteSpots.indexOf(spotId);
                 user.favouriteSpots.splice(index, 1);
                 user.save();
-                res.json(user);
+                res.status(202).json(user);
             }else{
                 return res.status(400).json({'message': 'The surf spot is not saved as favorite by the user'});
             }
