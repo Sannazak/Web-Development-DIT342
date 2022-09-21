@@ -1,12 +1,16 @@
 var mongoose = require('mongoose');
+const surfSpot = require('./surfSpot');
+const stores = require('./stores');
+
 var Schema = mongoose.Schema;
+
 
 var userSchema = new Schema(
     {
         email: { type: String, required: true, unique: true },
         fullName: { type: String },
         password: { type: String, required: true },
-        skillLevel: { type: String, allowedValues: ["Beginner", "Intermediate", "Advanced", "Pro"] },
+        skillLevel: { type: String, enum: ["Beginner", "Intermediate", "Advanced", "Pro"] },
         boardPreference: { type: [String] },
         clothingSize: { type: String },
         userHeight: { type: Number },
@@ -16,5 +20,5 @@ var userSchema = new Schema(
         favouriteSpots : [{type: Schema.Types.ObjectId, ref: "surfSpot"}]  //unique?
     }
 );
-
+ 
 module.exports = mongoose.model("users", userSchema);
