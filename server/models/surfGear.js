@@ -5,7 +5,7 @@ var surfGearsSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number },
     size: { type: Number },
-    gender: { type: String},
+    gender: { type: String },
     description: { type: String }
 });
 
