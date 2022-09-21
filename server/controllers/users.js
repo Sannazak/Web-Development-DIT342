@@ -70,23 +70,11 @@ router.put('/api/users/:id', function(req, res, next) {
     if(req.body.email && req.body.password){
         
         var id = req.params.id;
-        User.findById(id, function (err, user) {
+        User.findByIdAndUpdate(id, req.body, {new: true}, function (err, user) {
         if (err) {return next(err); }
             if (user === null) {
                 return res.status(404).json({'message': 'User not found!'});   
-            } //fix smaller code
-            user.email = req.body.email;
-            user.fullName = req.body.fullName;
-            user.password = req.body.password;
-            user.skillLevel = req.body.skillLevel;
-            user.favouriteShops = req.body.favouriteShops;
-            user.favouriteSpots = req.body.favouriteSpots;
-            user.boardPreference = req.body.boardPreference;
-            user.clothingSize = req.body.clothingSize;
-            user.userHeight = req.body.userHeight;
-            user.userWeight = req.body.userHeight;
-    
-            user.save();
+            }
             return res.status(200).json(user);
         });
     } else {
