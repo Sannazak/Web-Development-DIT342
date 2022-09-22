@@ -176,21 +176,21 @@ router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
 });
 
 //Get the info of a specific favorite spot from a specific user
-router.get('/:id/favouriteStores/:store_Id', function (req, res) {
+router.get('/:id/favouriteStores/:store_Id', function (req, res, next) {
     var storeId = req.params.store_Id;
     try {
-        User.findById(req.params.id, function (err, user) {
+        User.findById(req.params.id, function (err, user, next) {
             if (user.favouriteStores.indexOf(storeId) !== -1) {
+                if (err) { return next(err); }
                 FavouriteStore.findById(storeId, function (err, surfStore) {
-                    if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
-
+                    if (err) { return next(err); }
                     res.status(200).json({ 'Name of store ': surfStore.name, 'Data on spot ': surfStore });
                 });
             } else {
                 return res.status(400).json({ 'message': 'User doesnt have this store saved as favorite' });
             }
         });
-    } catch {
+    } catch (error) {
         return res.status(400).send('An error has occured');
     }
 });
