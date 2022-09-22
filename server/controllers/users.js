@@ -157,12 +157,9 @@ router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
     var spotId = req.params.spot_Id;
     try {
         User.findById(req.params.id, function (err, user) {
-            if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
 
             if (user.favouriteSpots.indexOf(spotId) !== -1) {
                 FavouriteSpot.findById(spotId, function (err, surfSpot) {
-                    if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
-
                     res.status(200).json({ 'Name of spot ': surfSpot.name, 'Data on spot ': surfSpot });
                 });
             } else {
