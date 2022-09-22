@@ -73,47 +73,28 @@ router.delete('/:id', function(req, res, next){
 
 //Put new information to the store
 router.put('/:id', function(req, res, next) {
-    //TO DO fix the code to make it shorter
     var id = req.params.id;
-    Store.findById(id, function(err, store) {
-        if (err) { return next(err); }
-        if (store === null) {
-            return res.status(404).json({"message": "Storet not found"});
+    Store.findOneAndReplace(id, req.body, {new:true}, function(err, store) {
+        if (err) { 
+            return next(err); 
+        } else if (store === null) {
+            return res.status(404).send('Store not found');
+        } else {
+            return res.status(201).json(store);
         }
-        store.name = req.body.name;
-        store.adress = req.body.adress;
-        store.country = req.body.country;
-        store.street = req.body.street;
-        store.streetNr = req.body.streetNr;
-        store.postalCode = req.body.postalCode;
-        store.city = req.body.city;
-        store.surfGear = req.body.surfGear;
-        store.surfLessons = req.body.surfLessons;
-        store.save();
-        res.status(201).json(store);
     });
 });
 
 router.patch('/:id', function(req, res, next) {
-    //TO DO fix the code to make it shorter
     var id = req.params.id;
-    Store.findById(id, function(err, store) {
-        if (err) { return next(err); }
-        if (store == null) {
-            return res.status(404).json({"message": "Store not found"});
+    Store.findByIdAndUpdate(id, req.body, {new:true}, function(err, store) {
+        if (err) { 
+            return next(err); 
+        } else if (store === null) {
+            return res.status(404).send('Store not found');
+        } else { 
+            return res.status(200).json(store)
         }
-        store.name = (req.body.name || store.name);
-        store.adress = (req.body.adress || store.adress);
-        store.country = (req.body.country || store.country);
-        store.street = (req.body.street || store.street);
-        store.streetNr = (req.body.streetNr || store.streetNr);
-        store.postalCode = (req.body.postalCode || store.postalCode);
-        store.city = (req.body.city || store.city);
-        store.surfGear = (req.body.surfGear || store.surfGear);
-        store.surfLessons = (req.body.surfLessons || store.surfLessons);
-        store.category = (req.body.category || store.category);
-        store.save();
-        res.status(201).json(store);
     });
 });
 
