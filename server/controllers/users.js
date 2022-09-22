@@ -147,6 +147,7 @@ router.post('/:id/favouriteStores', function (req, res, next) {
             user.save();
             return res.status(201).json(user);
         } catch {
+            if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
             return res.status(400).send('An error has occured');
         }
     })
@@ -163,10 +164,11 @@ router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
                     res.status(200).json({ 'Name of spot ': surfSpot.name, 'Data on spot ': surfSpot });
                 });
             } else {
-                return res.status(400).json({ 'message': 'User doesnt have this spot saved as favorite' });
+                return res.status(400).send('User doesnt have this spot saved as favorite' );
             }
         });
     } catch {
+        if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
         return res.status(400).send('An error has occured');
     }
 });
