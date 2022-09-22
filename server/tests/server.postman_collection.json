@@ -1122,16 +1122,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteSpots/6320e27256034431e0c828b3",
+							"raw": "{{host}}/api/users/632987eb6ba392372cbbceaf/favouriteSpots/6320e22f56034431e0c828af",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"631f7d748a15fe255c24998d",
+								"632987eb6ba392372cbbceaf",
 								"favouriteSpots",
-								"6320e27256034431e0c828b3"
+								"6320e22f56034431e0c828af"
 							]
 						}
 					},
@@ -1143,16 +1143,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteStores/6322de1c98f17549ac181596",
+							"raw": "{{host}}/api/users/632987eb6ba392372cbbceaf/favouriteStores/632223f816331e2f687e399a",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"631f7d748a15fe255c24998d",
+								"632987eb6ba392372cbbceaf",
 								"favouriteStores",
-								"6322de1c98f17549ac181596"
+								"632223f816331e2f687e399a"
 							]
 						}
 					},
