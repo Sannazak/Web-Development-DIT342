@@ -1122,16 +1122,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/631f7d748a15fe255c24998d/favouriteSpots/6320e27256034431e0c828b3",
+							"raw": "{{host}}/api/users/632987eb6ba392372cbbceaf/favouriteSpots/6320e22f56034431e0c828af",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"631f7d748a15fe255c24998d",
+								"632987eb6ba392372cbbceaf",
 								"favouriteSpots",
-								"6320e27256034431e0c828b3"
+								"6320e22f56034431e0c828af"
 							]
 						}
 					},
