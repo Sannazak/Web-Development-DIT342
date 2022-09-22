@@ -46,7 +46,7 @@ app.get('/api', function(req, res) {
 app.use('/api/stores', storesController);
 app.use(surfGearsController);
 app.use(surfSpotsController);
-app.use(usersController);
+app.use('/api/users', usersController);
 app.use(surfLessonsController);
 app.use(surfBoardsController);
 
