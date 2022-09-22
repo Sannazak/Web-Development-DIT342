@@ -6,7 +6,7 @@ var SurfBoards = require('../models/surfBoards');
 router.post('/api/surfBoards', function(req, res, next){
     var surfBoards = new SurfBoards(req.body);
     surfBoards.save(function(err, surfBoards){
-        if(err) { return res.status(400); }
+        if(err) { return next(err); }
         res.status(201).json(surfBoards);
     });
 });
