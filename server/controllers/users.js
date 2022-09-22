@@ -153,30 +153,9 @@ router.post('/:id/favouriteStores', function (req, res, next) {
     })
 });
 
-//Get the info of a specific favorite spot from a specific user
-router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
-    var spotId = req.params.spot_Id;
-    try {
-        User.findById(req.params.id, function (err, user) {
-
-            if (user.favouriteSpots.indexOf(spotId) !== -1) {
-                FavouriteSpot.findById(spotId, function (err, surfSpot) {
-                    if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
-
-                    res.status(200).json({ 'Name of spot ': surfSpot.name, 'Data on spot ': surfSpot });
-                });
-            } else {
-                return res.status(400).send('User doesnt have this spot saved as favorite' );
-            }
-        });
-    } catch {
-        if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
-        return res.status(400).send('An error has occured');
-    }
-});
 
 //Get the info of a specific favorite spot from a specific user
-router.get('/:id/favouriteSpots/:spot_Id', function(req, res) {
+router.get('/api/users/:id/favouriteSpots/:spot_Id', function(req, res) {
     var id = req.params.id;
     var spotId = req.params.spot_Id;
     User.findById(id, function(err, user) {
@@ -197,6 +176,76 @@ router.get('/:id/favouriteSpots/:spot_Id', function(req, res) {
         }
     });
 });
+
+//Get the info of a specific favorite store from a specific user
+router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
+    var userId = req.params.user_id;
+    var storeId = req.params.store_id;
+
+    User.findById(userId, function(err, user) {
+        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+        if (user === null) {
+            return res.status(404).json({'message' : 'User not found'});
+        }
+        if (user.favouriteStores.indexOf(storeId) !== -1){
+            FavouriteStore.findById(storeId, function(err, store) {
+                if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+                if (store === null) {
+                    return res.status(404).json({'message' : 'Store not found'});
+                } 
+                res.status(200).json({'Name of store ' : store.name, 'Data on store ' : store});
+            });
+        }else{
+            return res.status(400).json({'message': 'User doesnt have this store saved as favorite'});
+        }
+    });
+});
+
+
+// //Get the info of a specific favorite spot from a specific user
+// router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
+//     var spotId = req.params.spot_Id;
+//     try {
+//         User.findById(req.params.id, function (err, user) {
+
+//             if (user.favouriteSpots.indexOf(spotId) !== -1) {
+//                 FavouriteSpot.findById(spotId, function (err, surfSpot) {
+//                     if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
+
+//                     res.status(200).json({ 'Name of spot ': surfSpot.name, 'Data on spot ': surfSpot });
+//                 });
+//             } else {
+//                 return res.status(400).send('User doesnt have this spot saved as favorite' );
+//             }
+//         });
+//     } catch {
+//         if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
+//         return res.status(400).send('An error has occured');
+//     }
+// });
+
+// //Get the info of a specific favorite spot from a specific user
+// router.get('/:id/favouriteSpots/:spot_Id', function(req, res) {
+//     var id = req.params.id;
+//     var spotId = req.params.spot_Id;
+//     User.findById(id, function(err, user) {
+//         if (err) {  return res.status(404).json({'message': 'User not found!', 'error': err}); }
+//         if (user === null) {
+//             return res.status(404).json({'message': 'User not found'});
+//         }
+//         if (user.favouriteSpots.indexOf(spotId) !== -1){
+//             FavouriteSpot.findById(spotId, function(err, surfSpot) {
+//                 if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
+//                 if (surfSpot === null) {
+//                     return res.status(404).json({'message' : 'Spot not found'});
+//                 } 
+//                 res.status(200).json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+//             });
+//         }else{
+//             return res.status(400).json({'message': 'User doesnt have this spot saved as favorite'});
+//         }
+//     });
+// });
 
 // //Get the info of a specific favorite spot from a specific user
 // router.get('/:id/favouriteStores/:store_Id', function (req, res, next) {
