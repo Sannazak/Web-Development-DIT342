@@ -16,11 +16,11 @@ router.get("/", function (req, res, next) {
             }
         }
         query.exec(function(err, store){
-            if(err) { return next(err); }
+            if(err) { return next(err); }       //is this row needed when doing try catch?
             res.status(200).json(store)
         });
     }catch(error){
-        res.status(404).json()
+        res.status(400).send('An error has occured.')
     };
 });
 
@@ -178,6 +178,8 @@ router.get('/:id/favouriteStores/:store_Id', function (req, res) {
         User.findById(req.params.id, function (err, user) {
             if (user.favouriteStores.indexOf(storeId) !== -1) {
                 FavouriteStore.findById(storeId, function (err, surfStore) {
+                    if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
+
                     res.status(200).json({ 'Name of store ': surfStore.name, 'Data on spot ': surfStore });
                 });
             } else {
