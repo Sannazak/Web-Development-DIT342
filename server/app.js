@@ -43,7 +43,7 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
-app.use(storesController);
+app.use('/api/stores', storesController);
 app.use(surfGearsController);
 app.use(surfSpotsController);
 app.use(usersController);

@@ -5,7 +5,7 @@ var SurfLessons = require('../models/surfLessons');
 var SurfGears = require('../models/surfGear');
 
 //create a store
-router.post('/api/stores', function (req, res, next){
+router.post('/', function (req, res, next){
     var store = new Store(req.body);
     //TO DO: Check if unique name already exist
     store.save(function (err, store){
@@ -16,7 +16,7 @@ router.post('/api/stores', function (req, res, next){
 });
 
 //read all stores or using query to filter 
-router.get("/api/stores", function (req, res, next) {
+router.get("/", function (req, res, next) {
     try{
         var query = Store.find();
         for (var queryName in req.query){
@@ -36,7 +36,7 @@ router.get("/api/stores", function (req, res, next) {
 });
 
 //Get store by id
-router.get('/api/stores/:id', function(req, res, next){
+router.get('/:id', function(req, res, next){
     var id = req.params.id;
     Store.findById(id, function(err, store){
         if(err) {return next(err);}
@@ -48,7 +48,7 @@ router.get('/api/stores/:id', function(req, res, next){
 });
 
 //Delete all the stores
-router.delete('/api/stores', function(req, res, next){
+router.delete('/', function(req, res, next){
     Store.deleteMany(function(err, store){
         if(err) {return next(err);}
         if(store === null){
@@ -59,7 +59,7 @@ router.delete('/api/stores', function(req, res, next){
 });
 
 //Delete stores by the id
-router.delete('/api/stores/:id', function(req, res, next){
+router.delete('/:id', function(req, res, next){
     var id = req.params.id;
     Store.findOneAndDelete({_id: id}, function(err, store){
         if(err) {return next(err);}
@@ -71,7 +71,7 @@ router.delete('/api/stores/:id', function(req, res, next){
 });
 
 //Put new information to the store
-router.put('/api/stores/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     //TO DO fix the code to make it shorter
     var id = req.params.id;
     Store.findById(id, function(err, store) {
@@ -93,7 +93,7 @@ router.put('/api/stores/:id', function(req, res, next) {
     });
 });
 
-router.patch('/api/stores/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     //TO DO fix the code to make it shorter
     var id = req.params.id;
     Store.findById(id, function(err, store) {
@@ -116,8 +116,8 @@ router.patch('/api/stores/:id', function(req, res, next) {
     });
 });
 
-//Get all gears byt the surf id
-router.get('/api/stores/:id/surfGears', function(req, res, next){
+//Get all gears by the surf id
+router.get('/:id/surfGears', function(req, res, next){
     var id = req.params.id;
     Store.findById(id, function(err, store){
         if(err) {return next(err);}
@@ -128,8 +128,28 @@ router.get('/api/stores/:id/surfGears', function(req, res, next){
     });
 });
 
+//post surfGear to store
+//check if duplicate
+router.post('/:id/surfGears', function(req, res, next) {
+    Store.findById(req.params.id, function(err, store) {
+        if(err) {return next(err);}
+    if (store === null) {
+        return res.status(404).json({'message' : 'Store not found'});
+    }
+    var surfGears = new SurfGears(req.body);
+    surfGears.save(function(err) {
+        if(err) {
+            return res.status(400);
+        }
+    });
+    store.surfGears.push(surfGears);
+    store.save();
+    return res.status(201).json(store);
+    })
+});
+
 //Get the info of a specific gear from a specific store
-router.get('/api/stores/:store_id/surfGears/:gear_id', function(req, res){
+router.get('/:store_id/surfGears/:gear_id', function(req, res){
     var gearId = req.params.gear_id;
     var storeId = req.params.store_id;
 
@@ -154,7 +174,7 @@ router.get('/api/stores/:store_id/surfGears/:gear_id', function(req, res){
 });
 
 //Get the info of a specific lesson from a specific store
-router.get('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res){
+router.get('/:store_id/surfLessons/:lesson_id', function(req, res){
     var lessonId = req.params.lesson_id;
     var storeId = req.params.store_id;
 
@@ -178,7 +198,7 @@ router.get('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res){
 });
 
 //Delete a specific gear from a specific store
-router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, next) {
+router.delete('/:store_id/surfGears/:gear_id', function(req, res, next) {
     var gearId = req.params.gear_id;
     var storeId = req.params.store_id;
     
@@ -204,7 +224,7 @@ router.delete('/api/stores/:store_id/surfGears/:gear_id', function(req, res, nex
 });
 
 //Delete a specific lesson from a specific store
-router.delete('/api/stores/:store_id/surfLessons/:lesson_id', function(req, res, next) {
+router.delete('/:store_id/surfLessons/:lesson_id', function(req, res, next) {
     var lessonId = req.params.lesson_id;
     var storeId = req.params.store_id;
     
