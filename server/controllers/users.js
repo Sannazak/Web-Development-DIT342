@@ -156,9 +156,9 @@ router.post('/:id/favouriteStores', function (req, res, next) {
 router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
     var spotId = req.params.spot_Id;
     try {
-        User.findById(req.params.id, function (err, user) {
+        User.findById(req.params.id, function (user) {
             if (user.favouriteSpots.indexOf(spotId) !== -1) {
-                FavouriteSpot.findById(spotId, function (err, surfSpot) {
+                FavouriteSpot.findById(spotId, function (surfSpot) {
                     res.status(200).json({ 'Name of spot ': surfSpot.name, 'Data on spot ': surfSpot });
                 });
             } else {
@@ -170,13 +170,13 @@ router.get('/:id/favouriteSpots/:spot_Id', function (req, res) {
     }
 });
 
-//Get the info of a specific favorite spot from a specific user
+//Get the info of a specific favorite store from a specific user
 router.get('/:id/favouriteStores/:store_Id', function (req, res) {
     var storeId = req.params.store_Id;
     try {
-        User.findById(req.params.id, function (user) {
+        User.findById(req.params.id, function (err, user) {
             if (user.favouriteStores.indexOf(storeId) !== -1) {
-                FavouriteStore.findById(storeId, function (surfStore) {
+                FavouriteStore.findById(storeId, function (err, surfStore) {
                     res.status(200).json({ 'Name of store ': surfStore.name, 'Data on spot ': surfStore });
                 });
             } else {
