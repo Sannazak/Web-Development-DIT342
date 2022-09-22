@@ -3,6 +3,7 @@ var router = express.Router();
 var Store =  require('../models/stores');
 var SurfLessons = require('../models/surfLessons');
 var SurfGears = require('../models/surfGear');
+var SurfBoards = require('../models/surfBoards');
 
 //create a store
 router.post('/', function (req, res, next){
@@ -129,7 +130,6 @@ router.get('/:id/surfGears', function(req, res, next){
 });
 
 //post surfGear to store
-//check if duplicate
 router.post('/:id/surfGears', function(req, res, next) {
     Store.findById(req.params.id, function(err, store) {
         if(err) {return next(err);}
@@ -143,6 +143,44 @@ router.post('/:id/surfGears', function(req, res, next) {
         }
     });
     store.surfGears.push(surfGears);
+    store.save();
+    return res.status(201).json(store);
+    })
+});
+
+//post surfLesson to store
+router.post('/:id/surfLessons', function(req, res, next) {
+    Store.findById(req.params.id, function(err, store) {
+        if(err) {return next(err);}
+    if (store === null) {
+        return res.status(404).json({'message' : 'Store not found'});
+    }
+    var surfLessons = new SurfLessons(req.body);
+    surfLessons.save(function(err) {
+        if(err) {
+            return res.status(400);
+        }
+    });
+    store.surfLessons.push(surfLessons);
+    store.save();
+    return res.status(201).json(store);
+    })
+});
+
+//post surfBoards to store
+router.post('/:id/surfBoards', function(req, res, next) {
+    Store.findById(req.params.id, function(err, store) {
+        if(err) {return next(err);}
+    if (store === null) {
+        return res.status(404).json({'message' : 'Store not found'});
+    }
+    var surfBoards = new SurfBoards(req.body);
+    surfBoards.save(function(err) {
+        if(err) {
+            return res.status(400);
+        }
+    });
+    store.surfBoards.push(surfBoards);
     store.save();
     return res.status(201).json(store);
     })
