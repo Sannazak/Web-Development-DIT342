@@ -6,17 +6,29 @@ var SurfBoards = require('../models/surfBoards');
 router.post('/api/surfBoards', function(req, res, next){
     var surfBoards = new SurfBoards(req.body);
     surfBoards.save(function(err, surfBoards){
-        if(err) { return res.status(400); }
+        if(err) { return next(err); }
         res.status(201).json(surfBoards);
     });
 });
 
 //Get all the surf boards
 router.get('/api/surfBoards', function(req, res, next){
-    SurfBoards.find(function(err, surfBoards){
-        if(err) { return res.status(400);}
-        res.status(200).json(surfBoards);
-    });
+    try{
+        var query = SurfBoards.find();
+        for (var queryName in req.query){
+            if(req.query.hasOwnProperty(queryName)){
+                if(req.query[queryName]){
+                    query.where(queryName).equals(req.query[queryName]);
+                }
+            }
+        }
+        query.exec(function(err, surfboards){
+            if(err) { return next(err); }
+            res.status(200).json(surfboards)
+        });
+    }catch(error){
+        res.status(404).json()
+    };
 });
 
 //Delete all the surf boards 
@@ -55,37 +67,29 @@ router.delete('/api/surfBoards/:id', function(req, res, next){
 });
 
 router.put('/api/surfBoards/:id', function(req, res, next) {
-    //TO DO: make the code shorter
     var id = req.params.id;
-    SurfBoards.findById(id, function(err, surfBoards) {
-        if (err) { return next(err); }
-        if (surfBoards == null) {
-            return res.status(404).json({"message": "Surf Board not found"});
+    SurfBoards.findOneAndReplace(id, req.body, {new: true}, function(err, surfBoards) {
+        if (err) {
+            return next(err); 
+        } else if (surfBoards === null) {
+            return res.status(404).json({'message': 'Surfboard not found!'});   
+        } else {
+            return res.status(200).json(surfBoards);
         }
-        surfBoards.price = req.body.price;
-        surfBoards.size = req.body.size;
-        surfBoards.volume = req.body.volume;
-        surfBoards.style = req.body.style;
-        surfBoards.save();
-        res.status(201).json(surfBoards);
-    });
+      });
 });
 
 router.patch('/api/surfBoards/:id', function(req, res, next) {
-    //TO DO: make the code shorter
     var id = req.params.id;
-    SurfBoards.findById(id, function(err, surfBoards) {
-        if (err) { return next(err); }
-        if (surfBoards == null) {
-            return res.status(404).json({"message": "Surf Board not found"});
+    SurfBoards.findByIdAndUpdate(id, req.body, {new: true}, function(err, surfBoards) {
+        if (err) {
+            return next(err); 
+        } else if (surfBoards === null) {
+            return res.status(404).json({'message': 'Surfboard not found!'});   
+        } else {
+            return res.status(200).json(surfBoards);
         }
-        surfBoards.price = (req.body.price || surfBoards.price);
-        surfBoards.size = (req.body.size || surfBoards.size);
-        surfBoards.volume = (req.body.volume || surfBoards.volume);
-        surfBoards.style = (req.body.style || surfBoards.style);
-        surfBoards.save();
-        res.status(201).json(surfBoards);
-    });
+    })
 });
 
 module.exports = router;
