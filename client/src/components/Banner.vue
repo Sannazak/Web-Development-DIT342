@@ -4,6 +4,10 @@
             src="../assets/austin-neill-uHD0uyp79Dg-unsplash4.jpg"
             alt="Surf Photo"
         />
+        <form action="https://www.google.com" class="search-bar">
+            <input type="text" placeholder="Search for location or shop" name="q">
+            <button type="submit"><img src="../assets/search.png"></button>
+        </form>
         <div class="text-block">
             <h6>Welcome!</h6>
             <p>The days of carrying heavy surfbags and gears through airports is over.
@@ -22,6 +26,29 @@ export default { name: 'banner' }
   position:relative;
   padding-left: 1px;
   padding-top: 1px;
+  display:flex;
+  align-items: right;
+  justify-content: right;
+}
+.search-bar{
+    width: 100%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.2);
+    display:flex;
+    align-items: right;
+    position:absolute;
+    border-radius: 60px;
+    padding: 10px 20px;
+}
+
+.search-bar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 20px;
+    font-size: 20px;
+    color: #cac7ff;
 }
 .image {
     width: 1150px;
