@@ -1,7 +1,7 @@
 <template>
     <div>
         <img class="image"
-            src="../assets/austin-neill-uHD0uyp79Dg-unsplash.jpg"
+            src="../assets/austin-neill-uHD0uyp79Dg-unsplash4.jpg"
             alt="Surf Photo"
         />
     </div>
@@ -13,9 +13,9 @@ export default { name: 'banner' }
 
 <style scoped>
 .image {
-    width: 100%;
-    height: -15%;
+    width: 1300px;
     background-size: cover;
+    object-fit:scale-down;
 }
 
 h1 {
