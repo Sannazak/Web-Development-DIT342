@@ -23,10 +23,10 @@ export default { name: 'banner' }
 
 <style scoped>
 .container {
-  position:relative;
+  position: relative;
   padding-left: 1px;
   padding-top: 1px;
-  display:flex;
+  display: flex;
   align-items: right;
   justify-content: right;
 }
@@ -38,7 +38,7 @@ export default { name: 'banner' }
     align-items: right;
     position:absolute;
     border-radius: 60px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     backdrop-filter: blur(1px);
 }
 
@@ -48,23 +48,23 @@ export default { name: 'banner' }
     border: 0;
     outline: none;
     padding: 24px 20px;
-    font-size: 20px;
-    color: #cac7ff;
+    font-size: 15px;
+    color: #056158;
 }
 
 ::placeholder{
-    color:#cac7ff;
+    color:#056158;
 }
 
 .search-bar button img{
-    width:25px;
+    width:15px;
 }
 
 .search-bar button{
     border: 0;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     background: #054e47;
     cursor: pointer;
 }
@@ -77,8 +77,8 @@ export default { name: 'banner' }
 .text-block {
   position: absolute;
   bottom: 20px;
-  left: 60px;
-  right: 900px;
+  left: 20px;
+  right: 1000px;
   font-size: x-small;
   background-color: rgba(0, 0, 0, 0.478);
   color: white;
