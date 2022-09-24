@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Stores near {{ $route.params.name}}</h3>
+        <h3>Store {{ $route.params.name}}</h3>
     </div>
 </template>
 

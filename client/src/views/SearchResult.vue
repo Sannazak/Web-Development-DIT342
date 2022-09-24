@@ -2,6 +2,7 @@
     <div>
         <banner/>
         <ShowStore/>
+        <p>{{stores}}</p>
     </div>
 </template>
 
@@ -11,7 +12,12 @@ import ShowStore from '../components/ShowStore.vue'
 
 export default {
   name: 'searchResult',
-  components: { Banner, ShowStore }
+  components: { Banner, ShowStore },
+  data() {
+    return {
+      stores: []
+    }
+  }
 }
 </script>
 

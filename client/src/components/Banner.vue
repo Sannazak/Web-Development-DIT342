@@ -12,13 +12,33 @@
         </div>
         <form action="https://www.google.com" method="get" class="search-bar">
             <input type="text" placeholder="Search for location or shop" name="q">
-            <button type="submit"><img src="../assets/search.png"></button>
+            <button type="submit" @click=getMessage()><img src="../assets/search.png"></button>
         </form>
     </div>
 </template>
 
 <script>
-export default { name: 'banner' }
+// @ is an alias to /src
+import { Api } from '@/Api'
+export default {
+  name: 'banner',
+  data() {
+    return {
+      message: 'none'
+    }
+  },
+  methods: {
+    getMessage() {
+      Api.get('/')
+        .then(response => {
+          this.message = response.data.message
+        })
+        .catch(error => {
+          this.message = error
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
