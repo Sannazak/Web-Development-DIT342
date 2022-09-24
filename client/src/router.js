@@ -18,6 +18,11 @@ export default new Router({
       path: '/searchResult',
       name: 'searchResult',
       component: SearchResult
+    },
+    {
+      path: '/searchResult/:name',
+      name: 'searchResult',
+      component: SearchResult
     }
   ]
 })
