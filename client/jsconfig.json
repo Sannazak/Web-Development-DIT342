@@ -1,5 +1,12 @@
 {
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "preserve"
+  },
+  
   "include": [
     "./src/**/*"
   ]
+  
 }
