@@ -1,12 +1,52 @@
 <template>
   <div>
+  <div class="hr">
     <banner/>
-    <b-jumbotron header="DIT342 Frontend" lead="Welcome to your DIT342 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
-    </b-jumbotron>
+    <!-- <nav class="navbar">
+      <div class="container">
+        <ul class="nav navbar-nav flex-row float-right">
+          <li class="nav-item">
+            <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-outline-primary" to="/">Sign up</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div><p></p></div>-->
+    <div class="container">
+      <b-nav>
+        <router-link class="btn btn-outline-primary" to="/login">Sign in</router-link>
+        <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
+      <!--<router-link to="/">Home</router-link>
+      <router-link to="/user">User</router-link>-->
+      </b-nav>
+    </div>
+    <!--<b-nav justified>
+      <b-nav-item active>First</b-nav-item>
+      <b-nav-item>Second</b-nav-item>
+      <b-nav-item>Third</b-nav-item>
+    </b-nav>-->
+    <hr class="hr">
+    <div class="text">
+      <h2> Top spots </h2>
+    </div>
+    <div class="top_items">
+      <b-card title="Apelviken" :img-src="require('@/assets/apelviken.webp')" img-alt="Image" img-top
+        tag="article">
+        <b-card-text>
+          Great place for beginners. Children and adults.
+        </b-card-text>
+        <b-button href="#" variant="primary">Visit</b-button>
+      </b-card>
+      <b-section id="home">
+        <h1>Next page</h1>
+        <p>Just another text</p>
+      </b-section>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -40,5 +80,55 @@ export default {
 <style>
 .btn_message {
   margin-bottom: 1em;
+}
+
+.top_items {
+  top: 70%;
+  left: 90%;
+  max-width: 20rem;
+  margin-top: -9em;
+  margin-left: -15em;
+  position: fixed;
+}
+
+hr {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1px;
+  background-color: black;
+}
+
+.text {
+  position: relative;
+  padding-left: 1px;
+  padding-top: 1px;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  right: 170px;
+}
+
+.container {
+  width: 100%;
+  height: 100%,
+}
+
+section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+}
+
+section h1{
+  font-size: 4rem;
+}
+
+section p{
+  font-size: 1.5rem;
 }
 </style>
