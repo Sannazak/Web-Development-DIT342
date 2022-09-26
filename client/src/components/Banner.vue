@@ -12,13 +12,33 @@
         </div>
         <form action="https://www.google.com" method="get" class="search-bar">
             <input type="text" placeholder="Search for location or shop" name="q">
-            <button type="submit"><img src="../assets/banner_photo.jpg"></button>
+            <button type="submit" @click=getMessage()><img src="../assets/search.png"></button>
         </form>
     </div>
 </template>
 
 <script>
-export default { name: 'banner' }
+// @ is an alias to /src
+import { Api } from '@/Api'
+export default {
+  name: 'banner',
+  data() {
+    return {
+      message: 'none'
+    }
+  },
+  methods: {
+    getMessage() {
+      Api.get('/')
+        .then(response => {
+          this.message = response.data.message
+        })
+        .catch(error => {
+          this.message = error
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -32,12 +52,13 @@ export default { name: 'banner' }
 }
 .search-bar{
     width: 100%;
-    max-width: 400px;
+    max-width: 250px;
     background: rgba(255, 255, 255, 0.2);
     display:flex;
-    align-items: right;
-    position:absolute;
+    position: absolute;
     border-radius: 60px;
+    bottom:8px;
+    right:28px;
     padding: 5px 10px;
     backdrop-filter: blur(1px);
 }
@@ -47,13 +68,13 @@ export default { name: 'banner' }
     flex: 1;
     border: 0;
     outline: none;
-    padding: 24px 20px;
+    padding: 6px 5px;
     font-size: 15px;
-    color: #056158;
+    color:#f7f9f9;
 }
 
 ::placeholder{
-    color:#056158;
+    color:#f7f9f9;
 }
 
 .search-bar button img{
