@@ -52,12 +52,13 @@ export default {
 }
 .search-bar{
     width: 100%;
-    max-width: 400px;
+    max-width: 250px;
     background: rgba(255, 255, 255, 0.2);
     display:flex;
-    align-items: right;
-    position:absolute;
+    position: absolute;
     border-radius: 60px;
+    bottom:8px;
+    right:28px;
     padding: 5px 10px;
     backdrop-filter: blur(1px);
 }
@@ -67,13 +68,13 @@ export default {
     flex: 1;
     border: 0;
     outline: none;
-    padding: 24px 20px;
+    padding: 6px 5px;
     font-size: 15px;
-    color: #056158;
+    color:#f7f9f9;
 }
 
 ::placeholder{
-    color:#056158;
+    color:#f7f9f9;
 }
 
 .search-bar button img{
