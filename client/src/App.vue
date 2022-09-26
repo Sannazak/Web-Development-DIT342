@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home </router-link>|
-      <router-link to="stores">Stores</router-link>
+      <router-link to="searchResult">Search Result</router-link>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>

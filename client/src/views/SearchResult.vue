@@ -14,7 +14,7 @@ import ShowStore from '../components/ShowStore.vue'
 import StoreItem from '../components/StoreItem.vue'
 
 export default {
-  name: 'stores',
+  name: 'searchResult',
   components: { Banner, ShowStore, StoreItem },
   data() {
     return {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Stores from './views/Stores.vue'
+import Stores from './views/SearchResult.vue'
 
 Vue.use(Router)
 
@@ -15,13 +15,13 @@ export default new Router({
       component: Home
     },
     {
-      path: '/stores',
-      name: 'stores',
+      path: '/searchResult',
+      name: 'searchResult',
       component: Stores
     },
     {
-      path: '/stores/:name',
-      name: 'stores',
+      path: '/searchResult/:name',
+      name: 'searchResult',
       component: Stores
     }
   ]
