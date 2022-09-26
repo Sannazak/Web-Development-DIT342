@@ -1,13 +1,14 @@
 <template>
     <div>
-        <h3>Stores close to {{ $route.params.name}}</h3>
+        <p>The {{store.name}} is close to {{store.city}}</p>
     </div>
 </template>
 
 <script>
 
 export default {
-  name: 'showStore'
+  name: 'storeItem',
+  props: ['store']
 }
 </script>
 
