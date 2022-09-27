@@ -26,8 +26,8 @@ export default new Router({
       component: Stores
     },
     {
-      path: '/user',
-      name: 'user',
+      path: '/users',
+      name: 'users',
       component: User
     },
     {

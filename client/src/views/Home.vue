@@ -1,7 +1,7 @@
 <template>
   <div>
-  <div class="hr">
     <banner/>
+    <p></p>
     <!-- <nav class="navbar">
       <div class="container">
         <ul class="nav navbar-nav flex-row float-right">
@@ -13,40 +13,32 @@
           </li>
         </ul>
       </div>
-    </nav>
-    <div><p></p></div>-->
-    <div class="container">
-      <b-nav>
-        <router-link class="btn btn-outline-primary" to="/login">Sign in</router-link>
-        <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
-      <!--<router-link to="/">Home</router-link>
-      <router-link to="/user">User</router-link>-->
-      </b-nav>
-    </div>
+    </nav>-->
+    <b-nav class="container">
+      <router-link class="btn btn-outline-primary" to="/login">Sign in</router-link>
+      <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
+      <router-link class="btn btn-outline-primary" to="/user">User</router-link>
+       <!-- <router-link to="/">Home</router-link>
+        <router-link to="/user">User</router-link>-->
+    </b-nav>
     <!--<b-nav justified>
       <b-nav-item active>First</b-nav-item>
       <b-nav-item>Second</b-nav-item>
       <b-nav-item>Third</b-nav-item>
     </b-nav>-->
     <hr class="hr">
-    <div class="text">
-      <h2> Top spots </h2>
-    </div>
-    <div class="top_items">
-      <b-card title="Apelviken" :img-src="require('@/assets/apelviken.webp')" img-alt="Image" img-top
-        tag="article">
-        <b-card-text>
-          Great place for beginners. Children and adults.
-        </b-card-text>
-        <b-button href="#" variant="primary">Visit</b-button>
-      </b-card>
-      <b-section id="home">
-        <h1>Next page</h1>
-        <p>Just another text</p>
-      </b-section>
-    </div>
+    <h2 class="text"> Top spots </h2>
+    <p></p>
+    <b-card class="top_items" title="Apelviken" :img-src="require('@/assets/apelviken.webp')" img-alt="Image" img-top
+      tag="article">
+      <b-card-text>Great place for beginners. Children and adults.</b-card-text>
+      <b-button href="#" variant="primary">Visit</b-button>
+    </b-card>
+    <b-section id="home">
+      <h1>Next page</h1>
+      <p>Just another text</p>
+    </b-section>
   </div>
-</div>
 </template>
 
 <script>
@@ -83,12 +75,7 @@ export default {
 }
 
 .top_items {
-  top: 70%;
-  left: 90%;
-  max-width: 20rem;
-  margin-top: -9em;
-  margin-left: -15em;
-  position: fixed;
+  max-width: 25rem;
 }
 
 hr {
