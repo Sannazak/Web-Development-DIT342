@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Stores from './views/SearchResult.vue'
+import DetailedView from './views/DetailedView.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/searchResult/:name',
       name: 'searchResult',
       component: Stores
+    },
+    {
+      path: '/DetailedView',
+      name: 'DetailedView',
+      component: DetailedView
     }
   ]
 })
