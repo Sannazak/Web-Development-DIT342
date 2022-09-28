@@ -26,7 +26,7 @@ export default new Router({
       component: Stores
     },
     {
-      path: '/StoreView',
+      path: '/StoreView/:id',
       name: 'StoreView',
       component: StoreView
     }
