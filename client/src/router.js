@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Stores from './views/SearchResult.vue'
+import StoreView from './views/StoreView.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/searchResult/:name',
       name: 'searchResult',
       component: Stores
+    },
+    {
+      path: '/StoreView/:id',
+      name: 'StoreView',
+      component: StoreView
     }
   ]
 })

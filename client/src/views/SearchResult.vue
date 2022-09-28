@@ -20,7 +20,7 @@ export default {
     return {
       stores: [{
         _id: '632b6596f4f37c039c741905',
-        name: 'totally new surfstore where erik works',
+        name2: 'totally new surfstore where erik works',
         city: 'Åsa',
         __v: 0
       }]
