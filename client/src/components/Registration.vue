@@ -5,33 +5,72 @@
 
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" class="form-control form-control-lg"/>
+                <input v-model="fullName" type="text" class="form-control form-control-lg" v-bind:key="fullName"/>
             </div>
 
             <div class="form-group">
                 <label>Email address</label>
-                <input type="email" class="form-control form-control-lg" />
+                <input v-model="email" type="email" class="form-control form-control-lg" v-bind:key="email"/>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control form-control-lg" />
+                <input v-model="password" type="password" class="form-control form-control-lg" v-bind:key="password"/>
             </div>
 
-            <button type="submit" class="btn btn-dark btn-lg btn-block">Sign Up</button>
-
+            <b-button type="submit" class="btn btn-dark btn-lg btn-block" @click="Submit()">Sign Up</b-button>
+            <div>
+              <p>{{ message }}</p>
+            </div>
             <p class="forgot-password text-right">
-                Already registered
-                <router-link :to="{name: 'login'}">sign in?</router-link>
+                <router-link to="/login">Already registered?</router-link>
             </p>
         </form>
     </div>
 </template>
 
 <script>
+import { Api } from '@/Api'
+
 export default {
   data() {
-    return {}
+    return {
+      fullName: '',
+      email: '',
+      password: '',
+      success: '',
+      Verified: false,
+      message: '',
+      status: 201,
+      user: {}
+    }
+  },
+  methods: {
+    Submit() {
+      Api.post('/users', {
+        email: this.email,
+        password: this.password,
+        fulName: this.fullName
+      }).then((res) => {
+        this.message = res.data.message
+        this.Verified = true
+        /* if (res.data.status === 201) {
+          this.Verified = true
+          this.response = 'User created'
+          // this.user = res.data.user
+          // console.log(this.user)
+          // this.$router.push({ name: 'users', params: { _id: this.user._id } })
+        } else {
+          this.response = 'Login Failed.'
+        } */
+      })
+        .catch((error) => {
+          this.message = 'Login Failed. Please try again'
+          this.Verified = false
+          console.log(error)
+        }).finally(() => {
+        })
+    }
   }
 }
 </script>

@@ -12,10 +12,13 @@
             </div>
             <b-button type="submit" class="btn btn-dark btn-lg btn-block" @click="Submit()">Sign In</b-button>
 
+            <router-link to="/user" tag="button">Sign In</router-link>
             <p class="forgot-password text-right mt-2 mb-4">
                 <router-link to="/forgot-password">Forgot password ?</router-link>
             </p>
-
+            <div>
+              {{ response }}
+            </div>
             <div class="social-icons">
                 <ul>
                     <li><a href="#"><i class="fa fa-google"></i></a></li>
@@ -23,7 +26,6 @@
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                 </ul>
             </div>
-
         </form>
     </div>
 </template>
@@ -45,16 +47,16 @@ export default {
   },
   methods: {
     Submit() {
-      Api.post('/users', {
-        email: this.email,
-        password: this.password
-      }).then((res) => {
+      Api.get('/users'
+        // email: this.email,
+        // password: this.password
+      ).then((res) => {
         if (res.status === 200) {
           this.Verified = true
-          this.response = res.data
-          this.user = res.data
+          this.response = 'Login correct'
+          this.user = res.data.user
           console.log(this.user)
-          this.$router.push({ name: 'users', params: { _id: this.user._id } })
+          // this.$router.get({ name: 'users', params: { _id: this.user._id } })
         } else {
           this.response = 'Login Failed. Please try again'
         }

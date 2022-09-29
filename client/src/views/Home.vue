@@ -91,9 +91,9 @@ hr {
   padding-left: 1px;
   padding-top: 1px;
   display: flex;
-  align-items: right;
-  justify-content: right;
-  right: 170px;
+  align-items: left;
+  justify-content: left;
+  left: 170px;
 }
 
 .container {

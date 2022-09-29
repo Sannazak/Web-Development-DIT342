@@ -73,7 +73,8 @@ router.post('/', function (req, res, next) {
     var user = new User(req.body);
     user.save(function (err, user) {
         if (err) { return next(err); }
-        res.status(201).json(user);
+        res.status(201).json({'message':'User created'});
+        //res.status(201).json(user);
     })
 });
 
