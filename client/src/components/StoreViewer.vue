@@ -67,9 +67,9 @@ export default {
       }],
       surfLessonArray: [{
         name: '',
-        price: '',
-        instructor: ''
-      }],
+        description: ''
+      }
+      ],
       surfLesson: {
         name: '',
         price: '',
@@ -80,7 +80,6 @@ export default {
   mounted() {
     console.log('Page is loaded')
     this.getSpot()
-    console.log(this.store.surfLessons.lenght)
   },
   methods: {
     getSpot() {
@@ -89,9 +88,21 @@ export default {
         .then(response => {
           console.log(response.data)
           this.store = response.data
-          console.log('api saved')
-          console.log(this.store)
-          console.log(this.store.name)
+          this.surfLessonArray = response.data.surfLessons
+          console.log('store api saved')
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // executes regardless of failure or success
+        })
+      Api.get('/stores/' + this.$route.params.id + '/surfLessons')
+        .then(response => {
+          this.surfLessonsArray = response.data
+          console.log('lesson api saved')
+
+          this.surfLessonsArray.forEach(this.getLessonData)
         })
         .catch(error => {
           console.error(error)
@@ -100,8 +111,17 @@ export default {
           // executes regardless of failure or success
         })
     },
-    getLessons() {
-
+    getLessonData(index) {
+      Api.get('/surfLessons/' + index)
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // executes regardless of failure or success
+        })
     }
   }
 }

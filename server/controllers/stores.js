@@ -110,6 +110,18 @@ router.get('/:id/surfGears', function(req, res, next){
     });
 });
 
+//Get all lessons by the surf id
+router.get('/:id/surfLessons', function(req, res, next){
+    var id = req.params.id;
+    Store.findById(id, function(err, store){
+        if(err) {return next(err);}
+        if(store === null){
+            return res.status(404).json({'message': 'Store not found'});
+        }
+        res.status(200).json(store.surfLessons);
+    });
+});
+
 //post surfGear to store
 router.post('/:id/surfGears', function(req, res, next) {
     Store.findById(req.params.id, function(err, store) {
