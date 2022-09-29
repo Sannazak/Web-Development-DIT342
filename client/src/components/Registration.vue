@@ -1,25 +1,24 @@
 <template>
     <div class="vue-tempalte">
         <banner/>
-        <form>
+        <form @submit="onSubmit" class="add-form">
             <h3>Sign Up</h3>
-
             <div class="form-group">
                 <label>Full Name</label>
-                <input v-model="fullName" type="text" class="form-control form-control-lg" v-bind:key="fullName"/>
+                <input v-model="fullName" class="form-control form-control-lg"/>
             </div>
 
             <div class="form-group">
                 <label>Email address</label>
-                <input v-model="email" type="email" class="form-control form-control-lg" v-bind:key="email"/>
+                <input v-model="email" type="email" class="form-control form-control-lg" required/>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input v-model="password" type="password" class="form-control form-control-lg" v-bind:key="password"/>
+                <input v-model="password" type="password" class="form-control form-control-lg" required/>
             </div>
+            <input type="submit" value="Submit" class="btn-btn-block"/>
 
-            <b-button type="submit" class="btn btn-dark btn-lg btn-block" @click="Submit()">Sign Up</b-button>
             <div>
               <p>{{ message }}</p>
             </div>
@@ -45,28 +44,27 @@ export default {
       Verified: false,
       message: '',
       status: 201,
-      user: {}
+      show: true
     }
   },
   methods: {
-    Submit() {
+    onSubmit(event) {
+      event.preventDefault()
       Api.post('/users', {
         fullName: this.fullName,
         email: this.email,
         password: this.password
       }).then((res) => {
-        this.message = res.data.message
-        /* if (res.data.status === 201) {
-          this.Verified = true
-          this.message = 'User created'
-          // this.$router.push({ name: 'users', params: { _id: this.user._id } })
-        } else {
-          this.message = 'Login Failed.'
-        } */
+        console.log(res)
+        this.message = 'User Created'
+        console.log(event)
+        this.Verified = true
+        this.$router.push('/User')
       })
         .catch((error) => {
-          // this.message = 'Login Failed. Please try again'
-          this.message = error
+          console.log('Login Failed. Please try again')
+          this.message = 'Login Failed. Please try again'
+          console.log(error)
         }).finally(() => {
         })
     }
