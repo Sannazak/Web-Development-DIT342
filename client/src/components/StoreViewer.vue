@@ -7,9 +7,9 @@
                 <img src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
             </div>
             <div id="col_right" class="col-4">
-                 <p>About {{store.name}}<br>
-                  The increase in the number of independent specialty stores in the United States and internationally provides an opportunity to introduce a new, fresh clothing line. Within the larger surfing and active-wear market is our target market, customers of  specialty stores. These discerning customers want comfortable quality clothing for both surfing as well as everyday street wear.                </p>
-                <hr>
+                 <p><b>About {{store.name}}</b><br>
+                {{store.description}}
+                  <hr>
                 <p id="adress_text">How to get here:<br>
             {{store.adress.street}} {{store.adress.streetNr}}<br>
               {{store.adress.postalCode}} {{store.adress.city}}<br>
@@ -18,16 +18,27 @@
 
 </div>
 <div class="col-4">
-  <p>
-                      Gear for rent:
-                      {{store.surfBoards}}{{store.surfGears}}
-                    </p>
-                    <hr>
-                    <p>
-                      Lessons offered:
-
-                      {{store.surfLessons}}
-                    </p>
+    <p>
+    Surflessons available:
+    <ul>
+    <li v-for="lesson in store.surfLessons" v-bind:key="lesson.name">{{lesson}}</li>
+    </ul>
+    </p>
+    <hr>
+    <p>
+    Surfboards available:
+    <ul>
+    <li v-for="board in store.surfBoards" v-bind:key="board.name">{{board}}</li>
+    </ul>
+    </p>
+    <hr>
+    <p>
+    Surfgear available:
+    <ul>
+    <li v-for="gear in store.surfGears" v-bind:key="gear.name">{{gear}}</li>
+    </ul>
+    </p>
+    <hr>
 </div>
         </div>
     </div>
@@ -42,6 +53,7 @@ export default {
     return {
       store: [{
         name: '',
+        description: '',
         adress: {
           country: '',
           street: '',
@@ -52,13 +64,23 @@ export default {
         surfBoards: [],
         surfLessons: [],
         surfGears: []
-      }]
-
+      }],
+      surfLessonArray: [{
+        name: '',
+        price: '',
+        instructor: ''
+      }],
+      surfLesson: {
+        name: '',
+        price: '',
+        instructor: ''
+      }
     }
   },
   mounted() {
     console.log('Page is loaded')
     this.getSpot()
+    console.log(this.store.surfLessons.lenght)
   },
   methods: {
     getSpot() {
@@ -77,6 +99,9 @@ export default {
         .then(() => {
           // executes regardless of failure or success
         })
+    },
+    getLessons() {
+
     }
   }
 }
