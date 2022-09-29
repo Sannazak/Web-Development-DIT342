@@ -28,6 +28,11 @@ export default {
       this.$emit('get-store', this.store._id)
       console.log('get-store with this id' + this.store._id) // add connection to storeview
     }
+  },
+  data() {
+    return {
+      stores: {}
+    }
   }
 }
 </script>
