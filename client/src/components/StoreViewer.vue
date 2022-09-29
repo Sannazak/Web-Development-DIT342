@@ -1,47 +1,54 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div id="col_header" class="col-12"><h3>{{store.name}} in {{store.adress.city}}</h3></div>
-            <div id="col_left" class="col-4">
-                <img src="../assets/stores/surfshop1.jpg" class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
-                <img src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
-            </div>
-            <div id="col_right" class="col-4">
-                 <p><b>About {{store.name}}</b><br>
-                {{store.description}}
-                  <hr>
-                <p id="adress_text">How to get here:<br>
-            {{store.adress.street}} {{store.adress.streetNr}}<br>
-              {{store.adress.postalCode}} {{store.adress.city}}<br>
-              {{store.adress.country}}
-            </p>
-
-</div>
-<div class="col-4">
-    <p>
-    Surflessons available:
-    <ul>
-    <li v-for="lesson in store.surfLessons" v-bind:key="lesson.name">{{lesson}}</li>
-    </ul>
-    </p>
-    <hr>
-    <p>
-    Surfboards available:
-    <ul>
-    <li v-for="board in store.surfBoards" v-bind:key="board.name">{{board}}</li>
-    </ul>
-    </p>
-    <hr>
-    <p>
-    Surfgear available:
-    <ul>
-    <li v-for="gear in store.surfGears" v-bind:key="gear.name">{{gear}}</li>
-    </ul>
-    </p>
-    <hr>
-</div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div id="col_header" class="col-12">
+        <h3>{{store.name}} in {{store.adress.city}}</h3>
+      </div>
+      <div id="col_left" class="col-4">
+        <img src="../assets/stores/surfshop1.jpg" class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
+      </div>
+      <div id="col_right" class="col-4">
+        <p><b>About {{store.name}}</b><br>
+          {{store.description}}
+        </p>
+      </div>
+      <div class="col-4">
+        <p id="adress_text"><b>How to get here:</b><br>
+          {{store.adress.street}} {{store.adress.streetNr}}<br>
+          {{store.adress.postalCode}} {{store.adress.city}}<br>
+          {{store.adress.country}}
+        </p>
+      </div>
+      <div class="col-12">
+        <hr>
+      </div>
+      <div id="col_left" class="col-4">
+        <img src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
+      </div>
+      <div id="col_left" class="col-8">
+        <p>
+          Surflessons available:
+        <ul>
+          <div class="card" v-for="lesson in this.surfLessonArrayFilled" v-bind:key="lesson.name">{{lesson.name}} Instructed by: {{lesson.instructor}} Cost: {{lesson.price}}</div>
+        </ul>
+        </p>
+        <hr>
+        <p>
+          Surfboards available:
+        <ul>
+          <li v-for="board in store.surfBoards" v-bind:key="board.name">{{board}}</li>
+        </ul>
+        </p>
+        <hr>
+        <p>
+          Surfgear available:
+        <ul>
+          <li v-for="gear in store.surfGears" v-bind:key="gear.name">{{gear}}</li>
+        </ul>
+        </p>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -68,8 +75,8 @@ export default {
       surfLessonArray: [{
         name: '',
         description: ''
-      }
-      ],
+      }],
+      surfLessonArrayFilled: [{}],
       surfLesson: {
         name: '',
         price: '',
@@ -101,7 +108,6 @@ export default {
         .then(response => {
           this.surfLessonsArray = response.data
           console.log('lesson api saved')
-
           this.surfLessonsArray.forEach(this.getLessonData)
         })
         .catch(error => {
@@ -115,12 +121,15 @@ export default {
       Api.get('/surfLessons/' + index)
         .then(response => {
           console.log(response.data)
+          this.surfLessonArrayFilled.push(response.data)
+          console.log(this.surfLessonArrayFilled)
         })
         .catch(error => {
           console.error(error)
         })
         .then(() => {
           // executes regardless of failure or success
+          // this.surfLessonArrayFilled.splice(0, 1)
         })
     }
   }
@@ -129,22 +138,48 @@ export default {
 </script>
 
 <style scoped>
-    .col-12 {
-        height : 60px;
-        background-color: lightgray;
-    }
-    .col-4 {
-        height:550px;
-        background-color: lightgray;
-    }
-    .col-8 {
-        height: 550px;
-        background-color:pink;
-    }
-    #col_right {
-      text-align: left;
-    }
-    #adress_text {
-      text-align: center;
-    }
+.col-12 {
+  height: 60px;
+  background-color: lightgray;
+}
+
+.col-4 {
+  height: 250px;
+  background-color: lightgray;
+}
+
+.col-8 {
+  height: 250px;
+  background-color: lightgray;
+}
+
+#col_right {
+  text-align: left;
+}
+
+#adress_text {
+  text-align: center;
+}
 </style>
+
+<!--
+<p>
+  Surflessons available:
+  <ul>
+  <li v-for="lesson in store.surfLessons" v-bind:key="lesson.name">{{lesson}}</li>
+  </ul>
+  </p>
+  <hr>
+  <p>
+  Surfboards available:
+  <ul>
+  <li v-for="board in store.surfBoards" v-bind:key="board.name">{{board}}</li>
+  </ul>
+  </p>
+  <hr>
+  <p>
+  Surfgear available:
+  <ul>
+  <li v-for="gear in store.surfGears" v-bind:key="gear.name">{{gear}}</li>
+  </ul>
+  </p> -->
