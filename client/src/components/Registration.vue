@@ -1,5 +1,6 @@
 <template>
     <div class="vue-tempalte">
+        <banner/>
         <form>
             <h3>Sign Up</h3>
 
@@ -31,8 +32,10 @@
 
 <script>
 import { Api } from '@/Api'
+import Banner from '../components/Banner.vue'
 
 export default {
+  components: { Banner },
   data() {
     return {
       fullName: '',
@@ -48,26 +51,22 @@ export default {
   methods: {
     Submit() {
       Api.post('/users', {
+        fullName: this.fullName,
         email: this.email,
-        password: this.password,
-        fulName: this.fullName
+        password: this.password
       }).then((res) => {
         this.message = res.data.message
-        this.Verified = true
         /* if (res.data.status === 201) {
           this.Verified = true
-          this.response = 'User created'
-          // this.user = res.data.user
-          // console.log(this.user)
+          this.message = 'User created'
           // this.$router.push({ name: 'users', params: { _id: this.user._id } })
         } else {
-          this.response = 'Login Failed.'
+          this.message = 'Login Failed.'
         } */
       })
         .catch((error) => {
-          this.message = 'Login Failed. Please try again'
-          this.Verified = false
-          console.log(error)
+          // this.message = 'Login Failed. Please try again'
+          this.message = error
         }).finally(() => {
         })
     }

@@ -1,5 +1,6 @@
 <template>
     <div>
+      <banner/>
         <h2>Text Input</h2>
         <input v-model="text"> {{ text }}
         <h2>Select</h2>
@@ -14,7 +15,9 @@
 </template>
 
 <script>
+import Banner from '../components/Banner.vue'
 export default {
+  components: { Banner },
   data() {
     return {
       text: 'Edit me',

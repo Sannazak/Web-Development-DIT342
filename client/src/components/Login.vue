@@ -1,5 +1,6 @@
 <template>
     <div class="vue-tempalte">
+      <banner/>
         <form>
             <h3>Sign In</h3>
             <div class="form-group">
@@ -32,9 +33,10 @@
 
 <script>
 import { Api } from '@/Api'
+import Banner from '../components/Banner.vue'
 
 export default {
-
+  components: { Banner },
   data() {
     return {
       email: '',
