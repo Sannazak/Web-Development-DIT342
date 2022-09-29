@@ -1,6 +1,7 @@
 <template>
     <div class="vue-tempalte">
         <banner/>
+        <br>
         <form @submit="onSubmit" class="add-form">
             <h3>Sign Up</h3>
             <div class="form-group">
@@ -40,11 +41,7 @@ export default {
       fullName: '',
       email: '',
       password: '',
-      success: '',
-      Verified: false,
-      message: '',
-      status: 201,
-      show: true
+      message: ''
     }
   },
   methods: {
@@ -58,7 +55,6 @@ export default {
         console.log(res)
         this.message = 'User Created'
         console.log(event)
-        this.Verified = true
         this.$router.push('/User')
       })
         .catch((error) => {

@@ -1,7 +1,7 @@
 <template>
     <div class="vue-tempalte">
       <banner/>
-        <form>
+        <form @submit="onSubmit" class="add-form">
             <h3>Sign In</h3>
             <div class="form-group">
                 <label>Email address</label>
@@ -49,15 +49,18 @@ export default {
   },
   methods: {
     Submit() {
-      Api.get('/users'
+      Api.get('/users?fullName=Patricia'
         // email: this.email,
         // password: this.password
       ).then((res) => {
+        console.log(this.user)
+        console.log(res)
         if (res.status === 200) {
           this.Verified = true
           this.response = 'Login correct'
           this.user = res.data.user
           console.log(this.user)
+          this.$router.push('/User')
           // this.$router.get({ name: 'users', params: { _id: this.user._id } })
         } else {
           this.response = 'Login Failed. Please try again'

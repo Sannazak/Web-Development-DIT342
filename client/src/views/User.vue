@@ -1,14 +1,17 @@
 <template>
     <div>
       <banner/>
-        <h2>Text Input</h2>
-        <input v-model="text"> {{ text }}
-        <h2>Select</h2>
+      <br>
+        <h2>User Page</h2>
+        <br>
+        <input v-model="text">
+        <h2>Skill Level</h2>
         <select v-model="selected">
             <option disabled value="">Please select one</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+            <option>Pro</option>
         </select>
         <span>Selected: {{ selected }}</span>
     </div>
