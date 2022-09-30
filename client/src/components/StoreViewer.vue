@@ -29,7 +29,7 @@
         <p>
           Surflessons available:
         <ul>
-          <div class="card" v-for="lesson in this.surfLessonArrayFilled" v-bind:key="lesson.name">{{lesson.name}} Instructed by: {{lesson.instructor}} Cost: {{lesson.price}}</div>
+          <li v-for="lesson in this.surfLessonArrayFilled" v-bind:key="lesson.name">{{lesson.name}} Instructed by: {{lesson.instructor}} Cost: {{lesson.price}}</li>
         </ul>
         </p>
         <hr>
@@ -161,25 +161,3 @@ export default {
   text-align: center;
 }
 </style>
-
-<!--
-<p>
-  Surflessons available:
-  <ul>
-  <li v-for="lesson in store.surfLessons" v-bind:key="lesson.name">{{lesson}}</li>
-  </ul>
-  </p>
-  <hr>
-  <p>
-  Surfboards available:
-  <ul>
-  <li v-for="board in store.surfBoards" v-bind:key="board.name">{{board}}</li>
-  </ul>
-  </p>
-  <hr>
-  <p>
-  Surfgear available:
-  <ul>
-  <li v-for="gear in store.surfGears" v-bind:key="gear.name">{{gear}}</li>
-  </ul>
-  </p> -->
