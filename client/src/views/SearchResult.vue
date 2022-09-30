@@ -1,16 +1,17 @@
 <template>
   <div>
     <banner />
+    <div class="container-big">
     <FormSelect />
     <!-- <storeItem v-bind:store="store"/>   v-on:get-store="getStore" -->
-    <b-card-group deck>
+    <b-card-group deck id="deck-cards">
       <div v-for="stores in this.store" v-bind:key="stores.name">
         <b-card
           img-src="https://picsum.photos/600/300/?image=25"
           img-alt="Image"
           img-top
           tag="article"
-          style="max-width: 20rem"
+          style="max-width: 16rem"
           class="mb-2"
         >
           <b-card-title
@@ -29,6 +30,7 @@
         </b-card>
       </div>
     </b-card-group>
+  </div>
   </div>
 </template>
 
@@ -86,4 +88,12 @@ export default {
 </script>
 
 <style>
+  .container-big {
+    max-width: 1150px;
+margin: 0 auto;
+  }
+  .deck-cards {
+    margin: 0 auto;
+    align-content: center;
+  }
 </style>

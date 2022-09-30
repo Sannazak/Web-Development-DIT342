@@ -1,10 +1,10 @@
 <template>
-    <div class="container">
+    <div>
         <img class="image"
             src="../assets/austin-neill-uHD0uyp79Dg-unsplash4.jpg"
             alt="Surf Photo"
         />
-        <div class="text-block">
+        <!-- <div class="text-block">
             <h6>Welcome!</h6>
             <p>The days of carrying heavy surfbags and gears through airports is over.
                 Find all the stores, boards, gears and lessons on your next surftrip to keep the stoke!
@@ -13,7 +13,7 @@
         <form action="https://www.google.com" method="get" class="search-bar">
             <input type="text" placeholder="Search for location or shop" name="q">
             <button type="submit" @click=getMessage()><img src="../assets/search.png"></button>
-        </form>
+        </form> -->
     </div>
 </template>
 
@@ -43,12 +43,12 @@ export default {
 
 <style scoped>
 .container {
-  position: relative;
+  /* position: relative;
   padding-left: 1px;
   padding-top: 1px;
   display: flex;
   align-items: right;
-  justify-content: right;
+  justify-content: right; */
 }
 .search-bar{
     width: 100%;
@@ -93,6 +93,8 @@ export default {
     width: 1150px;
     background-size: cover;
     object-fit:scale-down;
+    margin: auto 0;
+
 }
 
 .text-block {
