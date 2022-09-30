@@ -1,13 +1,13 @@
 <template>
     <div>
         <img class="image"
-            src="../assets/austin-neill-uHD0uyp79Dg-unsplash4.jpg"
+            src="../assets/banner_photo.jpg"
             alt="Surf Photo"
         />
         <!-- <div class="text-block">
             <h6>Welcome!</h6>
             <p>The days of carrying heavy surfbags and gears through airports is over.
-                Find all the stores, boards, gears and lessons on your next surftrip to keep the stoke!
+                Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
             </p>
         </div>
         <form action="https://www.google.com" method="get" class="search-bar">
@@ -90,11 +90,11 @@ export default {
     cursor: pointer;
 }
 .image {
-    width: 1150px;
+    width: 100%;
     background-size: cover;
     object-fit:scale-down;
-    margin: auto 0;
-
+    min-height: 100%;
+    bottom: 0%;
 }
 
 .text-block {
@@ -102,11 +102,13 @@ export default {
   bottom: 20px;
   left: 20px;
   right: 1000px;
-  font-size: x-small;
+  font-size: normal;
   background-color: rgba(0, 0, 0, 0.478);
   color: white;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
+  width: 20%;
+  height: 90%;
 }
 </style>

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import SearchResult from './views/SearchResult.vue'
 import StoreView from './views/StoreView.vue'
+import User from './views/User.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,26 @@ export default new Router({
       path: '/StoreView/:id',
       name: 'StoreView',
       component: StoreView
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: User
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('./components/Registration.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./components/Login.vue')
+    },
+    {
+      path: '/forgot-password',
+      name: 'forgot-password',
+      component: () => import('./components/ForgotPassword.vue')
     }
   ]
 })
