@@ -15,9 +15,9 @@ router.get("/", function (req, res, next) {
                 }
             }
         }
-        query.exec(function(err, store){
+        query.exec(function(err, user){
             if(err) { return next(err); }       //is this row needed when doing try catch?
-            res.status(200).json(store)
+            res.status(200).json(user)
         });
     }catch(error){
         res.status(400).send('An error has occured.')
@@ -73,6 +73,7 @@ router.post('/', function (req, res, next) {
     var user = new User(req.body);
     user.save(function (err, user) {
         if (err) { return next(err); }
+        //res.status(201).json({'message':'User created'});
         res.status(201).json(user);
     })
 });
