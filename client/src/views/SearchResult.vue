@@ -2,6 +2,7 @@
   <div>
     <banner />
     <div class="container-big">
+      <b-form-input v-model="text" placeholder="Search for a specific store" :formatter="formatter"></b-form-input>
       <b-form-select v-model="selected" :options="options" ></b-form-select>
       <div class="mt-3">Stores close to: <strong>{{ selected }}</strong></div>
     <!-- <FormSelect @selectedCity="getStoreBySelectedCity"/> // get from formselect
@@ -9,14 +10,15 @@
     <!-- <storeItem v-bind:store="store"/>   v-on:get-store="getStore" -->
     <b-card-group deck id="deck-cards">
       <div v-for="stores in store" v-bind:key="stores._id">
-        <div v-if="selected === stores.adress.city">
+        <div v-if="text === stores.name || selected === stores.adress.city">
         <!-- <div class=”matchedStores” v-for="stores in matchedStores" v-bind:key="stores._id"> -->
         <b-card
-          img-src="https://picsum.photos/600/300/?image=25"
-          img-alt="Image"
-          img-top
+          overlay
+          img-src="https://i.picsum.photos/id/1041/200/250.jpg?hmac=GACWtMArqhQoRRs9_QZTU0B7l5Z2vbZFUdg0ZoFoVcM"
+          img-alt="Card Image"
+          text-variant="white"
           tag="article"
-          style="max-width: 16rem"
+          style="max-width: 50rem;"
           class="mb-2"
         >
           <b-card-title
@@ -29,7 +31,7 @@
             {{ stores.adress.country }}
           </b-card-text>
 
-          <b-button variant="primary" v-on:click="OnClick(stores._id)"
+          <b-button variant="dark" v-on:click="OnClick(stores._id)"
             >Visit Store</b-button
           >
         </b-card>
@@ -75,6 +77,7 @@ export default {
         { value: 'Varberg', text: 'Varberg' },
         { value: { C: '3PO' }, text: 'This is an option with object value' }
       ],
+      text: '',
       store: [
         {
           _id: '',
@@ -105,6 +108,9 @@ export default {
         // change view to show one store
           console.log(id)
           window.location = 'StoreView/' + id
+        },
+        formatter(value) {
+          return value.toUpperCase()
         }/* ,
         getStoreBySelectedCity(value) {
           this.selectedCity = value
@@ -118,7 +124,7 @@ export default {
 <style>
   .container-big {
     max-width: 1150px;
-margin: 0 auto;
+    margin: 0 auto;
   }
   .deck-cards {
     margin: 0 auto;
