@@ -4,7 +4,7 @@
       <div id="col_header" class="col-12">
         <h3>{{store.name}} in {{store.adress.city}}</h3>
       </div>
-      <div id="col_left" class="col-4">
+      <div class="col-4">
         <img src="../assets/stores/surfshop1.jpg" class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
       </div>
       <div id="col_right" class="col-4">
@@ -22,28 +22,40 @@
       <div class="col-12">
         <hr>
       </div>
-      <div id="col_left" class="col-4">
+      <div id="lower-col" class="col-4">
         <img src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
       </div>
-      <div id="col_left" class="col-8">
+      <div id="lower-col" class="col-8">
         <p>
-          Surflessons available:
+          <b>Surflessons available:</b>
         <ul>
-          <li v-for="lesson in this.surfLessonArrayFilled" v-bind:key="lesson.name">{{lesson.name}} Instructed by: {{lesson.instructor}} Cost: {{lesson.price}}</li>
+          <div id="offersListItem" v-for="lesson in this.surfLessonArrayFilled" v-bind:key="lesson.name">
+            <li v-if ="lesson.name != null">
+            {{lesson.name}} - Instructed by: {{lesson.instructor}} - {{lesson.price}}SEK
+            </li>
+          </div>
         </ul>
         </p>
         <hr>
         <p>
-          Surfboards available:
+          <b>Surfboards available:</b>
         <ul>
-          <li v-for="board in store.surfBoards" v-bind:key="board.name">{{board}}</li>
+          <div id="offersListItem" v-for="boards in this.surfBoardsArrayFilled" v-bind:key="boards._id">
+            <li v-if ="boards.price != null">
+            {{boards.style}} - {{boards.size}} - {{boards.volume}} - {{boards.price}}SEK
+            </li>
+          </div>
         </ul>
         </p>
         <hr>
         <p>
-          Surfgear available:
+          <b>Surfgear available:</b>
         <ul>
-          <li v-for="gear in store.surfGears" v-bind:key="gear.name">{{gear}}</li>
+          <div id="offersListItem" v-for="gears in this.surfGearsArrayFilled" v-bind:key="gears.name">
+            <li v-if ="gears.name != null">
+            {{gears.name}} - {{gears.gender}} - Size: {{gears.size}} - {{gears.price}}SEK
+            </li>
+          </div>
         </ul>
         </p>
       </div>
@@ -77,11 +89,21 @@ export default {
         description: ''
       }],
       surfLessonArrayFilled: [{}],
-      surfLesson: {
+      surfGearsArray: [{
         name: '',
         price: '',
-        instructor: ''
-      }
+        size: '',
+        gender: '',
+        description: ''
+      }],
+      surfGearsArrayFilled: [{}],
+      surfBoardsArray: [{
+        volume: '',
+        price: '',
+        size: '',
+        style: ''
+      }],
+      surfBoardsArrayFilled: [{}]
     }
   },
   mounted() {
@@ -116,13 +138,70 @@ export default {
         .then(() => {
           // executes regardless of failure or success
         })
+      Api.get('/stores/' + this.$route.params.id + '/surfGears')
+        .then(response => {
+          this.surfGearsArray = response.data
+          console.log('gear api saved')
+          this.surfGearsArray.forEach(this.getGearData)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // executes regardless of failure or success
+        })
+      Api.get('/stores/' + this.$route.params.id + '/surfBoards')
+        .then(response => {
+          this.surfBoardsArray = response.data
+          console.log('board api saved')
+          this.surfBoardsArray.forEach(this.getBoardData)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // executes regardless of failure or success
+        })
     },
     getLessonData(index) {
       Api.get('/surfLessons/' + index)
         .then(response => {
           console.log(response.data)
           this.surfLessonArrayFilled.push(response.data)
+          console.log('surflessonsarrayfilled')
           console.log(this.surfLessonArrayFilled)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // executes regardless of failure or success
+          // this.surfLessonArrayFilled.splice(0, 1)
+        })
+    },
+    getGearData(index) {
+      Api.get('/surfGears/' + index)
+        .then(response => {
+          console.log(response.data)
+          this.surfGearsArrayFilled.push(response.data)
+          console.log('surfgearsarrayfilled')
+          console.log(this.surfGearsArrayFilled)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // executes regardless of failure or success
+          // this.surfLessonArrayFilled.splice(0, 1)
+        })
+    },
+    getBoardData(index) {
+      Api.get('/surfBoards/' + index)
+        .then(response => {
+          console.log(response.data)
+          this.surfBoardsArrayFilled.push(response.data)
+          console.log('surfboardsarrayfilled')
+          console.log(this.surfBoardsArrayFilled)
         })
         .catch(error => {
           console.error(error)
@@ -140,24 +219,32 @@ export default {
 <style scoped>
 .col-12 {
   height: 60px;
+  max-width: 1124px;
   background-color: lightgray;
 }
 
 .col-4 {
-  height: 250px;
+  min-height: 250px;
   background-color: lightgray;
+  max-width: 374px;
 }
 
 .col-8 {
-  height: 250px;
+  min-height: 250px;
   background-color: lightgray;
+  max-width: 750px;
 }
 
 #col_right {
   text-align: left;
+  max-width: 376px;
 }
 
 #adress_text {
   text-align: center;
+}
+
+#offersListItem {
+  text-align: left;
 }
 </style>
