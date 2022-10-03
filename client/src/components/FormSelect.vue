@@ -1,10 +1,7 @@
 <template>
     <div>
-      <b-form-select v-model="selectedCity" :options="options"></b-form-select>
-      <div class="mt-3">Stores close to: <strong>{{ selectedCity }}</strong></div>
-      <div v-for="store in stores" v-bind:key="store._id">
-        <p>{{store}}</p>
-      </div>
+      <b-form-select v-model="selected" :options="options" @select="$emit('selectedCity')"></b-form-select>
+      <div class="mt-3">Stores close to: <strong>{{ selected }}</strong></div>
     </div>
 </template>
 
@@ -14,7 +11,7 @@
 export default {
   data() {
     return {
-      selectedCity: null,
+      selected: null,
       options: [
         { value: null, text: 'Please select a city' },
         { value: 'Brantevik', text: 'Brantevik' },

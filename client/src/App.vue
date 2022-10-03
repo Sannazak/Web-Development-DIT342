@@ -1,13 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-<<<<<<< HEAD
       <router-link to="/">Home </router-link>|
-      <router-link to="SearchResult">Search Result </router-link>
-=======
-      <!-- <router-link to="/">Home </router-link>|-->
-      <router-link to="searchResult">Search Result </router-link>
->>>>>>> 8153816903902385612ed3ecf2d97e5cd26116e3
+      <router-link to="SearchResult">Search Result </router-link>|
       <router-link to="StoreView/632b67eb702d604ee0031663">Store View </router-link>
     </div>
     <!-- Render the content of the current page view -->
