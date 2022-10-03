@@ -232,6 +232,9 @@ export default {
   min-height: 250px;
   background-color: lightgray;
 }
+.container {
+  background-color: lightgray;
+}
 
 #col_right {
   text-align: left;
@@ -258,6 +261,7 @@ export default {
   }
   #image-col {
     max-width: 25% ;
+    min-width: 24% ;
   }
   #store-image {
     width: 100% ;
