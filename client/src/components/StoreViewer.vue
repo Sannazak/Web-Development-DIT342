@@ -25,6 +25,7 @@
       </div>
       <div id="image-col" class="col-4">
         <img id="store-image" src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
+      <PatchStore/>
       </div>
       <div id="lower-col" class="col-8">
         <p>
@@ -66,9 +67,11 @@
 
 <script>
 import { Api } from '@/Api'
+import PatchStore from './PatchStore.vue'
 
 export default {
   name: 'StoreViewer',
+  components: { PatchStore },
   data() {
     return {
       store: [{
