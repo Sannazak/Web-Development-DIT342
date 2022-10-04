@@ -177,7 +177,6 @@ export default {
         })
         .then(() => {
           // executes regardless of failure or success
-          // this.surfLessonArrayFilled.splice(0, 1)
         })
     },
     getGearData(index) {
@@ -193,7 +192,6 @@ export default {
         })
         .then(() => {
           // executes regardless of failure or success
-          // this.surfLessonArrayFilled.splice(0, 1)
         })
     },
     getBoardData(index) {
@@ -209,7 +207,6 @@ export default {
         })
         .then(() => {
           // executes regardless of failure or success
-          // this.surfLessonArrayFilled.splice(0, 1)
         })
     }
   }
@@ -249,7 +246,6 @@ export default {
 }
 
 @media all and (max-width: 1199px) {
-  /* For mobile phones: */
   #col_right {
     min-width: 25% ;
   }
@@ -269,7 +265,6 @@ export default {
 }
 
 @media all and (max-width: 800px) {
-  /* For mobile phones: */
   #col_right {
     min-width: 50% ;
   }
@@ -285,7 +280,6 @@ export default {
 }
 
 @media all and (max-width: 500px) {
-  /* For mobile phones: */
   #col_right {
     min-width: 100% ;
     min-height: 10% ;
