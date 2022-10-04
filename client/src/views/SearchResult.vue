@@ -33,13 +33,11 @@
 
 <script>
 import Banner from '@/components/Banner.vue'
-// import StoreItem from '@/components/StoreItem.vue'
-/* import FormSelect from '@/components/FormSelect.vue' */
 import { Api } from '@/Api'
 
 export default {
   name: 'searchResult',
-  components: { Banner /* , FormSelect */ },
+  components: { Banner },
   mounted() {
     console.log('page is loaded')
     this.getAllStores()
@@ -53,8 +51,7 @@ export default {
         { value: 'Göteborg', text: 'Göteborg' },
         { value: 'Halmstad', text: 'Halmstad' },
         { value: 'Mölle', text: 'Mölle' },
-        { value: 'Varberg', text: 'Varberg' },
-        { value: { C: '3PO' }, text: 'This is an option with object value' }
+        { value: 'Varberg', text: 'Varberg' }
       ],
       text: '',
       store: [
