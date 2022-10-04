@@ -11,6 +11,7 @@
           class="form-control form-control-lg"
           type="email"
           placeholder="Your email"
+          required
         />
       </div>
       <div class="form-group">
@@ -20,6 +21,7 @@
           class="form-control form-control-lg"
           type="password"
           placeholder="Add a password"
+          required
         />
       </div>
 
@@ -62,15 +64,7 @@ export default {
       message: '',
       user: [{
         email: '',
-        fullName: '',
-        password: '',
-        skillLevel: [],
-        boardPreference: [],
-        clothingSize: '',
-        userHeight: '',
-        userWeight: '',
-        favouriteStores: [{ }],
-        favouriteSpots: [{ }]
+        password: ''
       }]
     }
   },
@@ -79,8 +73,6 @@ export default {
       event.preventDefault()
       Api.get('/users?email=' + this.email)
         .then(response => {
-          console.log(response.data)
-          console.log('sor far so good')
           this.user.email = response.data[0].email
           this.user.password = response.data[0].password
           console.log(this.user.email)
@@ -91,7 +83,7 @@ export default {
             this.message = 'Login correct'
             this.$router.push('/User')
           } else {
-            this.message = 'Login Failed. Please try again later'
+            this.message = 'Login Failed. User does not exist. Check email and password!'
           }
         })
         .catch((error) => {
