@@ -106,7 +106,31 @@ router.get('/:id/surfGears', function(req, res, next){
         if(store === null){
             return res.status(404).json({'message': 'Store not found'});
         }
-        res.status(200).json(store.surfGear);
+        res.status(200).json(store.surfGears);
+    });
+});
+
+//Get all lessons by the surf id
+router.get('/:id/surfLessons', function(req, res, next){
+    var id = req.params.id;
+    Store.findById(id, function(err, store){
+        if(err) {return next(err);}
+        if(store === null){
+            return res.status(404).json({'message': 'Store not found'});
+        }
+        res.status(200).json(store.surfLessons);
+    });
+});
+
+//Get all boards by the surf id
+router.get('/:id/surfBoards', function(req, res, next){
+    var id = req.params.id;
+    Store.findById(id, function(err, store){
+        if(err) {return next(err);}
+        if(store === null){
+            return res.status(404).json({'message': 'Store not found'});
+        }
+        res.status(200).json(store.surfBoards);
     });
 });
 
