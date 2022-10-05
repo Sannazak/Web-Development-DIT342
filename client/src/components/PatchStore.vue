@@ -6,7 +6,6 @@
       <template #modal-title>
         You are updating {{store.name}}
       </template>
-
 <div>
 <b-tabs content-class="mt-3">
   <b-tab title="Update Store">

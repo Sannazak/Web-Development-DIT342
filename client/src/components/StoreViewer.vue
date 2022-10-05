@@ -6,7 +6,7 @@
         <h3>{{store.name}} in {{store.adress.city}}</h3>
       </div>
       <div id="image-col" class="col-4">
-        <img id ="store-image" src="../assets/stores/surfshop1.jpg" class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
+        <img id ="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
       </div>
       <div id="col_right" class="col-4">
         <p><b>About {{store.name}}</b><br>
@@ -24,7 +24,7 @@
         <hr>
       </div>
       <div id="image-col" class="col-4">
-        <img id="store-image" src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
+        <img id="store-image" src="../assets/maps-google.jpg" fluid class="rounded" alt="image of spot" width="350px">
       <PatchStore/>
       </div>
       <div id="lower-col" class="col-8">
