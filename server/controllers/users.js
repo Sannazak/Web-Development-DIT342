@@ -17,7 +17,7 @@ router.get("/", function (req, res, next) {
         }
         query.exec(function(err, user){
             if(err) { return next(err); }       //is this row needed when doing try catch?
-            res.status(200).json(user)
+            return res.status(200).json(user)
         });
     }catch(error){
         res.status(400).send('An error has occured.')

@@ -6,7 +6,7 @@
             <h3>Sign Up</h3>
             <div class="form-group">
                 <label>Full Name</label>
-                <input v-model="fullName" class="form-control form-control-lg"/>
+                <input v-model="fullName" class="form-control form-control-lg" required/>
             </div>
 
             <div class="form-group">
@@ -59,7 +59,7 @@ export default {
       })
         .catch((error) => {
           console.log('Login Failed. Please try again')
-          this.message = 'Login Failed. Please try again'
+          this.message = 'User already created. Please try again'
           console.log(error)
         }).finally(() => {
         })

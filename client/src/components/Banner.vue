@@ -8,11 +8,11 @@
             </p>
         </div>
         <div id="dropdown-menu">
-          <b-button id="menuButtons" href="searchResult">Stores</b-button>
-          <b-button id="menuButtons" href="searchResult">Login</b-button>
-          <b-button id="menuButtons" href="searchResult">Register</b-button>
-          <b-button id="menuButtons" href="searchResult">Profile</b-button>
-          <b-button id="menuButtons" href="searchResult">Logout</b-button>
+          <b-button id="menuButtons" href="/searchResult">Stores</b-button>
+          <b-button id="menuButtons" href="/Login">Login</b-button>
+          <b-button id="menuButtons" href="/signup">Register</b-button>
+          <b-button id="menuButtons" href="/User">Profile</b-button>
+          <b-button id="menuButtons" href="/">Logout</b-button>
 
         <!-- <b-dropdown  text="≡" class="m-md-2">
           <b-dropdown-item href="">Login</b-dropdown-item>
