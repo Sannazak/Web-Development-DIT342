@@ -1,20 +1,19 @@
 <template>
   <div class="container">
-    <img class="image" src="../assets/banner_photo.jpg" alt="Surf Photo" />
-    <div class="text-block">
-      <h6>Welcome!</h6>
-      <p>
-        The days of carrying heavy surfbags and gears through airports is over.
-        Find all the stores, boards, gears and lessons on your next surftrip and
-        keep the stoke!
-      </p>
-    </div>
-    <form action="https://www.google.com" method="get" class="search-bar">
-      <input type="text" placeholder="Search for location or shop" name="q" />
-      <button type="submit" @click="getMessage()">
-        <img src="../assets/search.png" />
-      </button>
-    </form>
+      <img class="image"
+          src="../assets/banner_photo.jpg"
+          alt="Surf Photo"
+      />
+      <div id="text-container" class="text-block">
+          <h6>Welcome!</h6>
+          <p>The days of carrying heavy surfbags and gears through airports is over.
+              Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
+          </p>
+      </div>
+      <form action="https://www.google.com" method="get" class="search-bar">
+          <input type="text" placeholder="Search for location or shop" name="q">
+          <button type="submit" @click=getMessage()><img src="../assets/search.png"></button>
+      </form>
   </div>
 </template>
 
@@ -111,5 +110,23 @@ export default {
   padding-top: 10px;
   width: 20%;
   height: 90%;
+}
+
+@media all and (max-width: 1200px) {
+  #text-container {
+    width: 25%;
+  }
+}
+@media all and (max-width: 1000px) {
+  #text-container {
+    scale: 80%;
+    width: 40%;
+  }
+}
+
+@media all and (max-width: 800px) {
+  #text-container {
+    display: none;
+  }
 }
 </style>
