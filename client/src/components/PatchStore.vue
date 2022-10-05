@@ -10,6 +10,7 @@
 <div>
 <b-tabs content-class="mt-3">
   <b-tab title="Update Store">
+    <p>Only add the information you want to be changed.</p>
     <div class="row">
         <div class="col-sm">
           <p>
