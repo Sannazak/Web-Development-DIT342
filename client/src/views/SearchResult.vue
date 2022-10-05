@@ -100,9 +100,6 @@ export default {
       console.log(id)
       window.location = 'StoreView/' + id
     },
-    formatter(value) {
-      return value.toUpperCase()
-    },
     getFilteredStores(selected) {
       Api.get('/stores/?adress.city=' + selected)
         .then((response) => {
