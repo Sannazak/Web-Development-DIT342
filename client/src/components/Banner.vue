@@ -1,19 +1,24 @@
 <template>
     <div class="container">
-        <img class="image"
-            src="../assets/banner_photo.jpg"
-            alt="Surf Photo"
-        />
+        <img class="image" src="../assets/banner_photo.jpg" alt="Surf Photo" fluid/>
         <div id="text-container" class="text-block">
             <h6>Welcome!</h6>
             <p>The days of carrying heavy surfbags and gears through airports is over.
                 Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
             </p>
         </div>
-        <form action="https://www.google.com" method="get" class="search-bar">
-            <input type="text" placeholder="Search for location or shop" name="q">
-            <button type="submit" @click=getMessage()><img src="../assets/search.png"></button>
-        </form>
+        <div id="dropdown-menu">
+          <b-button id="menuButtons" href="searchResult">Stores</b-button>
+          <b-button id="menuButtons" href="searchResult">Login</b-button>
+          <b-button id="menuButtons" href="searchResult">Register</b-button>
+          <b-button id="menuButtons" href="searchResult">Profile</b-button>
+          <b-button id="menuButtons" href="searchResult">Logout</b-button>
+
+        <!-- <b-dropdown  text="≡" class="m-md-2">
+          <b-dropdown-item href="">Login</b-dropdown-item>
+          <b-dropdown-item href="">Register</b-dropdown-item>
+        </b-dropdown> -->
+      </div>
     </div>
 </template>
 
@@ -110,6 +115,14 @@ export default {
   padding-top: 10px;
   width: 20%;
   height: 90%;
+}
+#dropdown-menu {
+  position: absolute;
+  bottom:8px;
+    right:28px;
+}
+#menuButtons {
+  margin-right: 5px;
 }
 
 @media all and (max-width: 1200px) {
