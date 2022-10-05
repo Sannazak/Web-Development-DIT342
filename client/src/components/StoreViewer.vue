@@ -1,18 +1,19 @@
 <template>
   <div class="container">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <div class="row">
       <div id="col_header" class="col-12">
         <h3>{{store.name}} in {{store.adress.city}}</h3>
       </div>
-      <div class="col-4">
-        <img src="../assets/stores/surfshop1.jpg" class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
+      <div id="image-col" class="col-4">
+        <img id ="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
       </div>
       <div id="col_right" class="col-4">
         <p><b>About {{store.name}}</b><br>
           {{store.description}}
         </p>
       </div>
-      <div class="col-4">
+      <div id="col-adress" class="col-4">
         <p id="adress_text"><b>How to get here:</b><br>
           {{store.adress.street}} {{store.adress.streetNr}}<br>
           {{store.adress.postalCode}} {{store.adress.city}}<br>
@@ -22,8 +23,9 @@
       <div class="col-12">
         <hr>
       </div>
-      <div id="lower-col" class="col-4">
-        <img src="../assets/maps-google.jpg" class="rounded" alt="image of spot" width="350px">
+      <div id="image-col" class="col-4">
+        <img id="store-image" src="../assets/maps-google.jpg" fluid class="rounded" alt="image of spot" width="350px">
+      <PatchStore/>
       </div>
       <div id="lower-col" class="col-8">
         <p>
@@ -65,9 +67,11 @@
 
 <script>
 import { Api } from '@/Api'
+import PatchStore from './PatchStore.vue'
 
 export default {
   name: 'StoreViewer',
+  components: { PatchStore },
   data() {
     return {
       store: [{
@@ -176,7 +180,6 @@ export default {
         })
         .then(() => {
           // executes regardless of failure or success
-          // this.surfLessonArrayFilled.splice(0, 1)
         })
     },
     getGearData(index) {
@@ -192,7 +195,6 @@ export default {
         })
         .then(() => {
           // executes regardless of failure or success
-          // this.surfLessonArrayFilled.splice(0, 1)
         })
     },
     getBoardData(index) {
@@ -208,7 +210,6 @@ export default {
         })
         .then(() => {
           // executes regardless of failure or success
-          // this.surfLessonArrayFilled.splice(0, 1)
         })
     }
   }
@@ -219,25 +220,24 @@ export default {
 <style scoped>
 .col-12 {
   height: 60px;
-  max-width: 1124px;
   background-color: lightgray;
 }
 
 .col-4 {
   min-height: 250px;
   background-color: lightgray;
-  max-width: 374px;
 }
 
 .col-8 {
   min-height: 250px;
   background-color: lightgray;
-  max-width: 750px;
+}
+.container {
+  background-color: lightgray;
 }
 
 #col_right {
   text-align: left;
-  max-width: 376px;
 }
 
 #adress_text {
@@ -247,4 +247,57 @@ export default {
 #offersListItem {
   text-align: left;
 }
+
+@media all and (max-width: 1199px) {
+  #col_right {
+    min-width: 25% ;
+  }
+  #col-adress {
+    min-width: 25% ;
+  }
+  #lower-col {
+    min-width: 75% ;
+  }
+  #image-col {
+    max-width: 25% ;
+    min-width: 24% ;
+  }
+  #store-image {
+    width: 100% ;
+  }
+}
+
+@media all and (max-width: 800px) {
+  #col_right {
+    min-width: 50% ;
+  }
+  #col-adress {
+    min-width: 50% ;
+  }
+  #lower-col {
+    min-width: 100% ;
+  }
+  #image-col {
+    display: none;
+  }
+}
+
+@media all and (max-width: 500px) {
+  #col_right {
+    min-width: 100% ;
+    min-height: 10% ;
+  }
+  #col-adress {
+    min-width: 100% ;
+    min-height: 10% ;
+  }
+  #lower-col {
+    min-width: 100% ;
+    min-height: 10% ;
+  }
+  #image-col {
+    display: none;
+  }
+}
+
 </style>
