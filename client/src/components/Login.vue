@@ -26,8 +26,6 @@
       </div>
 
       <input type="submit" value="Sign in" class="btn-btn-block" />
-      <!--<b-button type="submit" class="btn btn-dark btn-lg btn-block" @click="Submit()">Sign In</b-button>
-            <router-link to="/user" tag="button">Sign In</router-link>-->
       <p class="forgot-password text-right mt-2 mb-4">
         <router-link to="/forgot-password">Forgot password ?</router-link>
       </p>

@@ -9,15 +9,13 @@
         </div>
         <div id="dropdown-menu">
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-          <b-button id="menuButtons" href="/Login">Login</b-button>
-          <b-button id="menuButtons" href="/signup">Register</b-button>
-          <b-button id="menuButtons" href="/User">Profile</b-button>
-          <b-button id="menuButtons" href="/">Logout</b-button>
+          <LoginPopUp/>
+          <!-- <b-button id="menuButtons" href="/Login">Login</b-button> -->
 
-        <!-- <b-dropdown  text="≡" class="m-md-2">
-          <b-dropdown-item href="">Login</b-dropdown-item>
-          <b-dropdown-item href="">Register</b-dropdown-item>
-        </b-dropdown> -->
+        <b-dropdown text="person-≡" class="m-md-2">
+          <b-dropdown-item href="">View profile</b-dropdown-item>
+          <b-dropdown-item href="">Log out</b-dropdown-item>
+        </b-dropdown>
       </div>
     </div>
 </template>
@@ -25,8 +23,11 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import LoginPopUp from './LoginPopUp.vue'
+
 export default {
   name: 'banner',
+  components: { LoginPopUp },
   data() {
     return {
       message: 'none'
