@@ -1,46 +1,82 @@
 <template>
-    <div>
-        <br>
-        <b-button v-b-modal.modal-1>Update store</b-button>
-        <b-modal id="modal-1" hide-footer centered>
-            <template #modal-title>
-                You are updating {{store.name}}
-            </template>
-            <div class="row">
-                <div class="col-sm">
-                    <p>
-                        Description:
-                        <b-form-input id="inputFormTall" v-model="storeDescription"></b-form-input>
-                    </p>
-                </div>
-                <div class="col-sm">
-                    <p> Adress:
-                        <b-form-input id="inputForms" v-model="storeStreet" placeholder="Street"></b-form-input>
-                        <b-form-input id="inputForms" v-model="storeStreetNr" placeholder="Street Nr"></b-form-input>
-                        <b-form-input id="inputForms" v-model="storePostalCode" placeholder="Postal Code">
-                        </b-form-input>
-                        <b-form-input id="inputForms" v-model="storeCity" placeholder="City"></b-form-input>
-                        <b-form-input id="inputForms" v-model="storeCountry" placeholder="Country"></b-form-input>
-                    </p>
-                </div>
-            </div>
-            <div id="buttonDiv">
-                <b-button id="successButton" variant="success" centered @click=patchStore()>Update Store</b-button>
-                <b-button variant="warning" centered  @click="$bvModal.hide('modal-1')">Close</b-button>
-            </div>
-        </b-modal>
-        <b-modal id="modal-2" hide-footer centered>
-            <template #modal-title>
-                Updated
-            </template>
-            <div>
-                <p>
-                    The store has been updated.
-                </p>
-                <b-button id="successButton" variant="success" centered @click="$bvModal.hide('modal-2')">OK</b-button>
-            </div>
-        </b-modal>
-    </div>
+  <div>
+    <br>
+    <b-button v-b-modal.modal-1>Update store</b-button>
+    <b-modal id="modal-1" hide-footer centered>
+      <template #modal-title>
+        You are updating {{store.name}}
+      </template>
+
+<div>
+<b-tabs content-class="mt-3">
+  <b-tab title="Update Store">
+    <div class="row">
+        <div class="col-sm">
+          <p>
+            Description:
+            <b-form-input id="inputFormTall" v-model="storeDescription"></b-form-input>
+          </p>
+        </div>
+        <div class="col-sm">
+          <p> Adress:
+            <b-form-input id="inputForms" v-model="storeStreet" placeholder="Street"></b-form-input>
+            <b-form-input id="inputForms" v-model="storeStreetNr" placeholder="Street Nr"></b-form-input>
+            <b-form-input id="inputForms" v-model="storePostalCode" placeholder="Postal Code">
+            </b-form-input>
+            <b-form-input id="inputForms" v-model="storeCity" placeholder="City"></b-form-input>
+            <b-form-input id="inputForms" v-model="storeCountry" placeholder="Country"></b-form-input>
+          </p>
+        </div>
+      </div>
+      <div id="buttonDiv">
+        <b-button id="successButton" variant="success" centered @click=patchStore()>Update Store</b-button>
+        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
+      </div>
+    </b-tab>
+  <b-tab title="Add Lesson">
+    <div id="buttonDiv">
+      <p>
+        Enter the details of the lesson:
+        <b-form-input id="inputForms" v-model="lessonName" placeholder="Name"></b-form-input>
+            <b-form-input id="inputForms" v-model="lessonPrice" placeholder="Price(only numbers)"></b-form-input>
+            <b-form-input id="inputForms" v-model="lessonInstructor" placeholder="Instructor">
+            </b-form-input>
+      </p>
+        <b-button id="successButton" variant="success" centered @click=addLesson()>Add Lesson</b-button>
+        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
+      </div>
+      </b-tab>
+<b-tab title="Add Board">
+    <div id="buttonDiv">
+      <p>
+        Enter the details of the surfboard:
+        <b-form-input id="inputForms" v-model="boardVolume" placeholder="Volume(in L, only numbers)"></b-form-input>
+            <b-form-input id="inputForms" v-model="boardPrice" placeholder="Price(only numbers)"></b-form-input>
+            <b-form-input id="inputForms" v-model="boardSize" placeholder="Size(in ft, only numbers)"></b-form-input>
+            <b-form-input id="inputForms" v-model="boardStyle" placeholder="Style"></b-form-input>
+            Allowed styles: Shortboard, Longboard, Hybridboard, Funboard and Beginnerboard.
+      </p>
+        <b-button id="successButton" variant="success" centered @click=addBoard()>Add Board</b-button>
+        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
+      </div></b-tab>
+      <b-tab title="Add Gear">
+    <div id="buttonDiv">
+      <p>
+        Enter the details of the gear:
+        <b-form-input id="inputForms" v-model="gearName" placeholder="Name"></b-form-input>
+            <b-form-input id="inputForms" v-model="gearPrice" placeholder="Price(only numbers)"></b-form-input>
+            <b-form-input id="inputForms" v-model="gearSize" placeholder="Size(only numbers)"></b-form-input>
+            <b-form-input id="inputForms" v-model="gearGender" placeholder="Gender"></b-form-input>
+            <b-form-input id="inputForms" v-model="gearDescription" placeholder="Description"></b-form-input>
+      </p>
+        <b-button id="successButton" variant="success" centered @click=addGear()>Add Gear</b-button>
+        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
+      </div></b-tab>
+</b-tabs>
+</div>
+
+    </b-modal>
+  </div>
 </template>
 
 <script>
@@ -139,6 +175,51 @@ export default {
     },
     reloadPage() {
       window.location.reload()
+    },
+    addLesson() {
+      Api.post('/stores/' + this.$route.params.id + '/surfLessons', {
+        name: this.lessonName,
+        price: this.lessonPrice,
+        instructor: this.lessonInstructor
+      })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          console.log('lesson added')
+          this.reloadPage()
+        })
+    },
+    addBoard() {
+      Api.post('/stores/' + this.$route.params.id + '/surfBoards', {
+        volume: this.boardVolume + ' L',
+        price: this.boardPrice,
+        size: this.boardSize + 'ft',
+        style: this.boardStyle
+      })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          console.log('lesson added')
+          this.reloadPage()
+        })
+    },
+    addGear() {
+      Api.post('/stores/' + this.$route.params.id + '/surfGears', {
+        name: this.gearName,
+        price: this.gearPrice,
+        size: this.gearSize,
+        gender: this.gearGender,
+        description: this.gearDescription
+      })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          console.log('lesson added')
+          this.reloadPage()
+        })
     }
   }
 }
@@ -146,21 +227,21 @@ export default {
 
 <style scoped>
 #inputForms {
-    margin-top: 5px;
-    padding-top: 5px;
+  margin-top: 5px;
+  padding-top: 5px;
 }
 
 #inputFormTall {
-    height: 210px;
-    margin-top: 5px;
-    padding-top: 5px;
+  height: 210px;
+  margin-top: 5px;
+  padding-top: 5px;
 }
 
 #successButton {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 #buttonDiv {
-    align-content: center;
+  align-content: center;
 }
 </style>
