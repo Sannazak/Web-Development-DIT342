@@ -35,10 +35,10 @@ export default {
   methods: {
     getMessage() {
       Api.get('/')
-        .then(response => {
+        .then((response) => {
           this.message = response.data.message
         })
-        .catch(error => {
+        .catch((error) => {
           this.message = error
         })
     }
@@ -55,51 +55,51 @@ export default {
   align-items: right;
   justify-content: right;
 }
-.search-bar{
-    width: 100%;
-    max-width: 250px;
-    background: rgba(255, 255, 255, 0.2);
-    display:flex;
-    position: absolute;
-    border-radius: 60px;
-    bottom:8px;
-    right:28px;
-    padding: 5px 10px;
-    backdrop-filter: blur(1px);
+.search-bar {
+  width: 100%;
+  max-width: 250px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  position: absolute;
+  border-radius: 60px;
+  bottom: 8px;
+  right: 28px;
+  padding: 5px 10px;
+  backdrop-filter: blur(1px);
 }
 
-.search-bar input{
-    background: transparent;
-    flex: 1;
-    border: 0;
-    outline: none;
-    padding: 6px 5px;
-    font-size: 15px;
-    color:#f7f9f9;
+.search-bar input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 6px 5px;
+  font-size: 15px;
+  color: #f7f9f9;
 }
 
-::placeholder{
-    color:#f7f9f9;
+::placeholder {
+  color: #f7f9f9;
 }
 
-.search-bar button img{
-    width:15px;
+.search-bar button img {
+  width: 15px;
 }
 
-.search-bar button{
-    border: 0;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    background: #054e47;
-    cursor: pointer;
+.search-bar button {
+  border: 0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #054e47;
+  cursor: pointer;
 }
 .image {
-    width: 100%;
-    background-size: cover;
-    object-fit:scale-down;
-    min-height: 100%;
-    bottom: 0%;
+  width: 100%;
+  background-size: cover;
+  object-fit: scale-down;
+  min-height: 100%;
+  bottom: 0%;
 }
 
 .text-block {
@@ -132,14 +132,14 @@ export default {
 }
 @media all and (max-width: 1000px) {
   #text-container {
- scale: 80%;
- width: 40%;
+    scale: 80%;
+    width: 40%;
   }
 }
 
 @media all and (max-width: 800px) {
   #text-container {
- display: none;
+    display: none;
   }
 }
 </style>
