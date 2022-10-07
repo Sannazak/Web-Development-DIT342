@@ -1,69 +1,66 @@
 <template>
-    <div class="vue-tempalte">
-        <banner/>
-        <br>
-        <form @submit="onSubmit" class="add-form">
-            <h3>Sign Up</h3>
-            <div class="form-group">
-                <label>Full Name</label>
-                <input v-model="fullName" class="form-control form-control-lg" required/>
-            </div>
+  <div>
+    <b-button v-b-modal.modal-register>Register</b-button>
+    <b-modal id="modal-register" centered hide-footer>
+      <template #modal-title id="modal-title-text" class="w-100">
+        Register new user
+      </template>
+      <p>
+        <b-form-input id="inputForms" type="email" v-model="userEmail" placeholder="Email" required></b-form-input>
+        <b-form-input id="inputForms" v-model="userFullName" placeholder="Full Name" required></b-form-input>
 
-            <div class="form-group">
-                <label>Email address</label>
-                <input v-model="email" type="email" class="form-control form-control-lg" required/>
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input v-model="password" type="password" class="form-control form-control-lg" required/>
-            </div>
-            <input type="submit" value="Submit" class="btn-btn-block"/>
-
-            <div>
-              <p>{{ message }}</p>
-            </div>
-            <p class="forgot-password text-right">
-                <router-link to="/login">Already registered?</router-link>
-            </p>
-        </form>
-    </div>
+        <b-form-input id="inputForms" type="password" v-model="userPassword" placeholder="Password" required></b-form-input>
+        <b-form-input id="inputForms" type="password" v-model="userConfirmPassword" placeholder="Confirm Password"
+          required></b-form-input>
+        {{this.message}}
+      </p>
+      <b-button id="successButton" variant="success" centered @click=registerUser()>Register</b-button>
+      <b-button variant="warning" centered @click="$bvModal.hide('modal-register')">Close</b-button>
+    </b-modal>
+  </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
-import Banner from '../components/Banner.vue'
 
 export default {
-  components: { Banner },
+  components: {},
   data() {
     return {
-      fullName: '',
-      email: '',
-      password: '',
       message: ''
     }
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault()
-      Api.post('/users', {
-        fullName: this.fullName,
-        email: this.email,
-        password: this.password
-      }).then((res) => {
-        console.log(res)
-        this.message = 'User Created'
-        console.log(event)
-        this.$router.push('/User')
-      })
-        .catch((error) => {
-          console.log('Login Failed. Please try again')
-          this.message = 'User already created. Please try again'
-          console.log(error)
-        }).finally(() => {
+    registerUser() {
+      if (this.userPassword === this.userConfirmPassword && this.userPassword != null) {
+        Api.post('/users', {
+          fullName: this.userFullName,
+          email: this.userEmail,
+          password: this.userPassword
+        }).then((res) => {
+          console.log(res)
+          this.message = 'User Created'
+          this.$router.push('/User')
         })
+          .catch((error) => {
+            console.log('Login Failed. Please try again')
+            this.message = 'User already created. Please try again'
+            console.log(error)
+          }).finally(() => {
+          })
+      } else {
+        this.message = 'Error: Make sure email is correct and passwords are matching while being at least 3 letters.'
+      }
     }
   }
 }
 </script>
+<style scooped>
+#inputForms {
+  margin-top: 10px;
+}
+
+#successButton {
+  margin-right: 5px;
+}
+</style>
