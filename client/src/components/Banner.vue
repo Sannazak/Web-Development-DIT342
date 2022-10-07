@@ -7,15 +7,18 @@
                 Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
             </p>
         </div>
-        <div id="dropdown-menu">
+        <div id="dropdown-menu" @logedIn="userLogedIn=$event">
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
           <LoginPopUp/>
+          <!-- <LoginPopUp v-on:logedIn="LogInSuccess" v-if="userLogedIn"/> -->
           <!-- <b-button id="menuButtons" href="/Login">Login</b-button> -->
-
-        <b-dropdown text="person-≡" class="m-md-2">
-          <b-dropdown-item href="">View profile</b-dropdown-item>
-          <b-dropdown-item href="">Log out</b-dropdown-item>
-        </b-dropdown>
+          <b-dropdown text="User" class="m-md-2">
+            <template #button-content>
+              <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
+            </template>
+            <b-dropdown-item href="/user">View profile</b-dropdown-item>
+            <b-dropdown-item href="/">Log out</b-dropdown-item>
+          </b-dropdown>
       </div>
     </div>
 </template>
@@ -24,13 +27,18 @@
 // @ is an alias to /src
 import { Api } from '@/Api'
 import LoginPopUp from './LoginPopUp.vue'
+// import PersonIcon from './PersonIcon.vue'
+
+// import { EventBus } from '../main'
 
 export default {
   name: 'banner',
   components: { LoginPopUp },
+  // component: { PersonIcon },
   data() {
     return {
       message: 'none'
+      // userLogedIn: true
     }
   },
   methods: {
@@ -43,7 +51,16 @@ export default {
           this.message = error
         })
     }
+    /* LogInSuccess(logInSucessful) {
+      console.log(logInSucessful)
+      if (logInSucessful === true) {
+        this.userLogedIn = false
+      }
+    } */
   }
+  /* created() {
+    EventBus.$on('logedIn', this.userLogedIn)
+  } */
 }
 </script>
 

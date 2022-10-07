@@ -55,6 +55,7 @@ import Banner from '../components/Banner.vue'
 
 export default {
   components: { Banner },
+  // name: 'Login',
   data() {
     return {
       email: '',
@@ -79,7 +80,9 @@ export default {
           if (this.email === this.user.email && this.password === this.user.password) {
             console.log('success')
             this.message = 'Login correct'
-            this.$router.push('/User')
+            // this.$router.push('/User')
+            this.$router.replace({ name: 'user' })
+            // this.$emit('authenticated', true)
           } else {
             this.message = 'Login Failed. User does not exist. Check email and password!'
           }
