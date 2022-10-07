@@ -1,8 +1,8 @@
 <template>
   <div>
     <br>
-    <b-button v-b-modal.modal-1>Update store</b-button>
-    <b-modal id="modal-1" hide-footer centered>
+    <b-button v-b-modal.modal-updateStore>Update store</b-button>
+    <b-modal id="modal-updateStore" hide-footer centered>
       <template #modal-title>
         You are updating {{store.name}}
       </template>
@@ -70,7 +70,7 @@
             <b-form-input id="inputForms" v-model="gearDescription" placeholder="Description"></b-form-input>
       </p>
         <b-button id="successButton" variant="success" centered @click=addGear()>Add Gear</b-button>
-        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
+        <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
       </div></b-tab>
 </b-tabs>
 </div>

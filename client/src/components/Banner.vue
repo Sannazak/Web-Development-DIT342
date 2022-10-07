@@ -10,7 +10,7 @@
         <div id="dropdown-menu">
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
           <b-button id="menuButtons" href="/Login">Login</b-button>
-          <b-button id="menuButtons" href="/signup">Register</b-button>
+          <register/>
           <b-button id="menuButtons" href="/User">Profile</b-button>
           <b-button id="menuButtons" href="/">Logout</b-button>
 
@@ -25,8 +25,11 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import register from './Registration.vue'
+
 export default {
   name: 'banner',
+  components: { register },
   data() {
     return {
       message: 'none'
