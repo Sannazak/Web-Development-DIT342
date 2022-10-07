@@ -9,15 +9,15 @@
         </div>
         <div id="dropdown-menu">
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-          <b-button id="menuButtons" href="/Login">Login</b-button>
-          <register/>
-          <b-button id="menuButtons" href="/User">Profile</b-button>
-          <b-button id="menuButtons" href="/">Logout</b-button>
-
-        <!-- <b-dropdown  text="≡" class="m-md-2">
-          <b-dropdown-item href="">Login</b-dropdown-item>
-          <b-dropdown-item href="">Register</b-dropdown-item>
-        </b-dropdown> -->
+          <LoginPopUp/>
+          <registration/>
+          <b-dropdown text="User" class="m-md-2">
+            <template #button-content>
+              <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
+            </template>
+            <b-dropdown-item href="/user">View profile</b-dropdown-item>
+            <b-dropdown-item href="/">Log out</b-dropdown-item>
+          </b-dropdown>
       </div>
     </div>
 </template>
@@ -25,11 +25,12 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import register from './Registration.vue'
+import registration from './Registration'
+import LoginPopUp from './LoginPopUp.vue'
 
 export default {
   name: 'banner',
-  components: { register },
+  components: { registration, LoginPopUp },
   data() {
     return {
       message: 'none'
