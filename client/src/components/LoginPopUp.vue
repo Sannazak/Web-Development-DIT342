@@ -1,13 +1,13 @@
 <template>
   <div>
     <br>
-      <b-button v-b-modal.modal-logIn :hidden="logInSucessful">Log In</b-button>
+      <b-button v-b-modal.modal-logIn>Log In</b-button>
       <b-modal id="modal-logIn" hide-footer centered>
-        <template #modal-title>
-          <h3>Sign In</h3>
+        <template #modal-title id="modal-title-text" class="w-100">
+          Sign In
         </template>
     <div>
-      <h5>Welcome to surf.rental</h5>
+      <h6>Welcome to surf.rental</h6>
       <div class="row">
         <div class="col-sm">
           <b-form @submit="onSubmit" class="add-form">
@@ -17,11 +17,11 @@
             <div class="form-group">
               <b-form-input id="inputForms" v-model="password" type="password" placeholder="Password" required></b-form-input>
             </div>
-            <input type="submit" value="Sign in" class="btn-btn-block" />
+            <input id="successButton" variant="success" centered type="submit" value="Sign in" class="btn-btn-block" />
             <p class="forgot-password text-right mt-2 mb-4">
               <router-link to="/forgot-password">Forgot password ?</router-link>
             </p>
-            <div class="buttonDiv">
+            <div>
               {{ message }}
             </div>
           </b-form>
@@ -34,7 +34,6 @@
 
 <script>
 import { Api } from '@/Api'
-// import { EventBus } from './main.js'
 
 export default {
   name: 'LoginPopUp',
@@ -43,7 +42,6 @@ export default {
       email: '',
       password: '',
       message: '',
-      logInSucessful: false,
       user: [{
         email: '',
         password: '',
@@ -66,8 +64,6 @@ export default {
             console.log('success')
             this.message = 'Login correct'
             this.$router.push('/User')
-            this.logInSucessful = true
-            this.$emit('logedIn', this.logInSucessful)
           } else {
             this.message = 'Login Failed. User does not exist. Check email and password!'
           }
@@ -98,11 +94,7 @@ export default {
     margin-right: 5px;
   }
 
-  .buttonDiv {
-    align-content: center;
-  }
-
-  h5 {
+  h6 {
     color: blue;
   }
   </style>

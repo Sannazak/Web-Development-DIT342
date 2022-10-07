@@ -7,11 +7,10 @@
                 Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
             </p>
         </div>
-        <div id="dropdown-menu" @logedIn="userLogedIn=$event">
+        <div id="dropdown-menu">
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
           <LoginPopUp/>
-          <register/>
-          <!-- <b-button id="menuButtons" href="/Login">Login</b-button> -->
+          <registration/>
           <b-dropdown text="User" class="m-md-2">
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
@@ -26,12 +25,12 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import register from './Registration.vue'
+import registration from './Registration'
 import LoginPopUp from './LoginPopUp.vue'
 
 export default {
   name: 'banner',
-  components: { register, LoginPopUp },
+  components: { registration, LoginPopUp },
   data() {
     return {
       message: 'none'
