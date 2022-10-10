@@ -3,23 +3,25 @@ var router = express.Router();
 var User = require('../models/users');
 var FavouriteSpot = require('../models/surfSpot');
 var FavouriteStore = require('../models/stores');
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 //read all stores or using query to filter 
 router.get("/", function (req, res, next) {
-    try{
+    try {
         var query = User.find();
-        for (var queryName in req.query){
-            if(req.query.hasOwnProperty(queryName)){
-                if(req.query[queryName]){
+        for (var queryName in req.query) {
+            if (req.query.hasOwnProperty(queryName)) {
+                if (req.query[queryName]) {
                     query.where(queryName).equals(req.query[queryName]);
                 }
             }
         }
-        query.exec(function(err, user){
-            if(err) { return next(err); }       //is this row needed when doing try catch?
+        query.exec(function (err, user) {
+            if (err) { return next(err); }       //is this row needed when doing try catch?
             return res.status(200).json(user)
         });
-    }catch(error){
+    } catch (error) {
         res.status(400).send('An error has occured.')
     };
 });
@@ -35,7 +37,7 @@ router.get('/:id', function (req, res, next) {
             }
         });
     } catch {
-         return next(err).status(200).send('An error has occured');
+        return next(err).status(200).send('An error has occured');
     }
 });
 
@@ -156,48 +158,48 @@ router.post('/:id/favouriteStores', function (req, res, next) {
 
 
 //Get the info of a specific favorite spot from a specific user
-router.get('/api/users/:id/favouriteSpots/:spot_Id', function(req, res) {
+router.get('/api/users/:id/favouriteSpots/:spot_Id', function (req, res) {
     var id = req.params.id;
     var spotId = req.params.spot_Id;
-    User.findById(id, function(err, user) {
-        if (err) {  return res.status(404).json({'message': 'User not found!', 'error': err}); }
+    User.findById(id, function (err, user) {
+        if (err) { return res.status(404).json({ 'message': 'User not found!', 'error': err }); }
         if (user === null) {
-            return res.status(404).json({'message': 'User not found'});
+            return res.status(404).json({ 'message': 'User not found' });
         }
-        if (user.favouriteSpots.indexOf(spotId) !== -1){
-            FavouriteSpot.findById(spotId, function(err, surfSpot) {
-                if (err) { return res.status(404).json({'message' : 'Spot not fund'});}
+        if (user.favouriteSpots.indexOf(spotId) !== -1) {
+            FavouriteSpot.findById(spotId, function (err, surfSpot) {
+                if (err) { return res.status(404).json({ 'message': 'Spot not fund' }); }
                 if (surfSpot === null) {
-                    return res.status(404).json({'message' : 'Spot not found'});
-                } 
-                res.status(200).json({'Name of spot ' : surfSpot.name, 'Data on spot ' : surfSpot});
+                    return res.status(404).json({ 'message': 'Spot not found' });
+                }
+                res.status(200).json({ 'Name of spot ': surfSpot.name, 'Data on spot ': surfSpot });
             });
-        }else{
-            return res.status(400).json({'message': 'User doesnt have this spot saved as favorite'});
+        } else {
+            return res.status(400).json({ 'message': 'User doesnt have this spot saved as favorite' });
         }
     });
 });
 
 //Get the info of a specific favorite store from a specific user
-router.get('/api/users/:user_id/favouriteStores/:store_id', function(req,res){
+router.get('/api/users/:user_id/favouriteStores/:store_id', function (req, res) {
     var userId = req.params.user_id;
     var storeId = req.params.store_id;
 
-    User.findById(userId, function(err, user) {
-        if (err) { return res.status(404).json({'message' : 'User not fund'});}
+    User.findById(userId, function (err, user) {
+        if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
         if (user === null) {
-            return res.status(404).json({'message' : 'User not found'});
+            return res.status(404).json({ 'message': 'User not found' });
         }
-        if (user.favouriteStores.indexOf(storeId) !== -1){
-            FavouriteStore.findById(storeId, function(err, store) {
-                if (err) { return res.status(404).json({'message' : 'Store not fund'});}
+        if (user.favouriteStores.indexOf(storeId) !== -1) {
+            FavouriteStore.findById(storeId, function (err, store) {
+                if (err) { return res.status(404).json({ 'message': 'Store not fund' }); }
                 if (store === null) {
-                    return res.status(404).json({'message' : 'Store not found'});
-                } 
-                res.status(200).json({'Name of store ' : store.name, 'Data on store ' : store});
+                    return res.status(404).json({ 'message': 'Store not found' });
+                }
+                res.status(200).json({ 'Name of store ': store.name, 'Data on store ': store });
             });
-        }else{
-            return res.status(400).json({'message': 'User doesnt have this store saved as favorite'});
+        } else {
+            return res.status(400).json({ 'message': 'User doesnt have this store saved as favorite' });
         }
     });
 });
@@ -319,5 +321,89 @@ router.delete('/:user_id/favouriteSpots/:spot_id', function (req, res) {
         }
     });
 });
+
+router.post('/signuphashed', (req, res, next) => {
+    User.find({ email: req.body.email })
+        .exec()
+        .then(user => {
+            if (user.lenght >= 1) {
+                return res.status(409).json({
+                    message: 'Email already registered'
+                });
+            } else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    if (err) {
+                        return json.status(500).json({
+                            error: err
+                        });
+                    } else {
+                        const user = new User({
+                            email: req.body.email,
+                            password: hash
+                        });
+                        user.save()
+                            .then(result => {
+                                console.log(result)
+                                res.status(201).json({
+                                    message: 'user created'
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    error: err
+                                });
+                            })
+                    };
+                })
+            }
+        })
+});
+
+router.post('/loginhashed', (req, res, next) => {
+    User.find({ email: req.body.email })
+        .exec()
+        .then(user => {
+            if (user.lenght < 1) {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            }
+            bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+                if (err) {
+                    return res.status(401).json({
+                        message: 'Auth failed'
+                    });
+                }
+                if (result) {
+                    const token = jwt.sign(
+                    {
+                        email: user[0],
+                        userId: user[0]._id
+                    },
+                    process.env.JWT_KEY, 
+                    {
+                    expiresIn: "1h"
+                    },
+                );
+                    return res.status(200).json({
+                        message: 'Auth successfull',
+                        token: token
+                    });
+                }
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+
+})
+
 
 module.exports = router;
