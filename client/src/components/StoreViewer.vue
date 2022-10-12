@@ -76,11 +76,10 @@
 import { Api } from '@/Api'
 import PatchStore from './PatchStore.vue'
 import DeleteStoreModal from './DeleteStoreModal.vue'
-import AddStoreModal from './AddStoreModal.vue'
 
 export default {
   name: 'StoreViewer',
-  components: { PatchStore, DeleteStoreModal, AddStoreModal },
+  components: { PatchStore, DeleteStoreModal },
   data() {
     return {
       store: [{
