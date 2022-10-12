@@ -385,9 +385,6 @@ router.post('/loginhashed', (req, res, next) => {
                     {
                     expiresIn: "30s"
                     });
-
-                    User.findByIdAndUpdate(user[0]._id, token )
-
                     return res.status(200).json({
                         message: 'Auth successfull',
                         token: token

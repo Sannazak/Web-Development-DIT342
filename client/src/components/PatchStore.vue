@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <b-button v-b-modal.modal-updateStore>Update store</b-button>
+    <b-button v-b-modal.modal-updateStore v-if="token">Update store</b-button>
     <b-modal id="modal-updateStore" hide-footer centered>
       <template #modal-title>
         You are updating {{store.name}}
@@ -86,6 +86,7 @@ export default {
   name: 'StorePatcher',
   data() {
     return {
+      token: '',
       store: [{
         name: '',
         description: '',
@@ -221,6 +222,9 @@ export default {
           this.reloadPage()
         })
     }
+  },
+  created() {
+    this.token = localStorage.getItem('user')
   }
 }
 </script>

@@ -11,12 +11,13 @@
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
           <LoginPopUp/>
           <registration/>
-          <b-dropdown text="User" class="m-md-2">
+          <b-dropdown v-if="token" text="User" class="m-md-2">
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
             </template>
-            <b-dropdown-item v-if="token" href="/user">View profile</b-dropdown-item>
-            <b-dropdown-item href="/">Log out</b-dropdown-item>
+            <b-dropdown-item href="/user">View profile</b-dropdown-item>
+            <Logout/>
+            <!-- <b-dropdown-item href="/">Log out</b-dropdown-item> -->
           </b-dropdown>
       </div>
     </div>
@@ -27,10 +28,11 @@
 import { Api } from '@/Api'
 import registration from './Registration'
 import LoginPopUp from './LoginPopUp.vue'
+import Logout from './LogOut'
 
 export default {
   name: 'banner',
-  components: { registration, LoginPopUp },
+  components: { registration, LoginPopUp, Logout },
   data() {
     return {
       message: 'none',
