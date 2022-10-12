@@ -3,7 +3,7 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <div class="row">
       <div id="col_header" class="col-12">
-        <h3>{{store.name}} in {{store.adress.city}}</h3>
+        <h3>{{store.name}} in {{store.adress.city}} {{this.token}}</h3>
       </div>
       <div id="image-col" class="col-4">
         <img id ="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
@@ -82,6 +82,7 @@ export default {
   components: { PatchStore, DeleteStoreModal },
   data() {
     return {
+      token: '',
       store: [{
         name: '',
         description: '',
@@ -223,6 +224,9 @@ export default {
           // executes regardless of failure or success
         })
     }
+  },
+  create() {
+    this.token = localStorage.getItem('user')
   }
 }
 

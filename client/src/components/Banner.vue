@@ -8,15 +8,18 @@
             </p>
         </div>
         <div id="dropdown-menu">
+          <!-- <div class="btn-group"> -->
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-          <LoginPopUp/>
+          <LoginPopUp/>  
           <registration/>
-          <b-dropdown text="User" class="m-md-2">
+        <!-- </div> -->
+          <b-dropdown v-if="token" text="User" class="m-md-2">
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
             </template>
-            <b-dropdown-item href="/user">View profile</b-dropdown-item>
-            <b-dropdown-item href="/">Log out</b-dropdown-item>
+            <b-dropdown-item href="/user">Profile</b-dropdown-item>
+            <Logout/>
+            <!-- <b-dropdown-item href="/">Log out</b-dropdown-item> -->
           </b-dropdown>
       </div>
     </div>
@@ -27,13 +30,15 @@
 import { Api } from '@/Api'
 import registration from './Registration'
 import LoginPopUp from './LoginPopUp.vue'
+import Logout from './LogOut'
 
 export default {
   name: 'banner',
-  components: { registration, LoginPopUp },
+  components: { registration, LoginPopUp, Logout },
   data() {
     return {
-      message: 'none'
+      message: 'none',
+      token: ''
     }
   },
   methods: {
@@ -46,6 +51,9 @@ export default {
           this.message = error
         })
     }
+  },
+  created() {
+    this.token = localStorage.getItem('user')
   }
 }
 </script>

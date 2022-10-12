@@ -1,6 +1,7 @@
 <template>
   <div>
     <banner />
+    <AddStoreModal/>
     <b-container>
       <b-form-select
         v-model="selected"
@@ -34,10 +35,11 @@
 <script>
 import Banner from '@/components/Banner.vue'
 import { Api } from '@/Api'
+import AddStoreModal from '../components/AddStoreModal.vue'
 
 export default {
   name: 'searchResult',
-  components: { Banner },
+  components: { Banner, AddStoreModal },
   mounted() {
     console.log('page is loaded')
     this.getAllStores()
