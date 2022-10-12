@@ -1,6 +1,6 @@
 <template>
     <div>
-      <!-- <banner/> -->
+      <banner />
       <br>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">Home</a>
@@ -14,10 +14,10 @@
             <a class="nav-link" href="#">Settings <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
+            <a class="nav-link" href="/Favorites">Favorites</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="" tabindex="-1" aria-disabled="true" @click="logout">Log Out</a>
           </li>
         </ul>
         </div>
@@ -35,16 +35,38 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h3>Hello (enter name of the user)</h3>
+        <h3>Hello {{ fullName }} {{token}}</h3>
+        <br/>
+        <p>Welcome to Surf Rentals.</p>
         <p>Complete your user profile to get a better experience on our website</p>
       </div>
       <div class="col-md-4">
         <b-icon icon="person-fill" font-scale="7.5"></b-icon>
       </div>
     </div>
+    <br/>
     <div class="row">
-
     </div>
+  </div>
+  <div>
+    <div class="container">
+      <div class="row">
+      <div class="col-md-2">
+        <br/>
+        <p>
+          Main Settings
+        </p>
+      </div>
+      <div class="col-md-6">
+        <div class="col-xs-2">
+          <p>Email
+            <b-form-input id="inputForms" type="email" v-model="email"></b-form-input>
+          </p>
+        <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
+      </div>
+      </div>
+    </div>
+  </div>
   </div>
 </main>
         <!-- <h2>User Page</h2>
@@ -63,16 +85,66 @@
 </template>
 
 <script>
-// import PersonIcon from '../components/PersonIcon.vue'
+// import VueJwtDecode from 'vue-jwt-decode'
+// import { Api } from '@/Api'
 
 export default {
   name: 'User',
-  // components: { PersonIcon },
   data() {
     return {
       text: 'Edit me',
-      selected: 'A'
+      selected: 'A',
+      email: '',
+      fullName: '',
+      token: '',
+      user: {
+        fullName: '',
+        email: '',
+        id: ''
+      }
     }
+  },
+
+  methods: {
+    getUserDetails() {
+      // get token from localStorage
+      this.token = localStorage.getItem('user')
+      // try {
+      //   // decode token here and attach to the user object
+      //   const decoded = VueJwtDecode.decode(this.token)
+      //   console.log('So far working')
+      //   console.log(decoded)
+      //   this.user = decoded
+      //   console.log(this.user)
+      //   console.log(this.user.email.email)
+      //   console.log(this.user.email._id)
+      //   console.log('still working')
+      //   // get the user information by using the id
+      //   Api.get('/users/' + this.user.email._id)
+      //     .then(response => {
+      //       this.email = response.data.email
+      //       this.fullName = response.data.fullName
+      //       console.log('Not sure')
+      //       console.log(this.email)
+      //       console.log(this.fullName)
+      //     })
+      //     .catch((error) => {
+      //       console.log(error)
+      //     })
+      // } catch (error) {
+      //   console.log(error, 'error from decoding token')
+      // }
+    },
+
+    logout() {
+      this.token = ''
+      localStorage.setItem('user', this.token)
+      console.log(this.token)
+    }
+  },
+  created() {
+    // this.token = localStorage.getItem('user')
+    this.getUserDetails()
   }
 }
 </script>

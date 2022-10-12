@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-      <b-button v-b-modal.modal-logIn>Log In</b-button>
+      <b-button v-b-modal.modal-logIn v-if="!token">Log In</b-button>
       <b-modal id="modal-logIn" hide-footer centered>
         <template #modal-title id="modal-title-text" class="w-100">
           Sign In
@@ -39,42 +39,64 @@ export default {
   name: 'LoginPopUp',
   data() {
     return {
-      email: '',
-      password: '',
       message: '',
-      user: [{
-        email: '',
-        password: '',
-        id: ''
-      }]
+      token: ''
     }
   },
+
   methods: {
     onSubmit(event) {
       event.preventDefault()
-      Api.get('/users?email=' + this.email)
+      Api.post('/users/loginhashed', {
+        email: this.email,
+        password: this.password
+      })
         .then(response => {
-          this.user.email = response.data[0].email
-          this.user.password = response.data[0].password
-          this.user.id = response.data[0]._id
-          console.log(this.user.email)
-          console.log(this.user.password)
-          console.log(this.user.id)
-          if (this.email === this.user.email && this.password === this.user.password) {
-            console.log('success')
-            this.message = 'Login correct'
-            this.$router.push('/User')
-          } else {
-            this.message = 'Login Failed. User does not exist. Check email and password!'
-          }
+          console.log('working')
+          const token = response.data.token
+          console.log(token)
+          localStorage.setItem('user', token)
+          this.$router.push('/User')
         })
         .catch((error) => {
           this.message = 'Login Failed. Please try again'
           console.log(error)
+          console.log(error.response)
         })
         .finally(() => {})
     }
+  },
+
+  created() {
+    this.token = localStorage.getItem('user')
   }
+
+  // methods: {
+  //   onSubmit(event) {
+  //     event.preventDefault()
+  //     Api.get('/users?email=' + this.email)
+  //       .then(response => {
+  //         this.user.email = response.data[0].email
+  //         this.user.password = response.data[0].password
+  //         this.user.id = response.data[0]._id
+  //         console.log(this.user.email)
+  //         console.log(this.user.password)
+  //         console.log(this.user.id)
+  //         if (this.email === this.user.email && this.password === this.user.password) {
+  //           console.log('success')
+  //           this.message = 'Login correct'
+  //           this.$router.push('/User')
+  //         } else {
+  //           this.message = 'Login Failed. User does not exist. Check email and password!'
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         this.message = 'Login Failed. Please try again'
+  //         console.log(error)
+  //       })
+  //       .finally(() => {})
+  //   }
+  // }
 }
 </script>
 

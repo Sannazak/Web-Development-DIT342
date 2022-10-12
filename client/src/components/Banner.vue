@@ -15,7 +15,7 @@
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
             </template>
-            <b-dropdown-item href="/user">View profile</b-dropdown-item>
+            <b-dropdown-item v-if="token" href="/user">View profile</b-dropdown-item>
             <b-dropdown-item href="/">Log out</b-dropdown-item>
           </b-dropdown>
       </div>
@@ -33,7 +33,8 @@ export default {
   components: { registration, LoginPopUp },
   data() {
     return {
-      message: 'none'
+      message: 'none',
+      token: ''
     }
   },
   methods: {
@@ -46,6 +47,9 @@ export default {
           this.message = error
         })
     }
+  },
+  created() {
+    this.token = localStorage.getItem('user')
   }
 }
 </script>

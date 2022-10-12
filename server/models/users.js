@@ -11,7 +11,8 @@ var userSchema = new Schema({
     userHeight: { type: Number },
     userWeight: { type: Number },
     favouriteStores : [{type: Schema.Types.ObjectId, ref: "stores"}],
-    favouriteSpots : [{type: Schema.Types.ObjectId, ref: "surfSpot"}] 
+    favouriteSpots : [{type: Schema.Types.ObjectId, ref: "surfSpot"}],
+    tokens: [{type: Object}]
 });
  
 module.exports = mongoose.model("users", userSchema);
