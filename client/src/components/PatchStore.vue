@@ -6,74 +6,90 @@
       <template #modal-title>
         You are updating {{store.name}}
       </template>
-<div>
-<b-tabs content-class="mt-3">
-  <b-tab title="Update Store">
-    <p>Only add the information you want to be changed.</p>
-    <div class="row">
-        <div class="col-sm">
-          <p>
-            Description:
-            <b-form-input id="inputFormTall" v-model="storeDescription"></b-form-input>
-          </p>
-        </div>
-        <div class="col-sm">
-          <p> Adress:
-            <b-form-input id="inputForms" v-model="storeStreet" placeholder="Street"></b-form-input>
-            <b-form-input id="inputForms" v-model="storeStreetNr" placeholder="Street Nr"></b-form-input>
-            <b-form-input id="inputForms" v-model="storePostalCode" placeholder="Postal Code">
-            </b-form-input>
-            <b-form-input id="inputForms" v-model="storeCity" placeholder="City"></b-form-input>
-            <b-form-input id="inputForms" v-model="storeCountry" placeholder="Country"></b-form-input>
-          </p>
-        </div>
+      <div>
+        <b-tabs content-class="mt-3">
+          <b-tab title="Update Store">
+            <p>Only add the information you want to be changed.</p>
+            <div class="row">
+              <div class="col-sm">
+                <p>
+                  Description:
+                  <b-form-input id="inputFormTall" v-model="storeDescription"></b-form-input>
+                </p>
+                <p>
+                  Opening hours:
+                  <b-form-timepicker v-model=storeOpenTime placeholder="Opens" locale="en-UK"></b-form-timepicker>
+                  <b-form-timepicker v-model=storeCloseTime placeholder="Closes" locale="en-UK"></b-form-timepicker>
+
+                </p>
+              </div>
+              <div class="col-sm">
+                <p>
+                  Information:
+                  <b-form-input id="inputForms" v-model="storePhoneNumber" placeholder="Phone number, only digits">
+                  </b-form-input>
+                  <b-form-input id="inputForms" v-model="storeEmail" placeholder="Email"></b-form-input>
+                </p>
+                <p> Adress:
+                  <b-form-input id="inputForms" v-model="storeStreet" placeholder="Street"></b-form-input>
+                  <b-form-input id="inputForms" v-model="storeStreetNr" placeholder="Street Nr"></b-form-input>
+                  <b-form-input id="inputForms" v-model="storePostalCode" placeholder="Postal Code">
+                  </b-form-input>
+                  <b-form-input id="inputForms" v-model="storeCity" placeholder="City"></b-form-input>
+                  <b-form-input id="inputForms" v-model="storeCountry" placeholder="Country"></b-form-input>
+                </p>
+              </div>
+            </div>
+            <div id="buttonDiv">
+              <b-button id="successButton" variant="success" centered @click=patchStore()>Update Store</b-button>
+              <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
+            </div>
+          </b-tab>
+          <b-tab title="Add Lesson">
+            <div id="buttonDiv">
+              <p>
+                Enter the details of the lesson:
+                <b-form-input id="inputForms" v-model="lessonName" placeholder="Name"></b-form-input>
+                <b-form-input id="inputForms" v-model="lessonPrice" placeholder="Price(only numbers)"></b-form-input>
+                <b-form-input id="inputForms" v-model="lessonInstructor" placeholder="Instructor">
+                </b-form-input>
+              </p>
+              <b-button id="successButton" variant="success" centered @click=addLesson()>Add Lesson</b-button>
+              <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
+            </div>
+          </b-tab>
+          <b-tab title="Add Board">
+            <div id="buttonDiv">
+              <p>
+                Enter the details of the surfboard:
+                <b-form-input id="inputForms" v-model="boardVolume" placeholder="Volume(in L, only numbers)">
+                </b-form-input>
+                <b-form-input id="inputForms" v-model="boardPrice" placeholder="Price(only numbers)"></b-form-input>
+                <b-form-input id="inputForms" v-model="boardSize" placeholder="Size(in ft, only numbers)">
+                </b-form-input>
+                <b-form-input id="inputForms" v-model="boardStyle" placeholder="Style"></b-form-input>
+                Allowed styles: Shortboard, Longboard, Hybridboard, Funboard and Beginnerboard.
+              </p>
+              <b-button id="successButton" variant="success" centered @click=addBoard()>Add Board</b-button>
+              <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
+            </div>
+          </b-tab>
+          <b-tab title="Add Gear">
+            <div id="buttonDiv">
+              <p>
+                Enter the details of the gear:
+                <b-form-input id="inputForms" v-model="gearName" placeholder="Name"></b-form-input>
+                <b-form-input id="inputForms" v-model="gearPrice" placeholder="Price(only numbers)"></b-form-input>
+                <b-form-input id="inputForms" v-model="gearSize" placeholder="Size(only numbers)"></b-form-input>
+                <b-form-input id="inputForms" v-model="gearGender" placeholder="Gender"></b-form-input>
+                <b-form-input id="inputForms" v-model="gearDescription" placeholder="Description"></b-form-input>
+              </p>
+              <b-button id="successButton" variant="success" centered @click=addGear()>Add Gear</b-button>
+              <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
+            </div>
+          </b-tab>
+        </b-tabs>
       </div>
-      <div id="buttonDiv">
-        <b-button id="successButton" variant="success" centered @click=patchStore()>Update Store</b-button>
-        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
-      </div>
-    </b-tab>
-  <b-tab title="Add Lesson">
-    <div id="buttonDiv">
-      <p>
-        Enter the details of the lesson:
-        <b-form-input id="inputForms" v-model="lessonName" placeholder="Name"></b-form-input>
-            <b-form-input id="inputForms" v-model="lessonPrice" placeholder="Price(only numbers)"></b-form-input>
-            <b-form-input id="inputForms" v-model="lessonInstructor" placeholder="Instructor">
-            </b-form-input>
-      </p>
-        <b-button id="successButton" variant="success" centered @click=addLesson()>Add Lesson</b-button>
-        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
-      </div>
-      </b-tab>
-<b-tab title="Add Board">
-    <div id="buttonDiv">
-      <p>
-        Enter the details of the surfboard:
-        <b-form-input id="inputForms" v-model="boardVolume" placeholder="Volume(in L, only numbers)"></b-form-input>
-            <b-form-input id="inputForms" v-model="boardPrice" placeholder="Price(only numbers)"></b-form-input>
-            <b-form-input id="inputForms" v-model="boardSize" placeholder="Size(in ft, only numbers)"></b-form-input>
-            <b-form-input id="inputForms" v-model="boardStyle" placeholder="Style"></b-form-input>
-            Allowed styles: Shortboard, Longboard, Hybridboard, Funboard and Beginnerboard.
-      </p>
-        <b-button id="successButton" variant="success" centered @click=addBoard()>Add Board</b-button>
-        <b-button variant="warning" centered @click="$bvModal.hide('modal-1')">Close</b-button>
-      </div></b-tab>
-      <b-tab title="Add Gear">
-    <div id="buttonDiv">
-      <p>
-        Enter the details of the gear:
-        <b-form-input id="inputForms" v-model="gearName" placeholder="Name"></b-form-input>
-            <b-form-input id="inputForms" v-model="gearPrice" placeholder="Price(only numbers)"></b-form-input>
-            <b-form-input id="inputForms" v-model="gearSize" placeholder="Size(only numbers)"></b-form-input>
-            <b-form-input id="inputForms" v-model="gearGender" placeholder="Gender"></b-form-input>
-            <b-form-input id="inputForms" v-model="gearDescription" placeholder="Description"></b-form-input>
-      </p>
-        <b-button id="successButton" variant="success" centered @click=addGear()>Add Gear</b-button>
-        <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
-      </div></b-tab>
-</b-tabs>
-</div>
 
     </b-modal>
   </div>
@@ -90,6 +106,9 @@ export default {
       store: [{
         name: '',
         description: '',
+        phoneNumber: '',
+        openingHours: '',
+        email: '',
         adress: {
           country: '',
           street: '',
@@ -155,9 +174,22 @@ export default {
       if (this.storeDescription) {
         this.storeUpdated.adress.description = this.storeDescription
       }
+      if (this.storeEmail) {
+        this.storeUpdated.email = this.storeEmail
+      }
+      if (this.storePhoneNumber) {
+        this.storeUpdated.phoneNumber = this.storePhoneNumber
+      }
+      if (this.storeOpenTime && this.storeCloseTime) {
+        this.storeUpdated.openingHours = this.storeOpenTime + '-' + this.storeCloseTime
+      }
+
       console.log(this.storeUpdated)
       Api.patch('/stores/' + this.$route.params.id, {
         description: this.storeUpdated.adress.description,
+        email: this.storeUpdated.email,
+        phoneNumber: this.storeUpdated.phoneNumber,
+        openingHours: this.storeUpdated.openingHours,
         adress: {
           country: this.storeUpdated.adress.country,
           street: this.storeUpdated.adress.street,

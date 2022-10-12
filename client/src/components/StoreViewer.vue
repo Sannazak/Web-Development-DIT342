@@ -19,13 +19,20 @@
           {{store.adress.postalCode}} {{store.adress.city}}<br>
           {{store.adress.country}}
         </p>
+        <p>
+          <b>Details:</b><br>
+          Phone: {{store.phoneNumber}}<br>
+          Email: {{store.email}}<br>
+          Open:
+          {{store.openingHours}}
+        </p>
       </div>
       <div class="col-12">
         <hr>
       </div>
       <div id="image-col" class="col-4">
         <img id="store-image" src="../assets/maps-google.jpg" fluid class="rounded" alt="image of spot" width="350px">
-      <PatchStore/>
+      <p><PatchStore/> <DeleteStoreModal/></p>
       </div>
       <div id="lower-col" class="col-8">
         <p>
@@ -68,16 +75,20 @@
 <script>
 import { Api } from '@/Api'
 import PatchStore from './PatchStore.vue'
+import DeleteStoreModal from './DeleteStoreModal.vue'
 
 export default {
   name: 'StoreViewer',
-  components: { PatchStore },
+  components: { PatchStore, DeleteStoreModal },
   data() {
     return {
       token: '',
       store: [{
         name: '',
         description: '',
+        phoneNumber: '',
+        openingHours: '',
+        email: '',
         adress: {
           country: '',
           street: '',
