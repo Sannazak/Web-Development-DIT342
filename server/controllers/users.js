@@ -366,13 +366,13 @@ router.post('/loginhashed', (req, res, next) => {
         .then(user => {
             if (user.lenght < 1) {
                 return res.status(401).json({
-                    message: 'Auth failed'
+                    message: 'Auth failed 1'
                 });
             }
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 if (err) {
                     return res.status(401).json({
-                        message: 'Auth failed'
+                        message: 'Auth failed 2'
                     });
                 }
                 if (result) {
@@ -391,7 +391,7 @@ router.post('/loginhashed', (req, res, next) => {
                     });
                 }
                 return res.status(401).json({
-                    message: 'Auth failed'
+                    message: 'Auth failed 3'
                 });
             });
         })

@@ -54,6 +54,7 @@ export default {
         .then(response => {
           console.log('working')
           const token = response.data.token
+          this.message = response.data.message 
           console.log(token)
           localStorage.setItem('user', token)
           this.$router.push('/User')

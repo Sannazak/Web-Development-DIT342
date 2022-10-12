@@ -19,7 +19,7 @@
           </li>
           <li class="nav-item">
             <LogoutButton/>
-            <a class="nav-link" href="" tabindex="-1" aria-disabled="true" @click="logout">Log Out</a>
+            <a class="nav-link" tabindex="-1" aria-disabled="true" @click="logout">Log Out</a>
           </li>
         </ul>
         </div>
@@ -144,9 +144,15 @@ export default {
     },
 
     logout() {
-      console.log(this.token)
+      console.log('Testing token')
+      if (localStorage.getItem('user')){
+        localStorage.clear()
+        // href="/"
+        this.$router.push('/')
+      }
+      // console.log(this.token)
       // this.token = 'null'
-      localStorage.removeItem('user')
+      // window.localStorage.clear()
       console.log(this.token)
       console.log('storage clear')
     }

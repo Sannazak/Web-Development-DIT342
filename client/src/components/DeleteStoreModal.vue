@@ -1,7 +1,7 @@
 <template>
     <div>
         <br>
-        <b-button v-b-modal.modal-deleteStore>Delete store</b-button>
+        <b-button v-b-modal.modal-deleteStore v-if="token">Delete store</b-button>
         <b-modal id="modal-deleteStore" hide-footer centered>
             <template #modal-title>
                 Delete store
@@ -21,6 +21,11 @@ import router from '../router'
 
 export default {
   name: 'DeleteStoreModal',
+  data() {
+    return {
+      token: ''
+    }
+  },
   methods: {
     deleteStore() {
       Api.delete('/stores/' + this.$route.params.id)
@@ -32,6 +37,9 @@ export default {
           router.push('/searchResult')
         })
     }
+  },
+  created() {
+    this.token = localStorage.getItem('user')
   }
 }
 </script>
