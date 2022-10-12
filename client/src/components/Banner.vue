@@ -15,7 +15,7 @@
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
             </template>
-            <b-dropdown-item href="/user">View profile</b-dropdown-item>
+            <b-dropdown-item href="/user">Profile</b-dropdown-item>
             <Logout/>
             <!-- <b-dropdown-item href="/">Log out</b-dropdown-item> -->
           </b-dropdown>

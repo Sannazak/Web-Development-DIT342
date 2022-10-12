@@ -1,8 +1,9 @@
 <template>
     <div>
-      <banner />
+      <banner/>
+      <div class="container">
       <br>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -17,11 +18,13 @@
             <a class="nav-link" href="/Favorites">Favorites</a>
           </li>
           <li class="nav-item">
+            <LogoutButton/>
             <a class="nav-link" href="" tabindex="-1" aria-disabled="true" @click="logout">Log Out</a>
           </li>
         </ul>
         </div>
       </nav>
+      </div>
       <br/>
       <br/>
       <br/>
@@ -86,9 +89,12 @@
 <script>
 import VueJwtDecode from 'vue-jwt-decode'
 import { Api } from '@/Api'
+import Banner from '@/components/Banner.vue'
+// import LogoutButton from './LogoutButton'
 
 export default {
   name: 'User',
+  components: { Banner },
   data() {
     return {
       text: 'Edit me',
@@ -110,6 +116,8 @@ export default {
       this.token = localStorage.getItem('user')
       try {
         // decode token here and attach to the user object
+        console.log('Reading the token')
+        console.log(this.token)
         const decoded = VueJwtDecode.decode(this.token)
         console.log('So far working')
         console.log(decoded)
@@ -136,9 +144,11 @@ export default {
     },
 
     logout() {
-      this.token = ''
-      localStorage.setItem('user', this.token)
       console.log(this.token)
+      // this.token = 'null'
+      localStorage.removeItem('user')
+      console.log(this.token)
+      console.log('storage clear')
     }
   },
   created() {
