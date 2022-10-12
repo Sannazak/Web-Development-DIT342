@@ -5,6 +5,9 @@ var storeSchema = new Schema(
     {
         name: {type: String, required: true, unique: true},
         description: {type: String},
+        phoneNumber: {type: Number},
+        openingHours: {type: String},
+        email: {type: String},
         adress: {
             country: { type: String },
             street: { type: String },
