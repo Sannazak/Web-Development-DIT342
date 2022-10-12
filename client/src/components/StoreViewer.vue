@@ -32,7 +32,7 @@
       </div>
       <div id="image-col" class="col-4">
         <img id="store-image" src="../assets/maps-google.jpg" fluid class="rounded" alt="image of spot" width="350px">
-      <p><PatchStore/> <DeleteStoreModal/><AddStoreModal/></p>
+      <p><PatchStore/> <DeleteStoreModal/></p>
       </div>
       <div id="lower-col" class="col-8">
         <p>
