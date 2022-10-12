@@ -17,9 +17,10 @@
               <h2>{{ stores.name }}</h2>
             </b-card-title>
             <b-card-text>
-              {{ stores.adress.city }} <br />
-              {{ stores.adress.postalCode }} <br />
-              {{ stores.adress.country }}
+              {{ stores._id }}
+              {{stores.phoneNumber}}
+              {{stores.openingHours}}
+              {{stores.adress.city}}
             </b-card-text>
             <b-button variant="dark" v-on:click="OnClick(stores._id)">
               Visit Store
@@ -57,6 +58,10 @@ export default {
       store: [
         {
           _id: '',
+          description: '',
+          phoneNumber: '',
+          openingHours: '',
+          email: '',
           name: '',
           adress: {
             country: '',

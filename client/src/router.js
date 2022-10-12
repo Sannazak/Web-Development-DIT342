@@ -36,11 +36,6 @@ export default new Router({
       name: 'signup',
       component: () => import('./components/Registration.vue')
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: () => import('./components/Login.vue')
-    // },
     {
       path: '/forgot-password',
       name: 'forgot-password',

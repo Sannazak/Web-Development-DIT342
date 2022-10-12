@@ -18,7 +18,9 @@
                   Opening hours:
                   <b-form-timepicker v-model=storeAddOpenTime placeholder="Opens" locale="en-UK"></b-form-timepicker><br>
                   <b-form-timepicker v-model=storeAddCloseTime placeholder="Closes" locale="en-UK"></b-form-timepicker>
-
+                </p>
+                <p>
+                  {{this.warningMessage}}
                 </p>
               </div>
               <div class="col-sm">
@@ -29,10 +31,10 @@
                 </p>
                 <p> Adress:
                   <b-form-input id="inputForms" v-model="storeAddStreet" placeholder="Street"></b-form-input>
-                  <b-form-input id="inputForms" v-model="storeAddStreetNr" placeholder="Street Nr"></b-form-input>
-                  <b-form-input id="inputForms" v-model="storeAddPostalCode" placeholder="Postal Code">
+                  <b-form-input id="inputForms" v-model="storeAddStreetNr" type="number" placeholder="Street Nr"></b-form-input>
+                  <b-form-input id="inputForms" v-model="storeAddPostalCode" type="number" placeholder="Postal Code">
                   </b-form-input>
-                  <b-form-input id="inputForms" v-model="storeAddCity" placeholder="City"></b-form-input>
+                  <b-form-input id="inputForms" v-model="storeAddCity" placeholder="City(required)"></b-form-input>
                   <b-form-input id="inputForms" v-model="storeAddCountry" placeholder="Country"></b-form-input>
                 </p>
               </div>
@@ -46,48 +48,59 @@
 
 <script>
 import { Api } from '../Api'
-import router from '../router'
 
 export default {
   name: 'AddStoreModal',
   data() {
     return {
       openingHoursTotal: '',
-      newId: ''
+      newId: '',
+      newStoreAdress: {
+        country: '',
+        street: '',
+        streetNr: '',
+        postalCode: '',
+        city: ''
+      },
+      warningMessage: ''
     }
   },
   methods: {
     addStore() {
       console.log('Adding store...')
-      this.openingHoursTotal = this.storeAddOpenTime + '-' + this.storeAddCloseTime
-      Api.post('/stores', {
-        name: this.storeAddName,
-        description: this.storeAddDescription,
-        email: this.storeAddEmail,
-        phoneNumber: this.storeAddPhoneNumber,
-        openingHours: this.openingHoursTotal,
-        adress: {
-          country: this.storeAddCountry,
-          street: this.storeAddCountry,
-          streetNr: this.storeAddCountry,
-          postalCode: this.storeAddCountry,
-          city: this.storeAddCountry
-
+      if (!this.storeAddCity) {
+        this.warningMessage = 'City is required'
+        console.log('city required')
+      } else {
+        this.openingHoursTotal = this.storeAddOpenTime + '-' + this.storeAddCloseTime
+        if (this.openingHoursTotal === 'undefined-undefined') {
+          this.openingHoursTotal = 'hours not set'
         }
-      })
-        .catch(error => {
-          console.error(error)
+        Api.post('/stores', {
+          name: this.storeAddName,
+          adress: {
+            country: this.storeAddCountry,
+            street: this.storeAddStreet,
+            streetNr: this.storeAddStreetNr,
+            postalCode: this.storeAddPostalCode,
+            city: this.storeAddCity
+          },
+          description: this.storeAddDescription,
+          email: this.storeAddEmail,
+          phoneNumber: this.storeAddPhoneNumber,
+          openingHours: this.openingHoursTotal
         })
-        .then(response => {
-          console.log('store added')
-          console.log(response.data._id)
-          if (response.data._id) {
+          .catch(error => {
+            console.error(error)
+          })
+          .then(response => {
             this.newId = response.data._id
-            router.push('/StoreView/' + this.newId)
-          } else {
-            router.push('/searchResult')
-          }
-        })
+            console.log('store added')
+            window.location = this.newId
+            // Depending on where we put this the location differs
+            // window.location = 'StoreView/' + this.newId
+          })
+      }
     }
   }
 }
