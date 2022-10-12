@@ -14,7 +14,7 @@
               <div class="col-sm">
                 <p>
                   Description:
-                  <b-form-input id="inputFormTall" v-model="storeDescription"></b-form-input>
+                  <b-form-textarea id="textarea" v-model="storeDescription" placeholder="Enter description.." rows="6" max-rows="9"></b-form-textarea >
                 </p>
                 <p>
                   Opening hours:
