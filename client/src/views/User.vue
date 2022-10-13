@@ -1,11 +1,19 @@
 <template>
-    <div>
-      <banner/>
-      <div class="container">
-      <br>
+  <div>
+    <banner />
+    <div class="container">
+      <br />
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -90,7 +98,7 @@
             <option>Pro</option>
         </select>
         <span>Selected: {{ selected }}</span> -->
-    </div>
+  </div>
 </template>
 
 <script>
@@ -141,7 +149,7 @@ export default {
         console.log('still working')
         // get the user information by using the id
         Api.get('/users/' + this.user.email._id)
-          .then(response => {
+          .then((response) => {
             this.email = response.data.email
             this.fullName = response.data.fullName
             this.skillLevel = response.data.skillLevel
@@ -195,7 +203,7 @@ export default {
 </script>
 
 <style scoped>
-  .colum {
-    align-items: right;
-  }
+.colum {
+  align-items: right;
+}
 </style>

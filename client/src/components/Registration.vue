@@ -1,21 +1,54 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-register v-if="!token" >Register</b-button>
+    <b-button v-b-modal.modal-register v-if="!token">Register</b-button>
     <b-modal id="modal-register" centered hide-footer>
       <template #modal-title id="modal-title-text" class="w-100">
         Register new user
       </template>
       <p>
-        <b-form-input id="inputForms" type="email" v-model="userEmail" placeholder="Email" required></b-form-input>
-        <b-form-input id="inputForms" v-model="userFullName" placeholder="Full Name" required></b-form-input>
+        <b-form-input
+          id="inputForms"
+          type="email"
+          v-model="userEmail"
+          placeholder="Email"
+          required
+        ></b-form-input>
+        <b-form-input
+          id="inputForms"
+          v-model="userFullName"
+          placeholder="Full Name"
+          required
+        ></b-form-input>
 
-        <b-form-input id="inputForms" type="password" v-model="userPassword" placeholder="Password" required></b-form-input>
-        <b-form-input id="inputForms" type="password" v-model="userConfirmPassword" placeholder="Confirm Password"
-          required></b-form-input>
-        {{this.message}}
+        <b-form-input
+          id="inputForms"
+          type="password"
+          v-model="userPassword"
+          placeholder="Password"
+          required
+        ></b-form-input>
+        <b-form-input
+          id="inputForms"
+          type="password"
+          v-model="userConfirmPassword"
+          placeholder="Confirm Password"
+          required
+        ></b-form-input>
+        {{ this.message }}
       </p>
-      <b-button id="successButton" variant="success" centered @click=registerUser()>Register</b-button>
-      <b-button variant="warning" centered @click="$bvModal.hide('modal-register')">Close</b-button>
+      <b-button
+        id="successButton"
+        variant="success"
+        centered
+        @click="registerUser()"
+        >Register</b-button
+      >
+      <b-button
+        variant="warning"
+        centered
+        @click="$bvModal.hide('modal-register')"
+        >Close</b-button
+      >
     </b-modal>
   </div>
 </template>

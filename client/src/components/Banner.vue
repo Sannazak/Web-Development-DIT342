@@ -131,8 +131,8 @@ export default {
 }
 #dropdown-menu {
   position: absolute;
-  bottom:8px;
-    right:28px;
+  bottom: 8px;
+  right: 28px;
 }
 #menuButtons {
   margin-right: 5px;
