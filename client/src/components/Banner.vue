@@ -1,35 +1,29 @@
 <template>
-  <div class="container">
-    <img
-      class="image"
-      src="../assets/banner_photo.jpg"
-      alt="Surf Photo"
-      fluid
-    />
-    <div id="text-container" class="text-block">
-      <h6>Welcome!</h6>
-      <p>
-        The days of carrying heavy surfbags and gears through airports is over.
-        Find all the stores, boards, gears and lessons on your next surftrip and
-        keep the stoke!
-      </p>
+    <div class="container">
+        <img class="image" src="../assets/banner_photo.jpg" alt="Surf Photo" fluid/>
+        <div id="text-container" class="text-block">
+            <h6>Welcome!</h6>
+            <p>The days of carrying heavy surfbags and gears through airports is over.
+                Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
+            </p>
+        </div>
+        <div id="dropdown-menu">
+          <!-- <div class="btn-group"> -->
+          <b-button id="menuButtons" href="/">Home</b-button>
+          <b-button id="menuButtons" href="/searchResult">Stores</b-button>
+          <LoginPopUp/>
+          <registration/>
+        <!-- </div> -->
+          <b-dropdown v-if="token" text="User" class="m-md-2">
+            <template #button-content>
+              <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
+            </template>
+            <b-dropdown-item href="/user">Profile</b-dropdown-item>
+            <Logout/>
+            <!-- <b-dropdown-item href="/">Log out</b-dropdown-item> -->
+          </b-dropdown>
+      </div>
     </div>
-    <div id="dropdown-menu">
-      <!-- <div class="btn-group"> -->
-      <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-      <LoginPopUp />
-      <registration />
-      <!-- </div> -->
-      <b-dropdown v-if="token" text="User" class="m-md-2">
-        <template #button-content>
-          <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
-        </template>
-        <b-dropdown-item href="/user">Profile</b-dropdown-item>
-        <Logout />
-        <!-- <b-dropdown-item href="/">Log out</b-dropdown-item> -->
-      </b-dropdown>
-    </div>
-  </div>
 </template>
 
 <script>

@@ -181,7 +181,7 @@ router.get('/api/users/:id/favouriteSpots/:spot_Id', function (req, res) {
 });
 
 //Get the info of a specific favorite store from a specific user
-router.get('/api/users/:user_id/favouriteStores/:store_id', function (req, res) {
+router.get('/:user_id/favouriteStores/:store_id', function (req, res) {
     var userId = req.params.user_id;
     var storeId = req.params.store_id;
 
@@ -339,7 +339,8 @@ router.post('/signuphashed', (req, res, next) => {
                     } else {
                         const user = new User({
                             email: req.body.email,
-                            password: hash
+                            password: hash,
+                            fullName: req.body.fullName
                         });
                         user.save()
                             .then(result => {

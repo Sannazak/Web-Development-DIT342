@@ -146,6 +146,7 @@ export default {
         .then(response => {
           this.surfLessonsArray = response.data
           console.log('lesson api saved')
+          console.log(this.surfBoardsArray)
           this.surfLessonsArray.forEach(this.getLessonData)
         })
         .catch(error => {

@@ -12,6 +12,7 @@
       <div class="mt-3">
         Stores close to: <strong>{{ selected }}</strong>
       </div>
+      <br/>
       <b-row deck id="deck-cards">
         <b-col
           cols="12"
