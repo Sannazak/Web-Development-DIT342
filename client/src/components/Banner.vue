@@ -9,6 +9,7 @@
         </div>
         <div id="dropdown-menu">
           <!-- <div class="btn-group"> -->
+          <b-button id="menuButtons" href="/">Home</b-button>
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
           <LoginPopUp/>
           <registration/>

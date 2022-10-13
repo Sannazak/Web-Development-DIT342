@@ -60,7 +60,6 @@
       </div>
       <div class="col-md-6">
         <div class="col-xs-2">
-          <p>Email</p>
           <b-form-input id="inputForms" type="email" v-model="email"></b-form-input>
           <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
           <b-form-input id="inputForms" v-model="skillLevel" placeholder="Skill Level"></b-form-input>
@@ -105,8 +104,8 @@ export default {
   components: { Banner },
   data() {
     return {
-      text: 'Edit me',
-      selected: 'A',
+      // text: 'Edit me',
+      // selected: 'A',
       email: '',
       fullName: '',
       token: '',
@@ -115,7 +114,7 @@ export default {
         fullName: '',
         email: '',
         id: '',
-        skillLevel: '',
+        skillLevel: [],
         boardPreference: '',
         clothingSize: '',
         height: '',
@@ -145,6 +144,11 @@ export default {
           .then(response => {
             this.email = response.data.email
             this.fullName = response.data.fullName
+            this.skillLevel = response.data.skillLevel
+            this.height = response.data.userHeight
+            this.weight = response.data.userWeight
+            this.boardPreference = response.data.boardPreference
+            this.clothingSize = response.data.clothingSize
             console.log('Not sure')
             console.log(this.email)
             console.log(this.fullName)
@@ -171,7 +175,7 @@ export default {
         fullName: this.fullName,
         skillLevel: this.skillLevel,
         boardPreference: this.boardPreference,
-        clothingSize: this.clothSize,
+        clothingSize: this.clothingSize,
         userHeight: this.height,
         userWeight: this.weight
       }).then(response => {
@@ -185,7 +189,6 @@ export default {
     }
   },
   created() {
-    // this.token = localStorage.getItem('user')
     this.getUserDetails()
   }
 }

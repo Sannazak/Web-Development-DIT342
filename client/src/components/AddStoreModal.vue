@@ -1,7 +1,6 @@
 <template>
     <div>
-        <br>
-        <b-button v-b-modal.modal-addStore>Add store</b-button>
+        <b-button v-b-modal.modal-addStore v-if="token">Add store</b-button>
         <b-modal id="modal-addStore" hide-footer centered>
             <template #modal-title>
                 Add store
@@ -53,6 +52,7 @@ export default {
   name: 'AddStoreModal',
   data() {
     return {
+      token: '',
       openingHoursTotal: '',
       newId: '',
       newStoreAdress: {
@@ -102,6 +102,9 @@ export default {
           })
       }
     }
+  },
+  created() {
+    this.token = localStorage.getItem('user')
   }
 }
 </script>

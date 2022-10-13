@@ -14,9 +14,11 @@ export default {
 
   methods: {
     logout() {
-      this.token = ''
-      localStorage.setItem('user', this.token)
-      console.log(this.token)
+      console.log('Testing token')
+      if (localStorage.getItem('user')) {
+        localStorage.clear()
+        this.$router.push('/')
+      }
     }
   },
 

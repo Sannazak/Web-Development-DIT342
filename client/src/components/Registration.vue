@@ -41,7 +41,7 @@ export default {
         console.log('working')
         console.log(response)
         this.message = 'User Created'
-        this.$router.push('/User')
+        this.$router.push('/')
       })
         .catch((error) => {
           this.message = 'Login Failed. Please try again'

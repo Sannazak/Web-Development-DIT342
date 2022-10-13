@@ -1,8 +1,10 @@
 <template>
   <div>
     <banner />
-    <AddStoreModal/>
     <b-container>
+      <br/>
+      <AddStoreModal/>
+      <br/>
       <b-form-select
         v-model="selected"
         @change="onSelectedCity(selected)"
@@ -11,6 +13,7 @@
       <div class="mt-3">
         Stores close to: <strong>{{ selected }}</strong>
       </div>
+      <br/>
       <b-row deck id="deck-cards">
         <b-col cols="12" md="6" lg="3" v-for="stores in store" v-bind:key="stores._id">
           <b-card id="resultCards" tag="article"  >
