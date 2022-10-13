@@ -38,11 +38,11 @@ export default {
         email: this.userEmail,
         password: this.userPassword
       }).then(response => {
-          console.log('working')
-          console.log(response)
-          this.message = 'User Created'
-          this.$router.push('/User')
-        })
+        console.log('working')
+        console.log(response)
+        this.message = 'User Created'
+        this.$router.push('/User')
+      })
         .catch((error) => {
           this.message = 'Login Failed. Please try again'
           console.log(error)

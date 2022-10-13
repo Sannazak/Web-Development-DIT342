@@ -10,7 +10,7 @@
         <div id="dropdown-menu">
           <!-- <div class="btn-group"> -->
           <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-          <LoginPopUp/>  
+          <LoginPopUp/>
           <registration/>
         <!-- </div> -->
           <b-dropdown v-if="token" text="User" class="m-md-2">

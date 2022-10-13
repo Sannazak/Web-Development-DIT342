@@ -5,7 +5,7 @@ var userSchema = new Schema({
     email: { type: String, required: true, unique: true },
     fullName: { type: String },
     password: { type: String, required: true },
-    skillLevel: { type: String, enum: ["Beginner", "Intermediate", "Advanced", "Pro"] },
+    skillLevel: { type: String },
     boardPreference: { type: [String] },
     clothingSize: { type: String },
     userHeight: { type: Number },

@@ -8,7 +8,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -19,15 +18,14 @@
           </li>
           <li class="nav-item">
             <LogoutButton/>
-            <a class="nav-link" tabindex="-1" aria-disabled="true" @click="logout">Log Out</a>
+            <a class="nav-link" href="" @click="logout">Log Out</a>
           </li>
         </ul>
         </div>
       </nav>
       </div>
       <br/>
-      <br/>
-      <br/>
+
 <main role="main">
   <!-- <div class="jumbotron">
     <div class="container">
@@ -64,7 +62,17 @@
         <div class="col-xs-2">
           <p>Email</p>
           <b-form-input id="inputForms" type="email" v-model="email"></b-form-input>
-        <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
+          <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
+          <b-form-input id="inputForms" v-model="skillLevel" placeholder="Skill Level"></b-form-input>
+          <b-form-input id="inputForms" v-model="boardPreference" placeholder="Board Preference"></b-form-input>
+          <b-form-input id="inputForms" v-model="clothingSize" placeholder="Clothing Size"></b-form-input>
+          <b-form-input id="inputForms" v-model="height" placeholder="Height"></b-form-input>
+          <b-form-input id="inputForms" v-model="weight" placeholder="Weight"></b-form-input>
+          <br/>
+          <b-button id="successButton" variant="success" centered @click=updateUserInfo()>Update</b-button>
+          <p>
+            {{ message }}
+          </p>
       </div>
       </div>
     </div>
@@ -102,10 +110,16 @@ export default {
       email: '',
       fullName: '',
       token: '',
+      message: '',
       user: {
         fullName: '',
         email: '',
-        id: ''
+        id: '',
+        skillLevel: '',
+        boardPreference: '',
+        clothingSize: '',
+        height: '',
+        weight: ''
       }
     }
   },
@@ -145,16 +159,29 @@ export default {
 
     logout() {
       console.log('Testing token')
-      if (localStorage.getItem('user')){
+      if (localStorage.getItem('user')) {
         localStorage.clear()
-        // href="/"
         this.$router.push('/')
       }
-      // console.log(this.token)
-      // this.token = 'null'
-      // window.localStorage.clear()
-      console.log(this.token)
-      console.log('storage clear')
+    },
+
+    updateUserInfo() {
+      Api.put('/users/' + this.user.email._id, {
+        email: this.email,
+        fullName: this.fullName,
+        skillLevel: this.skillLevel,
+        boardPreference: this.boardPreference,
+        clothingSize: this.clothSize,
+        userHeight: this.height,
+        userWeight: this.weight
+      }).then(response => {
+        console.log('patched to user')
+        console.log(this.user)
+      }).catch((error) => {
+        this.message = 'Login Failed. Please try again'
+        console.log(error)
+        console.log(error.response)
+      })
     }
   },
   created() {
