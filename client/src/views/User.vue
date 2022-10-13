@@ -1,77 +1,101 @@
 <template>
-    <div>
-      <banner/>
-      <div class="container">
-      <br>
+  <div>
+    <banner />
+    <div class="container">
+      <br />
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Settings <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Favorites">Favorites</a>
-          </li>
-          <li class="nav-item">
-            <LogoutButton/>
-            <a class="nav-link" tabindex="-1" aria-disabled="true" @click="logout">Log Out</a>
-          </li>
-        </ul>
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Settings <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Favorites">Favorites</a>
+            </li>
+            <li class="nav-item">
+              <LogoutButton />
+              <a
+                class="nav-link"
+                tabindex="-1"
+                aria-disabled="true"
+                @click="logout"
+                >Log Out</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
-      </div>
-      <br/>
-      <br/>
-      <br/>
-<main role="main">
-  <!-- <div class="jumbotron">
+    </div>
+    <br />
+    <br />
+    <br />
+    <main role="main">
+      <!-- <div class="jumbotron">
     <div class="container">
       <h1 class="display-3">Hello user</h1>
       <p>Welcome to your profile page. Enjoy all the features from the website by setting up your style of surf and favorite things</p>
     </div>
   </div> -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <h3>Hello {{ fullName }}</h3>
-        <br/>
-        <p>Welcome to Surf Rentals.</p>
-        <p>Complete your user profile to get a better experience on our website</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Hello {{ fullName }}</h3>
+            <br />
+            <p>Welcome to Surf Rentals.</p>
+            <p>
+              Complete your user profile to get a better experience on our
+              website
+            </p>
+          </div>
+          <div class="col-md-4">
+            <b-icon icon="person-fill" font-scale="7.5"></b-icon>
+          </div>
+        </div>
+        <br />
+        <div class="row"></div>
       </div>
-      <div class="col-md-4">
-        <b-icon icon="person-fill" font-scale="7.5"></b-icon>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2">
+              <br />
+              <p>Main Settings</p>
+            </div>
+            <div class="col-md-6">
+              <div class="col-xs-2">
+                <p>Email</p>
+                <b-form-input
+                  id="inputForms"
+                  type="email"
+                  v-model="email"
+                ></b-form-input>
+                <b-form-input
+                  id="inputForms"
+                  v-model="fullName"
+                  placeholder="Full Name"
+                ></b-form-input>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <br/>
-    <div class="row">
-    </div>
-  </div>
-  <div>
-    <div class="container">
-      <div class="row">
-      <div class="col-md-2">
-        <br/>
-        <p>
-          Main Settings
-        </p>
-      </div>
-      <div class="col-md-6">
-        <div class="col-xs-2">
-          <p>Email</p>
-          <b-form-input id="inputForms" type="email" v-model="email"></b-form-input>
-        <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
-      </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</main>
-        <!-- <h2>User Page</h2>
+    </main>
+    <!-- <h2>User Page</h2>
         <br>
         <input v-model="text">
         <h2>Skill Level</h2>
@@ -83,7 +107,7 @@
             <option>Pro</option>
         </select>
         <span>Selected: {{ selected }}</span> -->
-    </div>
+  </div>
 </template>
 
 <script>
@@ -128,7 +152,7 @@ export default {
         console.log('still working')
         // get the user information by using the id
         Api.get('/users/' + this.user.email._id)
-          .then(response => {
+          .then((response) => {
             this.email = response.data.email
             this.fullName = response.data.fullName
             console.log('Not sure')
@@ -145,7 +169,7 @@ export default {
 
     logout() {
       console.log('Testing token')
-      if (localStorage.getItem('user')){
+      if (localStorage.getItem('user')) {
         localStorage.clear()
         // href="/"
         this.$router.push('/')
@@ -165,7 +189,7 @@ export default {
 </script>
 
 <style scoped>
-  .colum {
-    align-items: right;
-  }
+.colum {
+  align-items: right;
+}
 </style>
