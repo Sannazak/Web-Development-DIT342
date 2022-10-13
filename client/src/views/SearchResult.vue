@@ -1,8 +1,9 @@
 <template>
   <div>
     <banner />
-    <AddStoreModal/>
+    <AddStoreModal />
     <b-container>
+      <h5>Show all stores or select a specific city</h5>
       <b-form-select
         v-model="selected"
         @change="onSelectedCity(selected)"
@@ -12,15 +13,21 @@
         Stores close to: <strong>{{ selected }}</strong>
       </div>
       <b-row deck id="deck-cards">
-        <b-col cols="12" md="6" lg="3" v-for="stores in store" v-bind:key="stores._id">
-          <b-card id="resultCards" tag="article"  >
+        <b-col
+          cols="12"
+          md="6"
+          lg="3"
+          v-for="stores in store"
+          v-bind:key="stores._id"
+        >
+          <b-card id="resultCards" tag="article">
             <b-card-title>
               <h2>{{ stores.name }}</h2>
             </b-card-title>
             <b-card-text>
+              {{ stores.phoneNumber}} <br />
+              {{ stores.email}} <br />
               {{ stores.adress.city }} <br />
-              {{ stores.adress.postalCode }} <br />
-              {{ stores.adress.country }}
             </b-card-text>
             <b-button variant="dark" v-on:click="OnClick(stores._id)">
               Visit Store
@@ -48,12 +55,17 @@ export default {
     return {
       selected: null,
       options: [
-        { value: null, text: 'Please select a city' },
-        { value: 'Brantevik', text: 'Brantevik' },
-        { value: 'Göteborg', text: 'Göteborg' },
-        { value: 'Halmstad', text: 'Halmstad' },
-        { value: 'Mölle', text: 'Mölle' },
-        { value: 'Varberg', text: 'Varberg' }
+        { value: null, text: 'Show all stores' },
+        {
+          label: 'Select a city',
+          options: [
+            { value: 'Brantevik', text: 'Brantevik' },
+            { value: 'Göteborg', text: 'Göteborg' },
+            { value: 'Halmstad', text: 'Halmstad' },
+            { value: 'Mölle', text: 'Mölle' },
+            { value: 'Varberg', text: 'Varberg' }
+          ]
+        }
       ],
       text: '',
       store: [
@@ -139,4 +151,13 @@ export default {
   text-align: center;
   margin-bottom: 25px;
 }
+h5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.mt-3 {
+  margin-bottom: 20px;
+}
+
 </style>
