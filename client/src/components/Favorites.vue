@@ -2,9 +2,9 @@
   <div>
     <banner />
     <div class="container">
-      <br />
       <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand" href="/">Home</a>
+        <a class="navbar-brand" href="/">
+          <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -49,21 +49,21 @@
                 cols="12"
                 md="6"
                 lg="3"
-                v-for="favoriteStores in this.favoriteStoreFilled"
-                v-bind:key="favoriteStores._id"
+                v-for="favoriteStore in this.favoriteStoreFilled"
+                v-bind:key="favoriteStore.name"
               >
                 <b-card id="resultCards" tag="article">
                   <b-card-title>
-                    <h2>{{ favoriteStores.name }}</h2>
+                    <h2>{{ favoriteStore.name }}</h2>
                   </b-card-title>
                   <b-card-text>
-                    {{ favoriteStores.adress.city }} <br />
-                    {{ favoriteStores.adress.postalCode }} <br />
-                    {{ favoriteStores.adress.country }}
+                    {{ favoriteStore.adress.city }} <br />
+                    {{ favoriteStore.adress.postalCode }} <br />
+                    {{ favoriteStore.adress.country }}
                   </b-card-text>
                   <b-button
                     variant="dark"
-                    v-on:click="OnClick(favoriteStores._id)"
+                    v-on:click="OnClick(favoriteStore._id)"
                     >Visit Store
                   </b-button>
                 </b-card>
@@ -168,10 +168,13 @@ export default {
     },
 
     getFavoriteStoresData(index) {
+      const key = 0
       Api.get('/stores/' + index)
         .then((response) => {
           console.log(response.data)
           this.favoriteStoreFilled.push(response.data)
+          this.$delete(this.favoriteStoreFilled, key)
+          // this.favoriteStoreFilled.splice(key, 1)
           console.log('favoriteStoreFilled')
           console.log(this.favoriteStoreFilled)
         })
@@ -208,5 +211,13 @@ export default {
 <style scoped>
 .colum {
   align-items: right;
+}
+.deck-cards {
+  align-items: center;
+  background-color: #054e47af;
+  color: white;
+  text-align: center;
+  width: 250px;
+  margin-bottom: 25px;
 }
 </style>
