@@ -77,27 +77,34 @@
           <b-form-input id="inputForms" v-model="weight" placeholder="Weight"></b-form-input>
           <br/>
           <b-button id="successButton" variant="success" centered @click=updateUserInfo()>Update</b-button>
+          <b-form-group label="Select your board preferences:" v-slot="{ ariaDescribedby }">
+            <b-form-checkbox-group id="checkbox-group-1" v-model="selected" :options="options" :aria-describedby="ariaDescribedby" name="boardPreferences">
+              <b-form-checkbox value="longboard">Longboard</b-form-checkbox>
+              <b-form-checkbox value="shortboard">Shortboard</b-form-checkbox>
+              <b-form-checkbox value="hybrid">Hybrid</b-form-checkbox>
+              <b-form-checkbox value="minimal">Mini Mal</b-form-checkbox>
+              <b-form-checkbox value="begginerboard">Begginer Soft Board</b-form-checkbox>
+            </b-form-checkbox-group>
+            <div v-for="board of selected" v-bind:key="board">Boards Selected: <strong>{{ board }}</strong></div>
+          </b-form-group>
           <p>
             {{ message }}
           </p>
-      </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</main>
-        <!-- <h2>User Page</h2>
-        <br>
-        <input v-model="text">
-        <h2>Skill Level</h2>
-        <select v-model="selected">
+        <p>Skill Level:</p>
+        <select v-model="selectedSkill">
             <option disabled value="">Please select one</option>
             <option>Beginner</option>
             <option>Intermediate</option>
             <option>Advanced</option>
             <option>Pro</option>
         </select>
-        <span>Selected: {{ selected }}</span> -->
+        <span> {{ selectedSkill }}</span>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>
   </div>
 </template>
 
@@ -112,8 +119,8 @@ export default {
   components: { Banner },
   data() {
     return {
-      // text: 'Edit me',
-      // selected: 'A',
+      selectedSkill: '',
+      selected: [],
       email: '',
       fullName: '',
       token: '',
@@ -122,8 +129,8 @@ export default {
         fullName: '',
         email: '',
         id: '',
-        skillLevel: [],
-        boardPreference: '',
+        skillLevel: '',
+        boardPreference: [],
         clothingSize: '',
         height: '',
         weight: ''

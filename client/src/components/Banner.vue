@@ -8,20 +8,21 @@
             </p>
         </div>
         <div id="dropdown-menu">
-          <!-- <div class="btn-group"> -->
-          <b-button id="menuButtons" href="/">Home</b-button>
-          <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-          <LoginPopUp/>
-          <registration/>
-        <!-- </div> -->
-          <b-dropdown v-if="token" text="User" class="m-md-2">
+          <b-button-toolbar aria-label="Toolbar with button groups and dropdown menu">
+          <b-button-group class="mx-1">
+            <b-button id="menuButtons" href="/">Home</b-button>
+            <b-button id="menuButtons" href="/searchResult">Stores</b-button>
+            <LoginPopUp/>
+            <registration/>
+          </b-button-group>
+          <b-dropdown v-if="token" class="mx-1" right text="menu">
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
             </template>
             <b-dropdown-item href="/user">Profile</b-dropdown-item>
             <Logout/>
-            <!-- <b-dropdown-item href="/">Log out</b-dropdown-item> -->
           </b-dropdown>
+        </b-button-toolbar>
       </div>
     </div>
 </template>
