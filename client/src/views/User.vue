@@ -2,38 +2,21 @@
   <div>
     <banner />
     <div class="container">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand" href="/">
-          <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Settings <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Favorites">Favorites</a>
-          </li>
-          <li class="nav-item">
-            <LogoutButton/>
-            <a class="nav-link" href="" @click="logout">Log Out</a>
-          </li>
-        </ul>
-        </div>
-      </nav>
+      <b-navbar toggleable="lg" class="navbar navbar-expand-md navbar-light bg-light">
+        <b-navbar-brand href="/">
+          <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon>
+        </b-navbar-brand>
+        <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
+        <b-navbar-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item active href="#">Settings <span class="sr-only">(current)</span></b-nav-item>
+            <b-nav-item href="/Favorites">Favorites</b-nav-item>
+            <b-nav-item href="#" @click="logout">Sign Out</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-collapse>
+      </b-navbar>
       </div>
       <br/>
-
 <main role="main">
   <div class="container">
     <div class="row">
