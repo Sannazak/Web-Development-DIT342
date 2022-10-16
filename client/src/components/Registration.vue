@@ -83,7 +83,7 @@ export default {
           this.$router.push('/User')
         })
           .catch((error) => {
-            this.message = 'Login Failed. Please try again'
+            this.message = 'Registration Failed. Please try again'
             console.log(error)
             console.log(error.response)
           })
@@ -93,7 +93,7 @@ export default {
         // this.$router.push('/')
       })
         .catch((error) => {
-          this.message = 'Login Failed. Please try again'
+          this.message = 'Registration Failed. Email already exists or password not correct'
           console.log(error)
           console.log(error.response)
         })

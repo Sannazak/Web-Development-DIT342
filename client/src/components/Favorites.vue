@@ -149,12 +149,12 @@ export default {
     },
 
     getFavoriteStoresData(index) {
-      const key = 0
+      // const key = 0
       Api.get('/stores/' + index)
         .then((response) => {
           console.log(response.data)
           this.favoriteStoreFilled.push(response.data)
-          this.$delete(this.favoriteStoreFilled, key)
+          // this.$delete(this.favoriteStoreFilled, key)
           // this.favoriteStoreFilled.splice(key, 1)
           console.log('favoriteStoreFilled')
           console.log(this.favoriteStoreFilled)

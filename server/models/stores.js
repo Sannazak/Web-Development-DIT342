@@ -7,6 +7,7 @@ var storeSchema = new Schema(
         description: {type: String},
         phoneNumber: {type: Number},
         openingHours: {type: String},
+        markedFavorite: {type: Boolean},
         email: {type: String},
         adress: {
             country: { type: String },

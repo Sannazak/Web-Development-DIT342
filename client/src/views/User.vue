@@ -147,6 +147,7 @@ export default {
         console.log(this.user)
         console.log(this.user.email.email)
         console.log(this.user.email._id)
+        localStorage.setItem('userId', this.user.email._id)// new line
         console.log('still working')
         // get the user information by using the id
         Api.get('/users/' + this.user.email._id)
