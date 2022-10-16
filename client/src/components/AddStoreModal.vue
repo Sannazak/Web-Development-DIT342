@@ -1,9 +1,9 @@
 <template>
     <div>
-        <b-button v-b-modal.modal-addStore v-if="token">Add store</b-button>
+        <b-button id="button" v-b-modal.modal-addStore v-if="token">Add Store</b-button>
         <b-modal id="modal-addStore" hide-footer centered>
             <template #modal-title>
-                Add store
+                Add Store
             </template>
             <div>
                 <p>Please fill out as much information as possible</p>
@@ -110,5 +110,7 @@ export default {
 </script>
 
 <style scoped>
-
+#button {
+  margin-top: 20px;
+}
 </style>
