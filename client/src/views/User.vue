@@ -52,26 +52,37 @@
   <div>
     <div class="container">
       <div class="row">
-      <!-- <div class="col-md-2">
-        Main Settings:
-      <br/>
-      </div> -->
       <div class="col-md-6">
         <div class="col-xs-2">
-          <b-form-input id="inputForms" label="Email" type="email" v-model="email"></b-form-input>
-          <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
-          <!-- <b-form-input id="inputForms" v-model="skillLevel" placeholder="Skill Level"></b-form-input> -->
-          <!-- <b-form-input id="inputForms" v-model="boardPreference" placeholder="Board Preference"></b-form-input> -->
-          <b-form-input id="inputForms" v-model="clothingSize" placeholder="Clothing Size"></b-form-input>
-          <b-form-input id="inputForms" v-model="height" placeholder="Height"></b-form-input>
-          <b-form-input id="inputForms" v-model="weight" placeholder="Weight"></b-form-input>
+          <label class="paragraph-size" for="inputEmail"><strong>Email</strong></label>
+          <b-form-input id="inputEmail" label="Email" type="email" v-model="email"></b-form-input>
+          <br/>
+          <lable class="paragraph-size" for="inputFullName"><strong>Full Name</strong></lable>
+          <b-form-input id="inputFullName" v-model="fullName"></b-form-input>
+          <br/>
+          <label class="paragraph-size" for="inputClothsSize"><strong>Choths Size</strong></label>
+          <b-form-select v-model="clothingSize">
+            <option disabled value="">Please select one</option>
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+          </b-form-select>
+          <br/>
+          <!-- <b-form-input id="inputClothsSize" v-model="clothingSize" placeholder="Clothing Size"></b-form-input> -->
+          <br/>
+          <label class="paragraph-size" for="inputHeigh"><strong>Height in cm</strong></label>
+          <b-form-input id="inputHeigh" v-model="height"></b-form-input>
+          <br/>
+          <label class="paragraph-size" for="inputWeight"><strong>Weight in Kg</strong></label>
+          <b-form-input id="inputWeight" v-model="weight"></b-form-input>
         </div>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5">
         <div class="col-xs-2">
           <br/>
-          <b-form-group class="paragraph-size" label="Select your board preferences:" v-slot="{ ariaDescribedby }">
+          <label class="paragraph-size" for="checkbox-group-1"><strong>Select Board Preferences</strong></label>
+          <b-form-group class="paragraph-size" v-slot="{ ariaDescribedby }">
             <b-form-checkbox-group id="checkbox-group-1" v-model="boardPreference" :options="options" :aria-describedby="ariaDescribedby" name="boardPreferences">
               <b-form-checkbox value="Longboard">Longboard</b-form-checkbox>
               <b-form-checkbox value="Shortboard">Shortboard</b-form-checkbox>
@@ -79,22 +90,20 @@
               <b-form-checkbox value="Mini Mal">Mini Mal</b-form-checkbox>
               <b-form-checkbox value="Begginer Board">Begginer Soft Board</b-form-checkbox>
             </b-form-checkbox-group>
-            <br/>
               Board preferences:
             <div v-for="board in boardPreference" v-bind:key="board"> <strong>{{ board }}</strong></div>
           </b-form-group>
-          <p>
-            {{ message }}
-          </p>
-        <p class="paragraph-size">Skill Level:</p>
-        <select v-model="skillLevel">
+          <br/>
+          <br/>
+        <p class="paragraph-size"><strong>Skill Level:</strong></p>
+        <b-form-select v-model="skillLevel">
             <option disabled value="">Please select one</option>
             <option>Beginner</option>
             <option>Intermediate</option>
             <option>Advanced</option>
             <option>Pro</option>
-        </select>
-        <span> {{ skillLevel }}</span>
+        </b-form-select>
+        <!-- <span> {{ skillLevel }}</span> -->
        </div>
       </div>
       <div class="col-md-12">
@@ -224,7 +233,12 @@ export default {
 }
 
 .paragraph-size {
-  font-size: 18px;
+  font-size: 19px;
+}
+
+.lable {
+  padding-bottom: 2em;
+  margin: auto;
 }
 /* .col-md-6 {
   background-color: gray;
