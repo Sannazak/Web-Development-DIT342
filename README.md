@@ -61,16 +61,19 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-The system's goal is to make it easier for people interested in surfing to rent surfing gear or get surfing lessons while travelling or to simply try something new while at home. It will also have a vast library of surf locations so that users can always find the perfect surf spot based on your needs and skills while on the go. This will both help local businesses to get new customers and for surfers to save money renting instead of paying to bring their own gear.
+The system's goal is to make it easier for people interested in surfing, which are travelling or simply trying something new at home, to find surf stores in different locations around Sweden. Users will be able to see all information about the store, surfing gears and surfing lessons the stores have to offer. 
+It will have a vast library of surf stores, their location and contact information, so that surfers can always find what they need when they are planning their next surf trip. Or when trying a new board on their local surf spot or replacing a broken gear which they need in their next surf session.
+The user will be able to create an account so they can add, delete, or change information on the store. They can also mark the stores as favorites which will be displayed at their user profile page. 
+This system will both help local businesses to get new customers and for surfers to have the freedom to travel without having to bring their own gear.
 
 ### Pages
 
-* Home: Landing page showing a map based on your location and some shops in your area. Also allows the user to login.
-* Search for store: Here it's possible to search and filter stores based on the users preference and skills.
-* Store page: These pages contain the details of the chosen store. Includes contact information, prices and so on.
-* Search for surfing spots: Here it's possible to search and filter surfing spots based on the users preference and skills.
-* Surfing spot page: These pages contain the details of the chosen surfing spot. Includes things such as recommended skill level to surf at the spot and if it's a beach break, reef break or rock point.
-* Profile page: Here the user can enter their details and preferences. These can later be used to filter surfing spots and stores. 
+* Home: Landing page showing a map based on your location and some recommended shops. Also allows the user to register, login or simple start to navigate through the stores from the store button.
+* Search for store: Here it's possible to search for stores based on locations. A button to view the store will direct to the store’s page. An add store button will be activated when the user is logged In.
+* Store page: These pages contain the details of the chosen store. Includes contact information, address, services, and gear available, prices and a small description of the store. A button to update or delete the store and to mark it as favorite will be available when the user is logged In.
+* Profile page: Here the user can enter their details and preferences. These will later be used to filter for spots and stores. 
+* Favorite page: This page displays the stores that the user has marked as favorite. The user can click on the view button from the store and be directed to the store’s page.
+
 
 ### Entity-Relationship (ER) Diagram
 
