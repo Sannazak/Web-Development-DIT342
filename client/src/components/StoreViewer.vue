@@ -6,8 +6,8 @@
         <h3>{{store.name}} in {{store.adress.city}}</h3>
       </div>
       <div id="col_header" class="col-1">
-        <b-icon v-if="!store.storeMarked" icon="star" aria-hidden="true" font-scale="1.5" @click="addToFavorites"></b-icon>
-        <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5"></b-icon>
+        <b-icon icon="star" aria-hidden="true" font-scale="1.5" @click="addToFavorites()"></b-icon>
+        <!-- <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5"></b-icon> -->
       </div>
       <div id="image-col" class="col-4">
         <img id ="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
@@ -89,10 +89,10 @@ export default {
     return {
       token: '',
       user: {
-        id: ''
+        id: '',
+        userFavoriteStores: []
       },
       favoriteStoreId: [],
-      favoriteStores: [{}],
       store: [{
         name: '',
         description: '',
@@ -136,10 +136,36 @@ export default {
   mounted() {
     console.log('Page is loaded')
     console.log('Array of favorite stores')
-    console.log(this.favoriteStores)
+    console.log(this.favoriteStoreId)
+    console.log(this.user.userFavoriteStores)
+    this.getUser()
     this.getSpot()
   },
   methods: {
+    getUser() {
+      this.token = localStorage.getItem('user')
+      try {
+        // decode token to retrive user id
+        console.log('Reading the token')
+        const decoded = VueJwtDecode.decode(this.token)
+        this.user = decoded
+        console.log(this.user)
+        this.user.id = this.user.email._id
+        console.log(this.user.email._id)
+        console.log('still working')
+      } catch (error) {
+        console.log(error, 'error from decoding token')
+      }
+      Api.get('/users/' + this.user.email._id)
+        .then((response) => {
+          this.favoriteStoreId.push(response.data.favouriteStores)
+          console.log('favorite array')
+          console.log(this.favoriteStoreId)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     getSpot() {
       // Api.get('/stores/632b6798702d604ee003165b')
       Api.get('/stores/' + this.$route.params.id)
@@ -242,19 +268,20 @@ export default {
         })
     },
     addToFavorites() {
-      this.getUserId()
-      console.log(this.favoriteStores)
-      this.favoriteStores.push(this.store._id)
       console.log('Trying to patch to user')
-      console.log(this.favoriteStores)
+      console.log(this.favoriteStoreId)
+      console.log(this.store._id)
+      this.favoriteStoreId.push(this.$route.params.id)
+      console.log('Pushed')
+      console.log(this.favoriteStoreId)
       this.store.storeMarked = true
 
       // Patch the store id as favorite to the user
       Api.patch('/users/' + this.user.id, {
-        favouriteStores: '632b6a79702d604ee0031669'
+        $push: { favouriteStores: this.$route.params.id }
       }).then(response => {
         console.log('patched to user')
-        console.log(this.favoriteStores)
+        console.log(this.favoriteStoreId)
       }).catch((error) => {
         this.message = 'Login Failed. Please try again'
         console.log(error)
@@ -294,30 +321,33 @@ export default {
         console.log(error)
       })
     },
-    getUserId() {
-      this.token = localStorage.getItem('user')
-      try {
-        // decode token to retrive user id
-        console.log('Reading the token')
-        const decoded = VueJwtDecode.decode(this.token)
-        this.user = decoded
-        console.log(this.user)
-        this.user.id = this.user.email._id
-        console.log(this.user.email._id)
-        console.log('still working')
-      } catch (error) {
-        console.log(error, 'error from decoding token')
-      }
-      Api.get('/users/' + this.user.email._id)
-        .then((response) => {
-          console.log('Favorite working')
-          this.favoriteStores = response.data
-          console.log(this.favoriteStores)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
+    // getUserId() {
+    //   this.token = localStorage.getItem('user')
+    //   try {
+    //     // decode token to retrive user id
+    //     console.log('Reading the token')
+    //     const decoded = VueJwtDecode.decode(this.token)
+    //     this.user = decoded
+    //     console.log(this.user)
+    //     this.user.id = this.user.email._id
+    //     console.log(this.user.email._id)
+    //     console.log('still working')
+    //   } catch (error) {
+    //     console.log(error, 'error from decoding token')
+    //   }
+    //   this.getUserFavoriteStores()
+    // },
+    // getUserFavoriteStores() {
+    //   Api.get('/users/' + this.user.email._id)
+    //     .then((response) => {
+    //       this.favoriteStoreId.push(response.data.favouriteStores)
+    //       console.log('favorite array')
+    //       console.log(this.favoriteStoreId)
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
+    // }
   },
   create() {
     this.token = localStorage.getItem('user')

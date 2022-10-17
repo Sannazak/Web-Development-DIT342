@@ -25,13 +25,10 @@
           </div>
           <div class="col-md-12">
             <b-row deck id="deck-cards">
-              <b-col
-                cols="12"
-                md="6"
-                lg="3"
+              <div 
                 v-for="favoriteStore in this.favoriteStoreFilled"
                 v-bind:key="favoriteStore.name">
-                <b-card id="resultCards" tag="article">
+                <b-card v-if="favoriteStore.phoneNumber != null" id="resultCards" tag="article">
                   <b-card-title>
                     <h2>{{ favoriteStore.name }}</h2>
                   </b-card-title>
@@ -45,7 +42,7 @@
                     v-on:click="OnClick(favoriteStore._id)">Visit Store
                   </b-button>
                 </b-card>
-              </b-col>
+              </div>
             </b-row>
           </div>
         </div>
@@ -191,11 +188,16 @@ export default {
   align-items: right;
 }
 .deck-cards {
-  align-items: center;
   background-color: #054e47af;
   color: white;
   text-align: center;
   width: 250px;
   margin-bottom: 25px;
+}
+
+#resultCards {
+  margin-bottom: 25px;
+  margin-right: 25px;
+  width: 250px;
 }
 </style>
