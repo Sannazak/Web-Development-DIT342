@@ -42,8 +42,7 @@
                   </b-card-text>
                   <b-button
                     variant="dark"
-                    v-on:click="OnClick(favoriteStore._id)"
-                    >Visit Store
+                    v-on:click="OnClick(favoriteStore._id)">Visit Store
                   </b-button>
                 </b-card>
               </b-col>
