@@ -1,10 +1,10 @@
 <template>
     <div>
         <br>
-        <b-button v-b-modal.modal-deleteStore v-if="token">Delete store</b-button>
+        <b-button v-b-modal.modal-deleteStore v-if="token">Delete Store</b-button>
         <b-modal id="modal-deleteStore" hide-footer centered>
             <template #modal-title>
-                Delete store
+                Delete Store
             </template>
             <div>
                 <p>Confirm deletion of store.</p>

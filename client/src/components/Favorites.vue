@@ -2,7 +2,7 @@
   <div>
     <banner />
     <div class="container">
-      <br>
+      <br />
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -59,7 +59,6 @@
         </div>
       </div>
       <div>
-
       </div>
     </main>
   </div>
@@ -140,7 +139,8 @@ export default {
             this.favouriteStores = response.data
             console.log(this.favouriteStores)
             this.favouriteStores.forEach(this.getFavoriteStoresData)
-          }).catch(error => {
+          })
+          .catch((error) => {
             console.log(error)
           })
       } catch (error) {
@@ -150,13 +150,13 @@ export default {
 
     getFavoriteStoresData(index) {
       Api.get('/stores/' + index)
-        .then(response => {
+        .then((response) => {
           console.log(response.data)
           this.favoriteStoreFilled.push(response.data)
           console.log('favoriteStoreFilled')
           console.log(this.favoriteStoreFilled)
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error)
         })
         .then(() => {
