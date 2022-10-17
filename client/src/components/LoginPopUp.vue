@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-      <b-button v-b-modal.modal-logIn v-if="!token">Log In</b-button>
+      <b-button id="loginButton" v-b-modal.modal-logIn v-if="!token">Log In</b-button>
       <b-modal id="modal-logIn" hide-footer centered>
         <template #modal-title id="modal-title-text" class="w-100">
           Sign In
@@ -115,6 +115,10 @@ export default {
 
   #successButton {
     margin-right: 5px;
+  }
+
+  #loginButton {
+    margin-left: 9px;
   }
 
   h6 {
