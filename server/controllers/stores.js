@@ -71,19 +71,22 @@ router.delete('/:id', function(req, res, next){
     });
 });
 
+
 //Put new information to the store
-router.put('/:id', function(req, res, next) {
-    var id = req.params.id;
-    Store.findOneAndReplace(id, req.body, {new:true}, function(err, store) {
-        if (err) { 
-            return next(err); 
-        } else if (store === null) {
-            return res.status(404).send('Store not found');
-        } else {
-            return res.status(201).json(store);
-        }
-    });
+router.put('/:id', function (req, res, next) {
+    try {
+        Store.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, store) {
+            if (store === null) {
+                return res.status(404).send('Store not found!');
+            } else {
+                return res.status(200).json(store);
+            }
+        });
+    } catch {
+        return res.status(400).send('An error has occured');
+    }
 });
+
 
 router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
@@ -233,6 +236,30 @@ router.get('/:store_id/surfLessons/:lesson_id', function(req, res){
                     return res.status(404).json({'message' : 'Lesson does not exists'});
                 } 
                 res.status(200).json({'Name of the lesson ' : surfLessons.name, 'Data on the lesson ' : surfLessons});
+            });
+        }else{
+            return res.status(400).json({'message': 'This lesson is not saved on this store'});
+        }
+    });
+});
+
+//Get the info of a specific board from a specific store
+router.get('/:store_id/surfBoards/:board_id', function(req, res){
+    var boardId = req.params.board_id;
+    var storeId = req.params.store_id;
+
+    Store.findById(storeId, function(err, store) {
+        if (err) { return res.status(404).json({'message' : 'Store not found'});}
+        if (store === null) {
+            return res.status(404).json({'message' : 'Store does not exists'});
+        }
+        if (store.surfBoards.indexOf(boardId) !== -1){
+            SurfBoards.findById(boardId, function(err, surfBoards) {
+                if (err) { return res.status(404).json({'message' : 'Board not found'});}
+                if (surfBoards === null) {
+                    return res.status(404).json({'message' : 'Board does not exists'});
+                } 
+                res.status(200).json({'Name of the board ' : surfBoards.name, 'Data on the board ' : surfBoards});
             });
         }else{
             return res.status(400).json({'message': 'This lesson is not saved on this store'});

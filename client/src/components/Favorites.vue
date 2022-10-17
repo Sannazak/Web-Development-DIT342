@@ -5,23 +5,14 @@
       <br />
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/user"
-                >Settings <span class="sr-only">(current)</span></a
-              >
+              <a class="nav-link" href="/user">Settings <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/Favorites">Favorites</a>
@@ -40,18 +31,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h3>{{ user.email.fullName }} Favorite Stores</h3>
+            <h3> {{ user.email.fullName }} Favorite Stores</h3>
             <br />
           </div>
           <div class="col-md-12">
             <b-row deck id="deck-cards">
-              <b-col
-                cols="12"
-                md="6"
-                lg="3"
-                v-for="favoriteStores in this.favoriteStoreFilled"
-                v-bind:key="favoriteStores._id"
-              >
+              <b-col cols="12" md="6" lg="3" v-for="favoriteStores in this.favoriteStoreFilled"
+                v-bind:key="favoriteStores._id">
                 <b-card id="resultCards" tag="article">
                   <b-card-title>
                     <h2>{{ favoriteStores.name }}</h2>
@@ -61,10 +47,7 @@
                     {{ favoriteStores.adress.postalCode }} <br />
                     {{ favoriteStores.adress.country }}
                   </b-card-text>
-                  <b-button
-                    variant="dark"
-                    v-on:click="OnClick(favoriteStores._id)"
-                    >Visit Store
+                  <b-button variant="dark" v-on:click="OnClick(favoriteStores._id)">Visit Store
                   </b-button>
                 </b-card>
               </b-col>
@@ -72,9 +55,11 @@
           </div>
         </div>
         <br />
-        <div class="row"></div>
+        <div class="row">
+        </div>
       </div>
-      <div></div>
+      <div>
+      </div>
     </main>
   </div>
 </template>
@@ -100,38 +85,34 @@ export default {
         height: '',
         weight: ''
       },
-      favoriteStoreFilled: [
-        {
-          _id: '',
-          name: '',
-          adress: {
-            country: '',
-            street: '',
-            streetNr: '',
-            postalCode: '',
-            city: ''
-          },
-          surfBoards: [],
-          surfLessons: [],
-          surfGears: []
-        }
-      ],
-      favouriteStores: [
-        {
-          _id: '',
-          name: '',
-          adress: {
-            country: '',
-            street: '',
-            streetNr: '',
-            postalCode: '',
-            city: ''
-          },
-          surfBoards: [],
-          surfLessons: [],
-          surfGears: []
-        }
-      ]
+      favoriteStoreFilled: [{
+        _id: '',
+        name: '',
+        adress: {
+          country: '',
+          street: '',
+          streetNr: '',
+          postalCode: '',
+          city: ''
+        },
+        surfBoards: [],
+        surfLessons: [],
+        surfGears: []
+      }],
+      favouriteStores: [{
+        _id: '',
+        name: '',
+        adress: {
+          country: '',
+          street: '',
+          streetNr: '',
+          postalCode: '',
+          city: ''
+        },
+        surfBoards: [],
+        surfLessons: [],
+        surfGears: []
+      }]
     }
   },
 
@@ -153,7 +134,7 @@ export default {
         console.log('still working')
         // get favorite store from this specific user
         Api.get('/users/' + this.user.email._id + '/favouriteStores')
-          .then((response) => {
+          .then(response => {
             console.log('Favorite working')
             this.favouriteStores = response.data
             console.log(this.favouriteStores)
