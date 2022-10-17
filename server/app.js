@@ -14,7 +14,7 @@ var surfLessonsController = require('./controllers/surfLessons');
 var surfBoardsController = require('./controllers/surfBoards');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://vscodeUser:e9M72acnkSz1XfxH@gearupforsurfing.m77nx1t.mongodb.net/SurfGears';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://Heroku:ilVs6YlLNggnMU0R@cluster0.orj5wku.mongodb.net/?retryWrites=true&w=majority';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
