@@ -72,7 +72,7 @@ This system will both help local businesses to get new customers and for surfers
 * Search for store: Here it's possible to search for stores based on locations. A button to view the store will direct to the store’s page. An add store button will be activated when the user is logged In.
 * Store page: These pages contain the details of the chosen store. Includes contact information, address, services, and gear available, prices and a small description of the store. A button to update or delete the store and to mark it as favorite will be available when the user is logged In.
 * Profile page: Here the user can enter their details and preferences. These will later be used to filter for spots and stores. 
-* Favorite page: This page displays the stores that the user has marked as favorite. The user can click on the view button from the store and be directed to the store’s page.
+* Favorite page: This page displays the stores that the user has marked as favorite. The user can click on the view button from thir favorite store and be directed to the store’s page.
 
 
 ### Entity-Relationship (ER) Diagram
