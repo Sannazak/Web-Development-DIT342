@@ -49,7 +49,6 @@ export default {
   name: 'searchResult',
   components: { Banner, AddStoreModal },
   mounted() {
-    console.log('page is loaded')
     this.getAllStores()
   },
   data() {
@@ -91,10 +90,7 @@ export default {
     getAllStores() {
       Api.get('/stores/')
         .then((response) => {
-          console.log(response.data)
           this.store = response.data
-          console.log('api saved')
-          console.log(this.store)
         })
         .catch((error) => {
           console.log(error)

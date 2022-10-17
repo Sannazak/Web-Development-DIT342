@@ -161,8 +161,6 @@ export default {
       Api.get('/stores/' + this.$route.params.id + '/surfLessons')
         .then(response => {
           this.surfLessonsArray = response.data
-          console.log('lesson api saved')
-          console.log(this.surfBoardsArray)
           this.surfLessonsArray.forEach(this.getLessonData)
         })
         .catch(error => {
@@ -174,7 +172,6 @@ export default {
       Api.get('/stores/' + this.$route.params.id + '/surfGears')
         .then(response => {
           this.surfGearsArray = response.data
-          console.log('gear api saved')
           this.surfGearsArray.forEach(this.getGearData)
         })
         .catch(error => {
@@ -186,7 +183,6 @@ export default {
       Api.get('/stores/' + this.$route.params.id + '/surfBoards')
         .then(response => {
           this.surfBoardsArray = response.data
-          console.log('board api saved')
           this.surfBoardsArray.forEach(this.getBoardData)
         })
         .catch(error => {
@@ -199,10 +195,7 @@ export default {
     getLessonData(index) {
       Api.get('/surfLessons/' + index)
         .then(response => {
-          console.log(response.data)
           this.surfLessonArrayFilled.push(response.data)
-          console.log('surflessonsarrayfilled')
-          console.log(this.surfLessonArrayFilled)
         })
         .catch(error => {
           console.error(error)
@@ -279,7 +272,6 @@ export default {
         favouriteStores: this.favoriteStores
       }).then(response => {
         console.log('patched to user')
-        console.log(this.favoriteStores)
       }).catch((error) => {
         this.message = 'Login Failed. Please try again'
         console.log(error)
@@ -298,21 +290,15 @@ export default {
       this.token = localStorage.getItem('user')
       try {
         // decode token to retrive user id
-        console.log('Reading the token')
         const decoded = VueJwtDecode.decode(this.token)
         this.user = decoded
-        console.log(this.user)
         this.user.id = this.user.email._id
-        console.log(this.user.email._id)
-        console.log('still working')
       } catch (error) {
         console.log(error, 'error from decoding token')
       }
       Api.get('/users/' + this.user.email._id)
         .then((response) => {
-          console.log('Favorite working')
           this.favoriteStores = response.data
-          console.log(this.favoriteStores)
         })
         .catch((error) => {
           console.log(error)
