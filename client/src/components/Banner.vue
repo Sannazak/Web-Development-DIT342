@@ -12,10 +12,10 @@
           <b-button-group class="mx-1">
             <b-button id="menuButtons" href="/">Home</b-button>
             <b-button id="menuButtons" href="/searchResult">Stores</b-button>
-            <LoginPopUp/>
             <registration/>
+            <LoginPopUp/>
           </b-button-group>
-          <b-dropdown v-if="token" class="mx-1" right text="menu">
+          <b-dropdown id="userButton" v-if="token" class="mx-1" right text="menu">
             <template #button-content>
               <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
             </template>
@@ -137,8 +137,13 @@ export default {
 }
 #menuButtons {
   margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 25px;
+  border-radius: 10%;
 }
-
+#userButton{
+  margin-top: 25px;
+}
 @media all and (max-width: 1200px) {
   #text-container {
     width: 25%;

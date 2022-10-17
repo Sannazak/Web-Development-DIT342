@@ -22,7 +22,7 @@
           ></iframe> -->
         </b-col>
         <b-col id="column2" lg="5">
-          <h3 class="recommended" lg="5">Recommended Stores:</h3>
+          <h3 class="recommended" lg="5">Newly Added Stores:</h3>
           <b-card-group
             deck
             id="deck-cards"
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      storeAmount: '',
       store: [
         {
           _id: '',
@@ -82,7 +83,9 @@ export default {
       Api.get('/stores/')
         .then((response) => {
           console.log(response.data)
-          this.store = response.data.slice(20, 22)
+          this.storeAmount = response.data.length
+          console.log(this.storeAmount)
+          this.store = response.data.slice(this.storeAmount - 2, this.storeAmount)
           console.log('api saved')
           console.log(this.store)
         })

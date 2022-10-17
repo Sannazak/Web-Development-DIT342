@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-register v-if="!token">Register</b-button>
+    <b-button id="button" v-b-modal.modal-register v-if="!token">Register</b-button>
     <b-modal id="modal-register" centered hide-footer>
       <template #modal-title id="modal-title-text" class="w-100">
         Register new user
@@ -132,5 +132,10 @@ export default {
 
 #successButton {
   margin-right: 5px;
+}
+#button {
+  margin-left: 5px;
+  margin-bottom: 0px;
+  margin-top: 25px;
 }
 </style>
