@@ -16,7 +16,6 @@
       </b-navbar>
     </div>
     <br />
-
     <main role="main">
       <div class="container">
         <div class="row">
@@ -31,8 +30,7 @@
                 md="6"
                 lg="3"
                 v-for="favoriteStore in this.favoriteStoreFilled"
-                v-bind:key="favoriteStore.name"
-              >
+                v-bind:key="favoriteStore.name">
                 <b-card id="resultCards" tag="article">
                   <b-card-title>
                     <h2>{{ favoriteStore.name }}</h2>
