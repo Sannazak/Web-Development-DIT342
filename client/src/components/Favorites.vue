@@ -200,4 +200,10 @@ export default {
   margin-right: 25px;
   width: 250px;
 }
+
+@media all and (max-width: 800px) {
+  #resultCards {
+    width: 210px;
+  }
+}
 </style>

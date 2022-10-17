@@ -6,7 +6,8 @@
         <h3>{{store.name}} in {{store.adress.city}}</h3>
       </div>
       <div id="col_header" class="col-1">
-        <b-icon icon="star" aria-hidden="true" font-scale="1.5" @click="addToFavorites()"></b-icon>
+        <FavouriteStar/>
+        <!-- <b-icon v-show="token" icon="star" aria-hidden="true" font-scale="1.5" @click="addToFavorites()"></b-icon> -->
         <!-- <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5"></b-icon> -->
       </div>
       <div id="image-col" class="col-4">
@@ -80,19 +81,14 @@
 import { Api } from '@/Api'
 import PatchStore from './PatchStore.vue'
 import DeleteStoreModal from './DeleteStoreModal.vue'
-import VueJwtDecode from 'vue-jwt-decode'
+import FavouriteStar from './FavouriteStar.vue'
 
 export default {
   name: 'StoreViewer',
-  components: { PatchStore, DeleteStoreModal },
+  components: { PatchStore, DeleteStoreModal, FavouriteStar },
   data() {
     return {
       token: '',
-      user: {
-        id: '',
-        userFavoriteStores: []
-      },
-      favoriteStoreId: [],
       store: [{
         name: '',
         description: '',
@@ -136,44 +132,15 @@ export default {
   mounted() {
     console.log('Page is loaded')
     console.log('Array of favorite stores')
-    console.log(this.favoriteStoreId)
-    console.log(this.user.userFavoriteStores)
-    this.getUser()
     this.getSpot()
   },
   methods: {
-    getUser() {
-      this.token = localStorage.getItem('user')
-      try {
-        // decode token to retrive user id
-        console.log('Reading the token')
-        const decoded = VueJwtDecode.decode(this.token)
-        this.user = decoded
-        console.log(this.user)
-        this.user.id = this.user.email._id
-        console.log(this.user.email._id)
-        console.log('still working')
-      } catch (error) {
-        console.log(error, 'error from decoding token')
-      }
-      Api.get('/users/' + this.user.email._id)
-        .then((response) => {
-          this.favoriteStoreId.push(response.data.favouriteStores)
-          console.log('favorite array')
-          console.log(this.favoriteStoreId)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
     getSpot() {
       // Api.get('/stores/632b6798702d604ee003165b')
       Api.get('/stores/' + this.$route.params.id)
         .then(response => {
           console.log(response.data)
           this.store = response.data
-          // this.favoriteStores.push(this.store)
-          // this.favoriteStoreId.push(response.data._id)
           console.log(this.favoriteStores)
           this.surfLessonArray = response.data.surfLessons
           console.log('store api saved')
@@ -266,88 +233,7 @@ export default {
         .then(() => {
           // executes regardless of failure or success
         })
-    },
-    addToFavorites() {
-      console.log('Trying to patch to user')
-      console.log(this.favoriteStoreId)
-      console.log(this.store._id)
-      this.favoriteStoreId.push(this.$route.params.id)
-      console.log('Pushed')
-      console.log(this.favoriteStoreId)
-      this.store.storeMarked = true
-
-      // Patch the store id as favorite to the user
-      Api.patch('/users/' + this.user.id, {
-        $push: { favouriteStores: this.$route.params.id }
-      }).then(response => {
-        console.log('patched to user')
-        console.log(this.favoriteStoreId)
-      }).catch((error) => {
-        this.message = 'Login Failed. Please try again'
-        console.log(error)
-        console.log(error.response)
-      })
-
-      // Path the store as been marked favorite
-      Api.patch('stores/' + this.$route.params.id, {
-        markedFavorite: this.store.storeMarked
-      }).then(response => {
-        console.log('Store patched')
-      }).catch((error) => {
-        this.message = 'Error to patch'
-        console.log(error)
-      })
-    },
-    removeFavorites() {
-      this.getUserId()
-      this.storeMarked = false
-      this.favoriteStores.split(this.store, 1)
-      Api.patch('/users/' + this.user.id, {
-        favouriteStores: this.favoriteStores
-      }).then(response => {
-        console.log('patched to user')
-        console.log(this.favoriteStores)
-      }).catch((error) => {
-        this.message = 'Login Failed. Please try again'
-        console.log(error)
-        console.log(error.response)
-      })
-      Api.patch('stores/' + this.$route.params.id, {
-        markedFavorite: this.storeMarked
-      }).then(response => {
-        console.log('Store patched')
-      }).catch((error) => {
-        this.message = 'Error to patch'
-        console.log(error)
-      })
-    },
-    // getUserId() {
-    //   this.token = localStorage.getItem('user')
-    //   try {
-    //     // decode token to retrive user id
-    //     console.log('Reading the token')
-    //     const decoded = VueJwtDecode.decode(this.token)
-    //     this.user = decoded
-    //     console.log(this.user)
-    //     this.user.id = this.user.email._id
-    //     console.log(this.user.email._id)
-    //     console.log('still working')
-    //   } catch (error) {
-    //     console.log(error, 'error from decoding token')
-    //   }
-    //   this.getUserFavoriteStores()
-    // },
-    // getUserFavoriteStores() {
-    //   Api.get('/users/' + this.user.email._id)
-    //     .then((response) => {
-    //       this.favoriteStoreId.push(response.data.favouriteStores)
-    //       console.log('favorite array')
-    //       console.log(this.favoriteStoreId)
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // }
+    }
   },
   create() {
     this.token = localStorage.getItem('user')
