@@ -2,52 +2,47 @@
   <div>
     <banner />
     <div class="container">
-      <br />
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand" href="/">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/user">Settings <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/Favorites">Favorites</a>
-            </li>
-            <li class="nav-item">
-              <LogoutButton />
-              <a class="nav-link" href="" @click="logout">Log Out</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <b-navbar toggleable="lg" class="navbar navbar-expand-md navbar-light bg-light">
+        <b-navbar-brand href="/">
+          <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon>
+        </b-navbar-brand>
+        <b-navbar-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item href="/user">Settings <span class="sr-only">(current)</span></b-nav-item>
+            <b-nav-item active href="#">Favorites</b-nav-item>
+            <b-nav-item href="#" @click="logout">Sign Out</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-collapse>
+      </b-navbar>
     </div>
     <br />
-
     <main role="main">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h3> {{ user.email.fullName }} Favorite Stores</h3>
+            <h3>{{ user.email.fullName }} Favorite Stores</h3>
             <br />
           </div>
           <div class="col-md-12">
             <b-row deck id="deck-cards">
-              <b-col cols="12" md="6" lg="3" v-for="favoriteStores in this.favoriteStoreFilled"
-                v-bind:key="favoriteStores._id">
+              <b-col
+                cols="12"
+                md="6"
+                lg="3"
+                v-for="favoriteStore in this.favoriteStoreFilled"
+                v-bind:key="favoriteStore.name">
                 <b-card id="resultCards" tag="article">
                   <b-card-title>
-                    <h2>{{ favoriteStores.name }}</h2>
+                    <h2>{{ favoriteStore.name }}</h2>
                   </b-card-title>
                   <b-card-text>
-                    {{ favoriteStores.adress.city }} <br />
-                    {{ favoriteStores.adress.postalCode }} <br />
-                    {{ favoriteStores.adress.country }}
+                    {{ favoriteStore.adress.city }} <br />
+                    {{ favoriteStore.adress.postalCode }} <br />
+                    {{ favoriteStore.adress.country }}
                   </b-card-text>
-                  <b-button variant="dark" v-on:click="OnClick(favoriteStores._id)">Visit Store
+                  <b-button
+                    variant="dark"
+                    v-on:click="OnClick(favoriteStore._id)">Visit Store
                   </b-button>
                 </b-card>
               </b-col>
@@ -55,11 +50,9 @@
           </div>
         </div>
         <br />
-        <div class="row">
-        </div>
+        <div class="row"></div>
       </div>
-      <div>
-      </div>
+      <div></div>
     </main>
   </div>
 </template>
@@ -85,34 +78,38 @@ export default {
         height: '',
         weight: ''
       },
-      favoriteStoreFilled: [{
-        _id: '',
-        name: '',
-        adress: {
-          country: '',
-          street: '',
-          streetNr: '',
-          postalCode: '',
-          city: ''
-        },
-        surfBoards: [],
-        surfLessons: [],
-        surfGears: []
-      }],
-      favouriteStores: [{
-        _id: '',
-        name: '',
-        adress: {
-          country: '',
-          street: '',
-          streetNr: '',
-          postalCode: '',
-          city: ''
-        },
-        surfBoards: [],
-        surfLessons: [],
-        surfGears: []
-      }]
+      favoriteStoreFilled: [
+        {
+          _id: '',
+          name: '',
+          adress: {
+            country: '',
+            street: '',
+            streetNr: '',
+            postalCode: '',
+            city: ''
+          },
+          surfBoards: [],
+          surfLessons: [],
+          surfGears: []
+        }
+      ],
+      favouriteStores: [
+        {
+          _id: '',
+          name: '',
+          adress: {
+            country: '',
+            street: '',
+            streetNr: '',
+            postalCode: '',
+            city: ''
+          },
+          surfBoards: [],
+          surfLessons: [],
+          surfGears: []
+        }
+      ]
     }
   },
 
@@ -134,7 +131,7 @@ export default {
         console.log('still working')
         // get favorite store from this specific user
         Api.get('/users/' + this.user.email._id + '/favouriteStores')
-          .then(response => {
+          .then((response) => {
             console.log('Favorite working')
             this.favouriteStores = response.data
             console.log(this.favouriteStores)
@@ -149,10 +146,13 @@ export default {
     },
 
     getFavoriteStoresData(index) {
+      // const key = 0
       Api.get('/stores/' + index)
         .then((response) => {
           console.log(response.data)
           this.favoriteStoreFilled.push(response.data)
+          // this.$delete(this.favoriteStoreFilled, key)
+          // this.favoriteStoreFilled.splice(key, 1)
           console.log('favoriteStoreFilled')
           console.log(this.favoriteStoreFilled)
         })
@@ -189,5 +189,13 @@ export default {
 <style scoped>
 .colum {
   align-items: right;
+}
+.deck-cards {
+  align-items: center;
+  background-color: #054e47af;
+  color: white;
+  text-align: center;
+  width: 250px;
+  margin-bottom: 25px;
 }
 </style>

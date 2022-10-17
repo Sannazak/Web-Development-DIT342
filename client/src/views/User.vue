@@ -2,102 +2,102 @@
   <div>
     <banner />
     <div class="container">
-      <br />
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand" href="/">Home</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Settings <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Favorites">Favorites</a>
-          </li>
-          <li class="nav-item">
-            <LogoutButton/>
-            <a class="nav-link" href="" @click="logout">Log Out</a>
-          </li>
-        </ul>
-        </div>
-      </nav>
+      <b-navbar toggleable="lg" class="navbar navbar-expand-md navbar-light bg-light">
+        <b-navbar-brand href="/">
+          <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon>
+        </b-navbar-brand>
+        <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
+        <b-navbar-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item active href="#">Settings <span class="sr-only">(current)</span></b-nav-item>
+            <b-nav-item href="/Favorites">Favorites</b-nav-item>
+            <b-nav-item href="#" @click="logout">Sign Out</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-collapse>
+      </b-navbar>
       </div>
       <br/>
-
 <main role="main">
-  <!-- <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Hello user</h1>
-      <p>Welcome to your profile page. Enjoy all the features from the website by setting up your style of surf and favorite things</p>
-    </div>
-  </div> -->
   <div class="container">
     <div class="row">
       <div class="col-md-8">
         <h3>Hello {{ fullName }}</h3>
         <br/>
-        <p>Welcome to Surf Rentals.</p>
-        <p>Complete your user profile to get a better experience on our website</p>
+        <p class="paragraph-size">Welcome to Surf Rentals.</p>
+        <p class="paragraph-size">Complete your user profile to get a better experience on our website</p>
       </div>
       <div class="col-md-4">
         <b-icon icon="person-fill" font-scale="7.5"></b-icon>
       </div>
     </div>
     <br/>
-    <div class="row">
-    </div>
   </div>
   <div>
     <div class="container">
       <div class="row">
-      <div class="col-md-2">
-        <br/>
-        <p>
-          Main Settings
-        </p>
-      </div>
       <div class="col-md-6">
         <div class="col-xs-2">
-          <b-form-input id="inputForms" type="email" v-model="email"></b-form-input>
-          <b-form-input id="inputForms" v-model="fullName" placeholder="Full Name"></b-form-input>
-          <b-form-input id="inputForms" v-model="skillLevel" placeholder="Skill Level"></b-form-input>
-          <b-form-input id="inputForms" v-model="boardPreference" placeholder="Board Preference"></b-form-input>
-          <b-form-input id="inputForms" v-model="clothingSize" placeholder="Clothing Size"></b-form-input>
-          <b-form-input id="inputForms" v-model="height" placeholder="Height"></b-form-input>
-          <b-form-input id="inputForms" v-model="weight" placeholder="Weight"></b-form-input>
+          <label class="paragraph-size" for="inputEmail"><strong>Email</strong></label>
+          <b-form-input id="inputEmail" label="Email" type="email" v-model="email"></b-form-input>
           <br/>
-          <b-button id="successButton" variant="success" centered @click=updateUserInfo()>Update</b-button>
-          <p>
-            {{ message }}
-          </p>
+          <lable class="paragraph-size" for="inputFullName"><strong>Full Name</strong></lable>
+          <b-form-input id="inputFullName" v-model="fullName"></b-form-input>
+          <br/>
+          <label class="paragraph-size" for="inputClothsSize"><strong>Choths Size</strong></label>
+          <b-form-select v-model="clothingSize">
+            <option disabled value="">Please select one</option>
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+          </b-form-select>
+          <br/>
+          <!-- <b-form-input id="inputClothsSize" v-model="clothingSize" placeholder="Clothing Size"></b-form-input> -->
+          <br/>
+          <label class="paragraph-size" for="inputHeigh"><strong>Height in cm</strong></label>
+          <b-form-input id="inputHeigh" v-model="height"></b-form-input>
+          <br/>
+          <label class="paragraph-size" for="inputWeight"><strong>Weight in Kg</strong></label>
+          <b-form-input id="inputWeight" v-model="weight"></b-form-input>
+        </div>
       </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</main>
-        <!-- <h2>User Page</h2>
-        <br>
-        <input v-model="text">
-        <h2>Skill Level</h2>
-        <select v-model="selected">
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <div class="col-xs-2">
+          <br/>
+          <label class="paragraph-size" for="checkbox-group-1"><strong>Select Board Preferences</strong></label>
+          <b-form-group class="paragraph-size" v-slot="{ ariaDescribedby }">
+            <b-form-checkbox-group id="checkbox-group-1" v-model="boardPreference" :options="options" :aria-describedby="ariaDescribedby" name="boardPreferences">
+              <b-form-checkbox value="Longboard">Longboard</b-form-checkbox>
+              <b-form-checkbox value="Shortboard">Shortboard</b-form-checkbox>
+              <b-form-checkbox value="Hybrid">Hybrid</b-form-checkbox>
+              <b-form-checkbox value="Mini Mal">Mini Mal</b-form-checkbox>
+              <b-form-checkbox value="Begginer Board">Begginer Soft Board</b-form-checkbox>
+            </b-form-checkbox-group>
+              Board preferences:
+            <div v-for="board in boardPreference" v-bind:key="board"> <strong>{{ board }}</strong></div>
+          </b-form-group>
+          <br/>
+          <br/>
+        <p class="paragraph-size"><strong>Skill Level:</strong></p>
+        <b-form-select v-model="skillLevel">
             <option disabled value="">Please select one</option>
             <option>Beginner</option>
             <option>Intermediate</option>
             <option>Advanced</option>
             <option>Pro</option>
-        </select>
-        <span>Selected: {{ selected }}</span> -->
+        </b-form-select>
+        <!-- <span> {{ skillLevel }}</span> -->
+       </div>
+      </div>
+      <div class="col-md-12">
+        <br/>
+        <br/>
+        <b-button id="successButton" variant="success" centered @click=updateUserInfo()>Update User Detais</b-button>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>
   </div>
 </template>
 
@@ -112,8 +112,9 @@ export default {
   components: { Banner },
   data() {
     return {
-      // text: 'Edit me',
-      // selected: 'A',
+      skillLevel: '',
+      boardPreference: [],
+      board: '',
       email: '',
       fullName: '',
       token: '',
@@ -122,8 +123,8 @@ export default {
         fullName: '',
         email: '',
         id: '',
-        skillLevel: [],
-        boardPreference: '',
+        skillLevel: '',
+        boardPreference: [],
         clothingSize: '',
         height: '',
         weight: ''
@@ -146,6 +147,7 @@ export default {
         console.log(this.user)
         console.log(this.user.email.email)
         console.log(this.user.email._id)
+        localStorage.setItem('userId', this.user.email._id)// new line
         console.log('still working')
         // get the user information by using the id
         Api.get('/users/' + this.user.email._id)
@@ -206,4 +208,23 @@ export default {
 .colum {
   align-items: right;
 }
+
+.col-xs-2 {
+  text-align: left;
+}
+.details-right {
+  margin-right: -20px
+}
+
+.paragraph-size {
+  font-size: 19px;
+}
+
+.lable {
+  padding-bottom: 2em;
+  margin: auto;
+}
+/* .col-md-6 {
+  background-color: gray;
+} */
 </style>

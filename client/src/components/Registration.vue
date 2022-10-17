@@ -71,13 +71,29 @@ export default {
         email: this.userEmail,
         password: this.userPassword
       }).then(response => {
-        console.log('working')
-        console.log(response)
-        this.message = 'User Created'
-        this.$router.push('/')
+        Api.post('/users/loginhashed', {
+          email: this.userEmail,
+          password: this.userPassword
+        }).then(response => {
+          console.log('working')
+          const token = response.data.token
+          this.message = 'User created'
+          console.log(token)
+          localStorage.setItem('user', token)
+          this.$router.push('/User')
+        })
+          .catch((error) => {
+            this.message = 'Registration Failed. Please try again'
+            console.log(error)
+            console.log(error.response)
+          })
+        // console.log('working')
+        // console.log(response)
+        // this.message = 'User Created'
+        // this.$router.push('/')
       })
         .catch((error) => {
-          this.message = 'Login Failed. Please try again'
+          this.message = 'Registration Failed. Email already exists or password not correct'
           console.log(error)
           console.log(error.response)
         })
