@@ -13,7 +13,7 @@
         Stores close to: <strong>{{ selected }}</strong>
       </div>
       <br/>
-      <b-row deck id="deck-cards">
+      <b-row deck>
         <b-col
           cols="12"
           md="6"
@@ -127,15 +127,6 @@ export default {
 </script>
 
 <style scoped>
-
-.deck-cards {
-  align-items: center;
-  background-color: #054e47af;
-  color: white;
-  text-align: center;
-  width: 250px;
-  margin-bottom: 25px;
-}
 
 #resultCards {
   background-color: #054e47af;
