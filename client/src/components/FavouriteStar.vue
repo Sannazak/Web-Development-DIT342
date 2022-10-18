@@ -88,21 +88,6 @@ export default {
       console.log('Check if its marked')
       console.log(this.storeMarked)
     },
-    // getSpot() {
-    //   // Api.get('/stores/632b6798702d604ee003165b')
-    //   Api.get('/stores/' + this.$route.params.id)
-    //     .then((response) => {
-    //       this.store = response.data
-    //       this.store.storeMarked = response.data.markedFavorite
-    //       console.log('store api saved')
-    //     })
-    //     .catch((error) => {
-    //       console.error(error)
-    //     })
-    //     .then(() => {
-    //       // executes regardless of failure or success
-    //     })
-    // },
     addToFavorites() {
       // Patch the store id as favorite to the user
       Api.patch('/users/' + this.user.id, {
