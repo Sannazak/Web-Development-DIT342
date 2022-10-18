@@ -66,7 +66,7 @@
               <b-form-checkbox value="Shortboard">Shortboard</b-form-checkbox>
               <b-form-checkbox value="Hybrid">Hybrid</b-form-checkbox>
               <b-form-checkbox value="Mini Mal">Mini Mal</b-form-checkbox>
-              <b-form-checkbox value="Begginer Board">Beginner Soft Board</b-form-checkbox>
+              <b-form-checkbox value="Beginner Board">Beginner Soft Board</b-form-checkbox>
             </b-form-checkbox-group>
               Board preferences:
             <div v-for="board in boardPreference" v-bind:key="board"> <strong>{{ board }}</strong></div>

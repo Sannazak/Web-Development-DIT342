@@ -7,10 +7,9 @@
       <b-form-select
         v-model="selected"
         @change="onSelectedCity(selected)"
-        :options="options"
-      ></b-form-select>
+        :options="options">
+      </b-form-select>
       <div class="mt-3">
-        Stores close to: <strong>{{ selected }}</strong>
       </div>
       <br/>
       <b-row deck>
