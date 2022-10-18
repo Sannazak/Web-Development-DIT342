@@ -2,7 +2,7 @@
     <div class="container">
         <img class="image" src="../assets/banner_photo.jpg" alt="Surf Photo" fluid/>
         <div id="text-container" class="text-block">
-            <h6>Welcome!</h6>
+            <h6>Welcome to Surf Rentals!</h6>
             <p>The days of carrying heavy surfbags and gears through airports is over.
                 Find all the stores, boards, gears and lessons on your next surftrip and keep the stoke!
             </p>
@@ -10,7 +10,9 @@
         <div id="dropdown-menu">
           <b-button-toolbar aria-label="Toolbar with button groups and dropdown menu">
           <b-button-group class="mx-1">
-            <b-button v-if="this.$route.path !== '/'" id="menuButtons" href="/">Home</b-button>
+            <b-button v-if="this.$route.path !== '/'" id="menuButtons" href="/">
+              <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon>
+            </b-button>
             <b-button id="menuButtons" href="/searchResult">Stores</b-button>
             <registration/>
             <LoginPopUp/>

@@ -1,12 +1,14 @@
 <template>
+  <div v-if="token">
   <b-icon
-    v-if="!this.storeMarked"
+    v-if="!this.storeMarked "
     icon="star"
     aria-hidden="true"
     font-scale="1.5"
     @click="addToFavorites()"
   ></b-icon>
   <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5" @click="removeFavorites()"></b-icon>
+</div>
 </template>
 
 <script>
@@ -100,6 +102,8 @@ export default {
           this.message = 'Login Failed. Please try again'
           console.log(error)
           console.log(error.response)
+        }).then(remove => {
+            this.reloadPage()
         })
     },
     removeFavorites() {
@@ -109,8 +113,13 @@ export default {
         .then(response => {
           console.log('Deleted from array')
         }).catch(error => {
-          console.log(error)
+            console.log(error)
+        }).then(response => {
+            this.reloadPage()
         })
+    },
+    reloadPage() {
+      window.location.reload()
     }
   }
 }

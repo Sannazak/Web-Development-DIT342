@@ -6,8 +6,8 @@
 
 </b-row>
 <div>
-  <p>
-    Text that explains the purpose of the site goes here
+  <p id="welcome_explanation">
+    Browse through our surf stores and check what they have available. Then start planning your next surf trip!
   </p>
 </div>
   <b-row>
@@ -131,6 +131,10 @@ export default {
 
 #photo {
   margin-top: 20px;
+}
+
+#welcome_explanation {
+  font-size: 18px;
 }
 
 @media (min-width: 1199px) {
