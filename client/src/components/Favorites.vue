@@ -25,7 +25,7 @@
           </div>
           <div class="col-md-12">
             <b-row deck id="deck-cards">
-              <div 
+              <div
                 v-for="favoriteStore in this.favoriteStoreFilled"
                 v-bind:key="favoriteStore.name">
                 <b-card v-if="favoriteStore.phoneNumber != null" id="resultCards" tag="article">
