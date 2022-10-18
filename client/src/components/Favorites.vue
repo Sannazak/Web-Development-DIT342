@@ -25,9 +25,7 @@
           </div>
           <div class="col-md-12">
             <b-row deck id="deck-cards">
-              <div 
-                v-for="favoriteStore in this.favoriteStoreFilled"
-                v-bind:key="favoriteStore.name">
+              <div v-for="favoriteStore in this.favoriteStoreFilled" v-bind:key="favoriteStore.name">
                 <b-card v-if="favoriteStore.phoneNumber != null" id="resultCards" tag="article">
                   <b-card-title>
                     <h2>{{ favoriteStore.name }}</h2>
@@ -37,9 +35,7 @@
                     {{ favoriteStore.adress.postalCode }} <br />
                     {{ favoriteStore.adress.country }}
                   </b-card-text>
-                  <b-button
-                    variant="dark"
-                    v-on:click="OnClick(favoriteStore._id)">Visit Store
+                  <b-button variant="dark" v-on:click="OnClick(favoriteStore._id)">Visit Store
                   </b-button>
                 </b-card>
               </div>
@@ -187,6 +183,7 @@ export default {
 .colum {
   align-items: right;
 }
+
 .deck-cards {
   background-color: #054e47af;
   color: white;
