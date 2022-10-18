@@ -3,9 +3,6 @@
     <banner />
     <div class="container">
       <b-navbar toggleable="lg" class="navbar navbar-expand-md navbar-light bg-light">
-        <b-navbar-brand href="/">
-          <b-icon icon="house-fill" aria-hidden="true" font-scale="1.5"></b-icon>
-        </b-navbar-brand>
         <b-navbar-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item href="/user">Settings <span class="sr-only">(current)</span></b-nav-item>
