@@ -24,7 +24,7 @@
         </p>
         <p>
           <b>Details:</b><br>
-          Phone: {{store.phoneNumber}}<br>
+          Phone: +46{{store.phoneNumber}}<br>
           Email: {{store.email}}<br>
           Open:
           {{store.openingHours}}

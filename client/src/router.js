@@ -42,11 +42,6 @@ export default new Router({
       component: () => import('./components/LoginPopUp.vue')
     },
     {
-      path: '/forgot-password',
-      name: 'forgot-password',
-      component: () => import('./components/ForgotPassword.vue')
-    },
-    {
       path: '/favorites',
       name: 'favorites',
       component: () => import('./components/Favorites.vue')
