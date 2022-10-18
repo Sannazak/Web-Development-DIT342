@@ -137,20 +137,16 @@ router.post('/:id/favouriteSpots', function (req, res, next) {
 
 //post favouriteStore to user
 //check if duplicate
+
 router.post('/:id/favouriteStores', function (req, res, next) {
     User.findById(req.params.id, function (err, user) {
         try {
-            var favouriteStore = new FavouriteStore(req.body);
-            favouriteStore.save(function (err) {
-                if (err) {
-                    return res.status(400).send('An error has occured');
-                }
-            });
+            var favouriteStore = req.body.favouriteStores;
             user.favouriteStores.push(favouriteStore);
             user.save();
             return res.status(201).json(user);
         } catch {
-            if (err) { return res.status(404).json({ 'message': 'User not fund' }); }
+            if (err) { return res.status(404).json({ 'message': 'User not found' }); }
             return res.status(400).send('An error has occured');
         }
     })
@@ -346,7 +342,7 @@ router.post('/signuphashed', (req, res, next) => {
                             .then(result => {
                                 console.log(result)
                                 res.status(201).json({
-                                    message: 'user created'
+                                    message: 'user created', user
                                 });
                             })
                             .catch(err => {
