@@ -107,11 +107,11 @@ export default {
         })
     },
     removeFavorites() {
-        console.log('Removing favorite')
-        console.log(this.userFavoriteStores)
-        Api.delete('/users/' + this.user.id + '/favouriteStores/' + this.$route.params.id)
+      console.log('Removing favorite')
+      console.log(this.userFavoriteStores)
+      Api.delete('/users/' + this.user.id + '/favouriteStores/' + this.$route.params.id)
         .then(response => {
-            console.log('Deleted from array')
+          console.log('Deleted from array')
         }).catch(error => {
             console.log(error)
         }).then(response => {

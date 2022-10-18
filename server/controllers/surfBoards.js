@@ -66,19 +66,6 @@ router.delete('/api/surfBoards/:id', function(req, res, next){
     });
 });
 
-router.put('/api/surfBoards/:id', function(req, res, next) {
-    var id = req.params.id;
-    SurfBoards.findOneAndReplace(id, req.body, {new: true}, function(err, surfBoards) {
-        if (err) {
-            return next(err); 
-        } else if (surfBoards === null) {
-            return res.status(404).json({'message': 'Surfboard not found!'});   
-        } else {
-            return res.status(200).json(surfBoards);
-        }
-      });
-});
-
 router.patch('/api/surfBoards/:id', function(req, res, next) {
     var id = req.params.id;
     SurfBoards.findByIdAndUpdate(id, req.body, {new: true}, function(err, surfBoards) {

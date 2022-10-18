@@ -277,8 +277,8 @@ export default {
   text-align: left;
 }
 #starButton {
-  padding-right: 10px;  
-} 
+  padding-right: 10px;
+}
 #mapheight {
   max-height: 300px;
 }
@@ -321,11 +321,10 @@ export default {
 
   #image-col {
     display: none;
-  } 
+  }
   #starButton {
-  padding-right: 20px;  
-} 
-
+  padding-right: 20px;
+}
 
 }
 
