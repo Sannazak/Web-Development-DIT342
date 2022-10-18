@@ -6,8 +6,6 @@
       </div>
       <div id="col_header" class="col-1">
         <FavouriteStar/>
-        <!-- <b-icon v-show="token" icon="star" aria-hidden="true" font-scale="1.5" @click="addToFavorites()"></b-icon> -->
-        <!-- <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5"></b-icon> -->
       </div>
       <div id="image-col" class="col-4">
         <img id="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot"
@@ -36,8 +34,7 @@
         <hr>
       </div>
       <div id="image-col" class="col-4">
-        <!-- <img id="store-image" src="../assets/maps-google.jpg" fluid class="rounded" alt="image of spot" width="350px"> -->
-        <iframe class="w-100" src="" id="mapheight" style="border: 0" allowfullscreen="" loading="lazy"
+        <iframe class="w-100" src="" id="mapheight" style="border: 0" height="300px" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p>
           <PatchStore />
@@ -154,7 +151,7 @@ export default {
           console.error(error)
         })
         .then(() => {
-          this.mapUrl = 'https://www.google.com/maps/embed/v1/place?key=' + process.env.MAPS_API + '&q=' + this.store.adress.street + '+' + this.store.adress.city + '+' + this.store.adress.country
+          this.mapUrl = 'https://www.google.com/maps/embed/v1/place?key=' + 'AIzaSyBnWIL3efUBoAMqbkotRURj8DXLN-huduk' + '&q=' + this.store.adress.street + '+' + this.store.adress.city + '+' + this.store.adress.country
           document.getElementById('mapheight').src = this.mapUrl
         })
       Api.get('/stores/' + this.$route.params.id + '/surfLessons')
@@ -272,6 +269,9 @@ export default {
 
 #offersListItem {
   text-align: left;
+}
+#mapheight {
+  max-height: 300px;
 }
 
 @media all and (max-width: 1199px) {

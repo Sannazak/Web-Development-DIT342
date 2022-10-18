@@ -54,7 +54,6 @@
 import VueJwtDecode from 'vue-jwt-decode'
 import { Api } from '@/Api'
 import Banner from '@/components/Banner.vue'
-// import LogoutButton from './LogoutButton'
 
 export default {
   name: 'User',
@@ -139,13 +138,10 @@ export default {
     },
 
     getFavoriteStoresData(index) {
-      // const key = 0
       Api.get('/stores/' + index)
         .then((response) => {
           console.log(response.data)
           this.favoriteStoreFilled.push(response.data)
-          // this.$delete(this.favoriteStoreFilled, key)
-          // this.favoriteStoreFilled.splice(key, 1)
           console.log('favoriteStoreFilled')
           console.log(this.favoriteStoreFilled)
         })
@@ -173,7 +169,6 @@ export default {
   },
 
   created() {
-    // this.token = localStorage.getItem('user')
     this.getUserDetails()
   }
 }

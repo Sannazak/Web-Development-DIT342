@@ -59,7 +59,6 @@ export default {
       }
     },
     getSpot() {
-      // Api.get('/stores/632b6798702d604ee003165b')
       Api.get('/stores/' + this.$route.params.id)
         .then(response => {
           this.store = response.data
