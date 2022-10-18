@@ -10,7 +10,7 @@
         <div id="dropdown-menu">
           <b-button-toolbar aria-label="Toolbar with button groups and dropdown menu">
           <b-button-group class="mx-1">
-            <b-button id="menuButtons" href="/">Home</b-button>
+            <b-button v-if="this.$route.path !== '/'" id="menuButtons" href="/">Home</b-button>
             <b-button id="menuButtons" href="/searchResult">Stores</b-button>
             <registration/>
             <LoginPopUp/>

@@ -131,7 +131,6 @@ export default {
   },
   mounted() {
     console.log('Page is loaded')
-    console.log('Array of favorite stores')
     this.getSpot()
   },
   methods: {
@@ -141,7 +140,6 @@ export default {
         .then(response => {
           console.log(response.data)
           this.store = response.data
-          console.log(this.favoriteStores)
           this.surfLessonArray = response.data.surfLessons
           console.log('store api saved')
         })
