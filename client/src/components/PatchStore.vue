@@ -137,7 +137,6 @@ export default {
     }
   },
   mounted() {
-    console.log('patcher loaded')
     this.getStore()
   },
   methods: {
