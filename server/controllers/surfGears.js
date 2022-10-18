@@ -69,7 +69,7 @@ router.put('/api/surfGears/:id', function(req, res, next) {
         surfGear.gender = req.body.gender;
         surfGear.description = req.body.description;
         surfGear.save();
-        res.status(201).json(surfGear);
+        res.status(200).json(surfGear);
     });
 });
 
