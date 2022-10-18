@@ -127,11 +127,6 @@ export default {
 </script>
 
 <style scoped>
-/* .container-big {
-  max-width: 1150px;
-  margin: 0 auto;
-  margin-top: 25px;
-} */
 
 .deck-cards {
   align-items: center;
