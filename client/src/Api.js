@@ -5,3 +5,4 @@ export const Api = axios.create({
 })
 
 //  process.env.VUE_APP_API_ENDPOINT ||
+// baseURL: process.env.VUE_APP_API_ENDPOINT || 'http://localhost:3000/api/'
