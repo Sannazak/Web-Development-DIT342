@@ -103,7 +103,7 @@ export default {
           console.log(error)
           console.log(error.response)
         }).then(remove => {
-            this.reloadPage()
+          this.reloadPage()
         })
     },
     removeFavorites() {
@@ -113,9 +113,9 @@ export default {
         .then(response => {
           console.log('Deleted from array')
         }).catch(error => {
-            console.log(error)
+          console.log(error)
         }).then(response => {
-            this.reloadPage()
+          this.reloadPage()
         })
     },
     reloadPage() {
