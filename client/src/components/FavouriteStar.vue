@@ -1,4 +1,5 @@
 <template>
+  <div v-if="token">
   <b-icon
     v-if="!this.storeMarked"
     icon="star"
@@ -7,6 +8,7 @@
     @click="addToFavorites()"
   ></b-icon>
   <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5" @click="removeFavorites()"></b-icon>
+</div>
 </template>
 
 <script>
