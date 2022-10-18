@@ -25,9 +25,7 @@
           </div>
           <div class="col-md-12">
             <b-row deck id="deck-cards">
-              <div
-                v-for="favoriteStore in this.favoriteStoreFilled"
-                v-bind:key="favoriteStore.name">
+              <div v-for="favoriteStore in this.favoriteStoreFilled" v-bind:key="favoriteStore.name">
                 <b-card v-if="favoriteStore.phoneNumber != null" id="resultCards" tag="article">
                   <b-card-title>
                     <h2>{{ favoriteStore.name }}</h2>
@@ -37,9 +35,7 @@
                     {{ favoriteStore.adress.postalCode }} <br />
                     {{ favoriteStore.adress.country }}
                   </b-card-text>
-                  <b-button
-                    variant="dark"
-                    v-on:click="OnClick(favoriteStore._id)">Visit Store
+                  <b-button variant="dark" v-on:click="OnClick(favoriteStore._id)">Visit Store
                   </b-button>
                 </b-card>
               </div>
@@ -58,7 +54,6 @@
 import VueJwtDecode from 'vue-jwt-decode'
 import { Api } from '@/Api'
 import Banner from '@/components/Banner.vue'
-// import LogoutButton from './LogoutButton'
 
 export default {
   name: 'User',
@@ -143,13 +138,10 @@ export default {
     },
 
     getFavoriteStoresData(index) {
-      // const key = 0
       Api.get('/stores/' + index)
         .then((response) => {
           console.log(response.data)
           this.favoriteStoreFilled.push(response.data)
-          // this.$delete(this.favoriteStoreFilled, key)
-          // this.favoriteStoreFilled.splice(key, 1)
           console.log('favoriteStoreFilled')
           console.log(this.favoriteStoreFilled)
         })
@@ -177,7 +169,6 @@ export default {
   },
 
   created() {
-    // this.token = localStorage.getItem('user')
     this.getUserDetails()
   }
 }
@@ -187,6 +178,7 @@ export default {
 .colum {
   align-items: right;
 }
+
 .deck-cards {
   background-color: #054e47af;
   color: white;

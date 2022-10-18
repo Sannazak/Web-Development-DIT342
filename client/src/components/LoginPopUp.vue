@@ -71,33 +71,6 @@ export default {
   created() {
     this.token = localStorage.getItem('user')
   }
-
-  // methods: {
-  //   onSubmit(event) {
-  //     event.preventDefault()
-  //     Api.get('/users?email=' + this.email)
-  //       .then(response => {
-  //         this.user.email = response.data[0].email
-  //         this.user.password = response.data[0].password
-  //         this.user.id = response.data[0]._id
-  //         console.log(this.user.email)
-  //         console.log(this.user.password)
-  //         console.log(this.user.id)
-  //         if (this.email === this.user.email && this.password === this.user.password) {
-  //           console.log('success')
-  //           this.message = 'Login correct'
-  //           this.$router.push('/User')
-  //         } else {
-  //           this.message = 'Login Failed. User does not exist. Check email and password!'
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         this.message = 'Login Failed. Please try again'
-  //         console.log(error)
-  //       })
-  //       .finally(() => {})
-  //   }
-  // }
 }
 </script>
 

@@ -25,7 +25,6 @@ export default {
         .then(response => {
           console.log(response.data)
           this.store = response.data
-          console.log('api saved')
           console.log(this.store)
           console.log(this.store.name)
         })
