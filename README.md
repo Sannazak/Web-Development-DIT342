@@ -68,7 +68,7 @@ This system will both help local businesses to get new customers and for surfers
 
 ### Pages
 
-* Home: Landing page showing a map based on your location and some recommended shops. Also allows the user to register, login or simply start to navigate through the stores from the store button.
+* Home: Landing page showing a map based on your location and newly added stores. Also allows the user to register, login or simply start to navigate through the stores from the store button.
 * Search for store: Here it's possible to search for stores based on locations. A button to view the store will direct to the store’s page. An add store button will be activated when the user is logged In.
 * Store page: These pages contain the details of the chosen store. Includes contact information, address, services, and gear available, prices and a small description of the store. A button to update or delete the store and to mark it as favourite will be available when the user is logged In.
 * Profile page: Here the user can enter their details and preferences. These will later be used to filter for spots and stores.
