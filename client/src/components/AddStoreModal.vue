@@ -97,8 +97,6 @@ export default {
             this.newId = response.data._id
             console.log('store added')
             window.location = this.newId
-            // Depending on where we put this the location differs
-            // window.location = 'StoreView/' + this.newId
           })
       }
     }

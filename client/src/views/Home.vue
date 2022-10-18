@@ -13,13 +13,6 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
-          <!-- <iframe class="w-100" id="mapheight"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d646961.561543493!2d12.18590388377194!3d57.17369962902062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46502afdf4948aa9%3A0x4796738c26545be4!2sFahl%C3%A9nSurf%20Uthyrning%20%26%20Kurscenter!5e0!3m2!1ssv!2sse!4v1665078361609!5m2!1ssv!2sse"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe> -->
         </b-col>
         <b-col id="column2" lg="5">
           <h3 class="recommended" lg="5">Newly Added Stores:</h3>
@@ -100,18 +93,7 @@ export default {
       // change view to show one store
       console.log(id)
       window.location = 'StoreView/' + id
-    } /*
-    getTopStores() {
-      Api.get('/stores/?name=Fahlén Surf')
-        .then((response) => {
-          this.store = response.data
-          console.log()
-          console.log(this.store)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }, */
+    }
   }
 }
 </script>
