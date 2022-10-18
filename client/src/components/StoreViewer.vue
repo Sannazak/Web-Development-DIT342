@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <div class="row" id="topRow">
       <div id="col_header" class="col-1">
       </div>
@@ -11,7 +10,8 @@
         <p id="starButton"><FavouriteStar/></p>
       </div>
       <div id="image-col" class="col-4">
-        <img id ="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot" width="350px"> <br><br><br><br>
+        <img id="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot"
+          width="350px"> <br><br><br><br>
       </div>
       <div id="col_right" class="col-4">
         <p><b>About {{store.name}}</b><br>
@@ -26,7 +26,7 @@
         </p>
         <p>
           <b>Details:</b><br>
-          Phone: {{store.phoneNumber}}<br>
+          Phone: +46{{store.phoneNumber}}<br>
           Email: {{store.email}}<br>
           Open:
           {{store.openingHours}}
@@ -36,16 +36,20 @@
         <hr>
       </div>
       <div id="image-col" class="col-4">
-        <img id="store-image" src="../assets/maps-google.jpg" fluid class="rounded" alt="image of spot" width="350px">
-      <p><PatchStore/> <DeleteStoreModal/></p>
+        <iframe class="w-100" src="" id="mapheight" style="border: 0" height="300px" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p>
+          <PatchStore />
+          <DeleteStoreModal />
+        </p>
       </div>
       <div id="lower-col" class="col-8">
         <p>
           <b>Surflessons available:</b>
         <ul>
           <div id="offersListItem" v-for="lesson in this.surfLessonArrayFilled" v-bind:key="lesson.name">
-            <li v-if ="lesson.name != null">
-            {{lesson.name}} - Instructed by: {{lesson.instructor}} - {{lesson.price}}SEK
+            <li v-if="lesson.name != null">
+              {{lesson.name}} - Instructed by: {{lesson.instructor}} - {{lesson.price}}SEK
             </li>
           </div>
         </ul>
@@ -55,8 +59,8 @@
           <b>Surfboards available:</b>
         <ul>
           <div id="offersListItem" v-for="boards in this.surfBoardsArrayFilled" v-bind:key="boards._id">
-            <li v-if ="boards.price != null">
-            {{boards.style}} - {{boards.size}} - {{boards.volume}} - {{boards.price}}SEK
+            <li v-if="boards.price != null">
+              {{boards.style}} - {{boards.size}} - {{boards.volume}} - {{boards.price}}SEK
             </li>
           </div>
         </ul>
@@ -66,8 +70,8 @@
           <b>Surfgear available:</b>
         <ul>
           <div id="offersListItem" v-for="gears in this.surfGearsArrayFilled" v-bind:key="gears.name">
-            <li v-if ="gears.name != null">
-            {{gears.name}} - {{gears.gender}} - Size: {{gears.size}} - {{gears.price}}SEK
+            <li v-if="gears.name != null">
+              {{gears.name}} - {{gears.gender}} - Size: {{gears.size}} - {{gears.price}}SEK
             </li>
           </div>
         </ul>
@@ -89,6 +93,12 @@ export default {
   data() {
     return {
       token: '',
+      mapUrl: '',
+      user: {
+        id: ''
+      },
+      favoriteStoreId: [],
+      favoriteStores: [{}],
       store: [{
         name: '',
         description: '',
@@ -130,30 +140,25 @@ export default {
     }
   },
   mounted() {
-    console.log('Page is loaded')
     this.getSpot()
   },
   methods: {
     getSpot() {
-      // Api.get('/stores/632b6798702d604ee003165b')
       Api.get('/stores/' + this.$route.params.id)
         .then(response => {
-          console.log(response.data)
           this.store = response.data
           this.surfLessonArray = response.data.surfLessons
-          console.log('store api saved')
         })
         .catch(error => {
           console.error(error)
         })
         .then(() => {
-          // executes regardless of failure or success
+          this.mapUrl = 'https://www.google.com/maps/embed/v1/place?key=' + 'AIzaSyBnWIL3efUBoAMqbkotRURj8DXLN-huduk' + '&q=' + this.store.adress.street + '+' + this.store.adress.city + '+' + this.store.adress.country
+          document.getElementById('mapheight').src = this.mapUrl
         })
       Api.get('/stores/' + this.$route.params.id + '/surfLessons')
         .then(response => {
           this.surfLessonsArray = response.data
-          console.log('lesson api saved')
-          console.log(this.surfBoardsArray)
           this.surfLessonsArray.forEach(this.getLessonData)
         })
         .catch(error => {
@@ -165,7 +170,6 @@ export default {
       Api.get('/stores/' + this.$route.params.id + '/surfGears')
         .then(response => {
           this.surfGearsArray = response.data
-          console.log('gear api saved')
           this.surfGearsArray.forEach(this.getGearData)
         })
         .catch(error => {
@@ -177,7 +181,6 @@ export default {
       Api.get('/stores/' + this.$route.params.id + '/surfBoards')
         .then(response => {
           this.surfBoardsArray = response.data
-          console.log('board api saved')
           this.surfBoardsArray.forEach(this.getBoardData)
         })
         .catch(error => {
@@ -190,10 +193,7 @@ export default {
     getLessonData(index) {
       Api.get('/surfLessons/' + index)
         .then(response => {
-          console.log(response.data)
           this.surfLessonArrayFilled.push(response.data)
-          console.log('surflessonsarrayfilled')
-          console.log(this.surfLessonArrayFilled)
         })
         .catch(error => {
           console.error(error)
@@ -256,6 +256,7 @@ export default {
   min-height: 250px;
   background-color: lightgray;
 }
+
 .container {
   background-color: lightgray;
 }
@@ -278,36 +279,46 @@ export default {
 #starButton {
   padding-right: 10px;  
 } 
+#mapheight {
+  max-height: 300px;
+}
 
 @media all and (max-width: 1199px) {
   #col_right {
-    min-width: 25% ;
+    min-width: 25%;
   }
+
   #col-adress {
-    min-width: 25% ;
+    min-width: 25%;
   }
+
   #lower-col {
-    min-width: 75% ;
+    min-width: 75%;
   }
+
   #image-col {
-    max-width: 25% ;
-    min-width: 24% ;
+    max-width: 25%;
+    min-width: 24%;
   }
+
   #store-image {
-    width: 100% ;
+    width: 100%;
   }
 }
 
 @media all and (max-width: 800px) {
   #col_right {
-    min-width: 50% ;
+    min-width: 50%;
   }
+
   #col-adress {
-    min-width: 50% ;
+    min-width: 50%;
   }
+
   #lower-col {
-    min-width: 100% ;
+    min-width: 100%;
   }
+
   #image-col {
     display: none;
   } 
@@ -320,20 +331,22 @@ export default {
 
 @media all and (max-width: 500px) {
   #col_right {
-    min-width: 100% ;
-    min-height: 10% ;
+    min-width: 100%;
+    min-height: 10%;
   }
+
   #col-adress {
-    min-width: 100% ;
-    min-height: 10% ;
+    min-width: 100%;
+    min-height: 10%;
   }
+
   #lower-col {
-    min-width: 100% ;
-    min-height: 10% ;
+    min-width: 100%;
+    min-height: 10%;
   }
+
   #image-col {
     display: none;
   }
 }
-
 </style>

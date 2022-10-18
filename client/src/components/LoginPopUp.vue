@@ -18,9 +18,6 @@
               <b-form-input id="inputForms" v-model="password" type="password" placeholder="Password" required></b-form-input>
             </div>
             <input id="successButton" variant="success" centered type="submit" value="Sign in" class="btn-btn-block" />
-            <p class="forgot-password text-right mt-2 mb-4">
-              <router-link to="/forgot-password">Forgot password ?</router-link>
-            </p>
             <div>
               {{ message }}
             </div>
@@ -71,33 +68,6 @@ export default {
   created() {
     this.token = localStorage.getItem('user')
   }
-
-  // methods: {
-  //   onSubmit(event) {
-  //     event.preventDefault()
-  //     Api.get('/users?email=' + this.email)
-  //       .then(response => {
-  //         this.user.email = response.data[0].email
-  //         this.user.password = response.data[0].password
-  //         this.user.id = response.data[0]._id
-  //         console.log(this.user.email)
-  //         console.log(this.user.password)
-  //         console.log(this.user.id)
-  //         if (this.email === this.user.email && this.password === this.user.password) {
-  //           console.log('success')
-  //           this.message = 'Login correct'
-  //           this.$router.push('/User')
-  //         } else {
-  //           this.message = 'Login Failed. User does not exist. Check email and password!'
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         this.message = 'Login Failed. Please try again'
-  //         console.log(error)
-  //       })
-  //       .finally(() => {})
-  //   }
-  // }
 }
 </script>
 

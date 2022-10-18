@@ -87,10 +87,6 @@ export default {
             console.log(error)
             console.log(error.response)
           })
-        // console.log('working')
-        // console.log(response)
-        // this.message = 'User Created'
-        // this.$router.push('/')
       })
         .catch((error) => {
           this.message = 'Registration Failed. Email already exists or password not correct'
@@ -98,26 +94,6 @@ export default {
           console.log(error.response)
         })
         .finally(() => {})
-
-      // if (this.userPassword === this.userConfirmPassword && this.userPassword != null) {
-      //   Api.post('/users', {
-      //     fullName: this.userFullName,
-      //     email: this.userEmail,
-      //     password: this.userPassword
-      //   }).then((res) => {
-      //     console.log(res)
-      //     this.message = 'User Created'
-      //     this.$router.push('/User')
-      //   })
-      //     .catch((error) => {
-      //       console.log('Login Failed. Please try again')
-      //       this.message = 'User already created. Please try again'
-      //       console.log(error)
-      //     }).finally(() => {
-      //     })
-      // } else {
-      //   this.message = 'Error: Make sure email is correct and passwords are matching while being at least 3 letters.'
-      // }
     }
   },
   created() {

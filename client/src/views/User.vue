@@ -51,7 +51,6 @@
             <option>Large</option>
           </b-form-select>
           <br/>
-          <!-- <b-form-input id="inputClothsSize" v-model="clothingSize" placeholder="Clothing Size"></b-form-input> -->
           <br/>
           <label class="paragraph-size" for="inputHeigh"><strong>Height in cm</strong></label>
           <b-form-input id="inputHeigh" v-model="height"></b-form-input>
@@ -86,7 +85,6 @@
             <option>Advanced</option>
             <option>Pro</option>
         </b-form-select>
-        <!-- <span> {{ skillLevel }}</span> -->
        </div>
       </div>
       <div class="col-md-12">
@@ -105,7 +103,6 @@
 import VueJwtDecode from 'vue-jwt-decode'
 import { Api } from '@/Api'
 import Banner from '@/components/Banner.vue'
-// import LogoutButton from './LogoutButton'
 
 export default {
   name: 'User',
@@ -224,7 +221,4 @@ export default {
   padding-bottom: 2em;
   margin: auto;
 }
-/* .col-md-6 {
-  background-color: gray;
-} */
 </style>
