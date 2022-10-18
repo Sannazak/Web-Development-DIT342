@@ -18,9 +18,6 @@
               <b-form-input id="inputForms" v-model="password" type="password" placeholder="Password" required></b-form-input>
             </div>
             <input id="successButton" variant="success" centered type="submit" value="Sign in" class="btn-btn-block" />
-            <p class="forgot-password text-right mt-2 mb-4">
-              <router-link to="/forgot-password">Forgot password ?</router-link>
-            </p>
             <div>
               {{ message }}
             </div>
