@@ -1,6 +1,12 @@
 <template>
-    <b-icon v-if="!this.store.storeMarked" icon="star" aria-hidden="true" font-scale="1.5" @click="addToFavorites()"></b-icon>
-    <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5"></b-icon>
+  <b-icon
+    v-if="!this.storeMarked"
+    icon="star"
+    aria-hidden="true"
+    font-scale="1.5"
+    @click="addToFavorites()"
+  ></b-icon>
+  <b-icon v-else icon="star-fill" aria-hidden="true" font-scale="1.5" @click="removeFavorites()"></b-icon>
 </template>
 
 <script>
@@ -12,28 +18,30 @@ export default {
   data() {
     return {
       token: '',
+      storeMarked: false,
       user: {
-        id: '',
-        userFavoriteStores: []
+        id: ''
       },
-      store: [{
-        name: '',
-        description: '',
-        phoneNumber: '',
-        openingHours: '',
-        storeMarked: false,
-        email: '',
-        adress: {
-          country: '',
-          street: '',
-          streetNr: '',
-          postalCode: '',
-          city: ''
-        },
-        surfBoards: [],
-        surfLessons: [],
-        surfGears: []
-      }]
+      userFavoriteStores: [],
+      store: [
+        {
+          name: '',
+          description: '',
+          phoneNumber: '',
+          openingHours: '',
+          email: '',
+          adress: {
+            country: '',
+            street: '',
+            streetNr: '',
+            postalCode: '',
+            city: ''
+          },
+          surfBoards: [],
+          surfLessons: [],
+          surfGears: []
+        }
+      ]
     }
   },
   mounted() {
@@ -41,7 +49,6 @@ export default {
     console.log('Is page marked?')
     console.log(this.store.storeMarked)
     this.getUser()
-    this.getSpot()
   },
   methods: {
     getUser() {
@@ -54,46 +61,56 @@ export default {
         this.user.id = this.user.email._id
         console.log(this.user.email._id)
         console.log('still working')
+        Api.get('/users/' + this.user.email._id)
+          .then((response) => {
+            this.userFavoriteStores = response.data.favouriteStores
+            console.log('Not sure')
+            console.log(this.userFavoriteStores)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+          .then((response) => {
+            this.checkStoreMarkedFavourite()
+          })
       } catch (error) {
         console.log(error, 'error from decoding token')
       }
     },
-    getSpot() {
-      Api.get('/stores/' + this.$route.params.id)
-        .then(response => {
-          this.store = response.data
-          this.store.storeMarked = response.data.markedFavorite
-          console.log('store api saved')
-        })
-        .catch(error => {
-          console.error(error)
-        })
-        .then(() => {
-          // executes regardless of failure or success
-        })
+    checkStoreMarkedFavourite() {
+      console.log('Check for array')
+      console.log(this.userFavoriteStores)
+      for (let i = 0; i < this.userFavoriteStores.length; i++) {
+        if (this.$route.params.id === this.userFavoriteStores[i]) {
+          this.storeMarked = true
+        }
+      }
+      console.log('Check if its marked')
+      console.log(this.storeMarked)
     },
     addToFavorites() {
       // Patch the store id as favorite to the user
       Api.patch('/users/' + this.user.id, {
         $push: { favouriteStores: this.$route.params.id }
-      }).then(response => {
-        console.log('patched to user')
-      }).catch((error) => {
-        this.message = 'Login Failed. Please try again'
-        console.log(error)
-        console.log(error.response)
       })
-      // Path the store as been marked favorite
-      this.storeMarked = true
-      Api.patch('stores/' + this.$route.params.id, {
-        markedFavorite: this.store.storeMarked
-      }).then(response => {
-        console.log('Store patched')
-        console.log(this.store.storeMarked)
-      }).catch((error) => {
-        this.message = 'Error to patch'
-        console.log(error)
-      })
+        .then((response) => {
+          console.log('patched to user')
+        })
+        .catch((error) => {
+          this.message = 'Login Failed. Please try again'
+          console.log(error)
+          console.log(error.response)
+        })
+    },
+    removeFavorites() {
+      console.log('Removing favorite')
+      console.log(this.userFavoriteStores)
+      Api.delete('/users/' + this.user.id + '/favouriteStores/' + this.$route.params.id)
+        .then(response => {
+          console.log('Deleted from array')
+        }).catch(error => {
+          console.log(error)
+        })
     }
   }
 }

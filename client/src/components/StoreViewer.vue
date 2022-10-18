@@ -1,11 +1,13 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div id="col_header" class="col-11">
+    <div class="row" id="topRow">
+      <div id="col_header" class="col-1">
+      </div>
+      <div id="col_header" class="col-10">
         <h3>{{store.name}} in {{store.adress.city}}</h3>
       </div>
       <div id="col_header" class="col-1">
-        <FavouriteStar/>
+        <p id="starButton"><FavouriteStar/></p>
       </div>
       <div id="image-col" class="col-4">
         <img id="store-image" src="../assets/stores/surfshop1.jpg" fluid class="rounded" alt="image of spot"
@@ -262,6 +264,10 @@ export default {
 #col_right {
   text-align: left;
 }
+#topRow {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 #adress_text {
   text-align: center;
@@ -269,6 +275,9 @@ export default {
 
 #offersListItem {
   text-align: left;
+}
+#starButton {
+  padding-right: 10px;
 }
 #mapheight {
   max-height: 300px;
@@ -313,6 +322,10 @@ export default {
   #image-col {
     display: none;
   }
+  #starButton {
+  padding-right: 20px;
+}
+
 }
 
 @media all and (max-width: 500px) {
