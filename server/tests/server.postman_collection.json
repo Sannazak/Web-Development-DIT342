@@ -669,50 +669,6 @@
 					"response": []
 				},
 				{
-					"name": "User login verification",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"pm.test(\"User authorized\", function () {\r",
-									"    pm.expect(jsonData.message).to.eql(\"Auth successfull\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"postman@live.com\",\r\n    \"password\": \"password123\"\r\n}\r\n    ",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/users/loginhashed/",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"loginhashed",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get user by ID",
 					"event": [
 						{
