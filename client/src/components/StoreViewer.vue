@@ -154,7 +154,7 @@ export default {
           console.error(error)
         })
         .then(() => {
-          this.mapUrl = 'https://www.google.com/maps/embed/v1/place?key=' + process.env.JWT_KEY + '&q=' + this.store.adress.street + '+' + this.store.adress.city + '+' + this.store.adress.country
+          this.mapUrl = 'https://www.google.com/maps/embed/v1/place?key=' + process.env.MAPS_API + '&q=' + this.store.adress.street + '+' + this.store.adress.city + '+' + this.store.adress.country
           document.getElementById('mapheight').src = this.mapUrl
         })
       Api.get('/stores/' + this.$route.params.id + '/surfLessons')
