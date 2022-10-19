@@ -96,7 +96,7 @@ export default {
           .then(response => {
             this.newId = response.data._id
             console.log('store added')
-            window.location = this.newId
+            window.location = 'StoreView/' + this.newId
           })
       }
     }
