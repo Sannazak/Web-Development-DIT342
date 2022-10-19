@@ -1,6 +1,8 @@
 <template>
   <div>
-    <b-button id="button" v-b-modal.modal-register v-if="!token">Register</b-button>
+    <b-button id="button" v-b-modal.modal-register v-if="!token"
+      >Register</b-button
+    >
     <b-modal id="modal-register" centered hide-footer>
       <template #modal-title id="modal-title-text" class="w-100">
         Register new user
@@ -66,34 +68,44 @@ export default {
   },
   methods: {
     registerUser() {
-      Api.post('/users/signuphashed', {
-        fullName: this.userFullName,
-        email: this.userEmail,
-        password: this.userPassword
-      }).then(response => {
-        Api.post('/users/loginhashed', {
+      if (
+        this.userPassword === this.userConfirmPassword &&
+        this.userPassword != null
+      ) {
+        Api.post('/users/signuphashed', {
+          fullName: this.userFullName,
           email: this.userEmail,
           password: this.userPassword
-        }).then(response => {
-          console.log('working')
-          const token = response.data.token
-          this.message = 'User created'
-          console.log(token)
-          localStorage.setItem('user', token)
-          this.$router.push('/User')
         })
+          .then((response) => {
+            Api.post('/users/loginhashed', {
+              email: this.userEmail,
+              password: this.userPassword
+            })
+              .then((response) => {
+                console.log('working')
+                const token = response.data.token
+                this.message = 'User created'
+                console.log(token)
+                localStorage.setItem('user', token)
+                this.$router.push('/User')
+              })
+              .catch((error) => {
+                this.message = 'Registration Failed. Please try again'
+                console.log(error)
+                console.log(error.response)
+              })
+          })
           .catch((error) => {
-            this.message = 'Registration Failed. Please try again'
+            this.message =
+              'Registration Failed. Email already exists or password not correct'
             console.log(error)
             console.log(error.response)
           })
-      })
-        .catch((error) => {
-          this.message = 'Registration Failed. Email already exists or password not correct'
-          console.log(error)
-          console.log(error.response)
-        })
-        .finally(() => {})
+          .finally(() => {})
+      } else {
+        this.message = 'Error: Make sure email is correct and passwords are matching.'
+      }
     }
   },
   created() {
