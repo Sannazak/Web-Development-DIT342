@@ -82,7 +82,7 @@
                 <b-form-input id="inputForms" v-model="gearPrice" placeholder="Price(only numbers)"></b-form-input>
                 <b-form-input id="inputForms" v-model="gearSize" placeholder="Size(only numbers)"></b-form-input>
                 <b-form-input id="inputForms" v-model="gearGender" placeholder="Gender"></b-form-input>
-                <b-form-input id="inputForms" v-model="gearDescription" placeholder="Description"></b-form-input>
+                <!-- <b-form-input id="inputForms" v-model="gearDescription" placeholder="Description"></b-form-input> -->
               </p>
               <b-button id="successButton" variant="success" centered @click=addGear()>Add Gear</b-button>
               <b-button variant="warning" centered @click="$bvModal.hide('modal-updateStore')">Close</b-button>
@@ -242,8 +242,8 @@ export default {
         name: this.gearName,
         price: this.gearPrice,
         size: this.gearSize,
-        gender: this.gearGender,
-        description: this.gearDescription
+        gender: this.gearGender
+        // description: this.gearDescription
       })
         .catch(error => {
           console.error(error)
