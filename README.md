@@ -1,3 +1,6 @@
+This repository origins from GitLab where I worked together with 2 other persons for the course Web Development DIT342. 
+In this project we created an application where users can search for surf spots and gears that are available for renting.
+
 # Backend and Frontend Template
 
 Latest version: https://git.ita.chalmers.se/courses/dit341/group-00-web (public Github [mirror](https://github.com/dit341/group-00-web))
